@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Milano Multiservice Hub | Luxury Urban Services & Executive Solutions</title>
+    <title>KANVA | Luxury Urban Services & Executive Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* ===== CSS VARIABLES & RESET ===== */
-        :root {
-               --primary: #4A235A;         /* Royal Purple */
-    --primary-dark: #2E1438;
-    --primary-light: #6B3A7B;
-    --secondary: #DAA520;       /* Goldenrod */
-    --secondary-light: #F0D995;
-    --secondary-dark: #B8860B;
-    --accent: #7B5A5A;          /* Muted Rosewood */
-    --background: #F9F7F5;
-    --background-alt: #F3EFF8;
+        :root { 
+   /* Primary: Deep, expensive-looking Emerald */
+    --primary: #004B49; 
+    --primary-dark: #002B2A;
+    --primary-light: #007A74;
+
+    /* Secondary: A bright, electric Mint for high-contrast actions */
+    --secondary: #00D1B2;
+    --secondary-light: #D1FFF8;
+    --secondary-dark: #009E86;
+
+    /* Accents & Gradients */
+    --accent: #2DE1C2;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    
+    /* NEW: Gradient definitions for a premium look */
+    --gradient-main: linear-gradient(135deg, #004B49 0%, #007A74 100%);
+    --gradient-glow: linear-gradient(135deg, #00D1B2 0%, #2DE1C2 100%);
+    --gradient-surface: linear-gradient(180deg, #FFFFFF 0%, #F0F7F6 100%);
+
+    /* Neutrals */
+    --background: #F4F9F8;
     --card-bg: #FFFFFF;
-    --border: rgba(0, 0, 0, 0.08);
-    --text-dark: #1A1A1A;
-    --text-medium: #4A4A4A;
-    --text-light: #6C757D;
-    --white: #FFFFFF;
+    --text-dark: #001F1E;      /* Very dark green-black for readability */
+    --text-medium: #405B59;
+    --border: rgba(0, 75, 73, 0.08);
             --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
             --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.12);
@@ -281,7 +291,7 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+           background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             box-shadow: 0 8px 25px rgba(12, 26, 45, 0.15);
         }
@@ -350,6 +360,7 @@
             z-index: 1000;
             transition: var(--transition);
             border-bottom: 1px solid rgba(232, 230, 225, 0.3);
+            padding: 30px;
         }
 
         .header.scrolled {
@@ -372,7 +383,7 @@
             position: relative;
         }
 
-        .logo-icon {
+        /* .logo-icon {
             width: 60px;
             height: 60px;
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -386,9 +397,9 @@
             box-shadow: 0 8px 20px rgba(12, 26, 45, 0.15);
             position: relative;
             overflow: hidden;
-        }
+        } */
 
-        .logo-icon:before {
+        /* .logo-icon:before {
             content: '';
             position: absolute;
             top: 0;
@@ -398,7 +409,7 @@
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s ease;
-        }
+        } */
 
         .logo:hover .logo-icon:before {
             transform: translateX(100%);
@@ -410,21 +421,23 @@
         }
 
         .logo-title {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.7rem;
+            font-weight: 900;
             color: var(--primary);
             line-height: 1.1;
+            letter-spacing: 3px;
             font-family: 'Playfair Display', serif;
+            margin-left: 20px;
         }
 
-        .logo-subtitle {
+        /* .logo-subtitle {
             font-size: 0.7rem;
             color: var(--text-light);
             font-weight: 500;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 0.25rem;
-        }
+        } */
 
         .nav {
             display: flex;
@@ -467,42 +480,13 @@
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
-        }
-
-        .lang-selector {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0.75rem;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid var(--border);
-            font-weight: 500;
-            background: white;
-        }
-
-        .lang-selector:hover {
-            background-color: var(--background-alt);
-            border-color: var(--secondary);
-        }
-
-        .flag {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .flag-it {
-            background: linear-gradient(to right, #009246 33%, white 33%, white 66%, #CE2B37 66%);
-        }
-
-        .flag-en {
-            background: linear-gradient(to bottom, #012169 0%, #012169 33%, white 33%, white 66%, #C8102E 66%);
-        }
+            gap: 1.5rem; 
+        } 
+        .header-actions img{
+            padding: 20px;
+            width: 200px;
+            border-radius: 30px;
+        } 
 
         .mobile-menu-btn {
             display: none;
@@ -765,7 +749,7 @@
 .floating-card .card-icon {
     width: 48px;
     height: 48px;
-    background: #C5A059;
+    background: var(--primary-light);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -1644,7 +1628,7 @@
         }
 
         /* ===== LOADING ANIMATION ===== */
-        .loader {
+        /* .loader {
             position: fixed;
             top: 0;
             left: 0;
@@ -1688,7 +1672,7 @@
         @keyframes load {
             0% { width: 0; }
             100% { width: 100%; }
-        }
+        } */
 
         @keyframes pulse {
             0% { transform: scale(1); }
@@ -1929,7 +1913,7 @@
 </head>
 <body>
     <!-- Loading Animation -->
-    <div class="loader" id="loader">
+    <!-- <div class="loader" id="loader">
         <div class="loader-content">
             <div class="loader-logo">
                 <i class="fas fa-building"></i>
@@ -1938,7 +1922,7 @@
                 <div class="loader-progress"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     
 
@@ -1946,10 +1930,10 @@
     <header class="header" id="header">
         <div class="container header-container">
             <a href="#home" class="logo">
-                <div class="logo-icon">MH</div>
+                <!-- <div class="logo-icon">K</div> -->
                 <div class="logo-text">
-                    <div class="logo-title">Milano Multiservice</div>
-                    <div class="logo-subtitle">Premium Urban Solutions</div>
+                    <div class="logo-title">KANVA</div>
+                    <!-- <div class="logo-subtitle">Premium Urban Solutions</div> -->
                 </div>
             </a>
             
@@ -1958,21 +1942,17 @@
             </button>
             
             <nav class="nav" id="nav">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#office-pod" class="nav-link">Office Pod</a>
+                <a href="#home" class="nav-link active">Home</a> 
+                <a href="#about" class="nav-link">About us</a> 
+                <a href="#services" class="nav-link">Services</a> 
+                <a href="#promotions" class="nav-link">Promotions</a>
                 <a href="#testimonials" class="nav-link">Testimonials</a>
                 <a href="#contact" class="nav-link">Contact</a>
             </nav>
             
-            <div class="header-actions">
-                <div class="lang-selector" role="button" aria-label="Language selector">
-                    <div class="flag flag-it"></div>
-                    <span>IT</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <a href="#booking" class="btn btn-primary">
-                    <i class="fa-solid fa-shop"></i> Visit our Shop
+            <div class="header-actions"> 
+                <a href="https://wa.me/+393388050820" target="_blank">
+                    <img src="assets/whatsapp.png" >
                 </a>
             </div>
         </div>
@@ -2049,8 +2029,7 @@
         </div>
     </div>
 </section>
-
-    <!-- Trust Bar -->
+<!--  
     <div class="trust-bar">
         <div class="container trust-container">
             <div class="trust-item">
@@ -2078,7 +2057,7 @@
                 <div class="trust-text">Certified Professionals</div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Services Section -->
     <section class="section section-light" id="services">
@@ -2713,10 +2692,10 @@
             <div class="footer-container">
                 <div class="footer-logo">
                     <a href="#home" class="logo" style="align-items: flex-start;">
-                        <div class="logo-icon">MH</div>
+                        <!-- <div class="logo-icon">MH</div> -->
                         <div class="logo-text">
                             <div class="logo-title">Milano Multiservice</div>
-                            <div class="logo-subtitle">Premium Urban Solutions</div>
+                            <!-- <div class="logo-subtitle">Premium Urban Solutions</div> -->
                         </div>
                     </a>
                     <p class="footer-description">Redefining urban convenience with premium services designed for Milan's discerning residents, professionals, and visitors since 2015.</p>
@@ -2787,22 +2766,22 @@
     <script>
         // Enhanced JavaScript for luxury interactions
         
-        // Remove loader when page is loaded
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
+        // // Remove loader when page is loaded
+        // window.addEventListener('load', function() {
+        //     const loader = document.getElementById('loader');
+        //     setTimeout(() => {
+        //         loader.style.opacity = '0';
+        //         loader.style.visibility = 'hidden';
                 
-                // Animate service cards after loading
-                const serviceCards = document.querySelectorAll('.service-card');
-                serviceCards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('animate');
-                    }, index * 100);
-                });
-            }, 800);
-        });
+        //         // Animate service cards after loading
+        //         const serviceCards = document.querySelectorAll('.service-card');
+        //         serviceCards.forEach((card, index) => {
+        //             setTimeout(() => {
+        //                 card.classList.add('animate');
+        //             }, index * 100);
+        //         });
+        //     }, 800);
+        // });
 
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
@@ -2857,21 +2836,7 @@
             });
         });
         
-        // Language selector toggle
-        document.querySelector('.lang-selector')?.addEventListener('click', function() {
-            const currentFlag = this.querySelector('.flag');
-            const currentText = this.querySelector('span');
-            
-            if (currentFlag.classList.contains('flag-it')) {
-                currentFlag.className = 'flag flag-en';
-                currentText.textContent = 'EN';
-                currentText.setAttribute('aria-label', 'English');
-            } else {
-                currentFlag.className = 'flag flag-it';
-                currentText.textContent = 'IT';
-                currentText.setAttribute('aria-label', 'Italian');
-            }
-        });
+         
         
         // Service category filtering
         const categoryButtons = document.querySelectorAll('.category-btn');
