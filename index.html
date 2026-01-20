@@ -1,2034 +1,383 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KANVA | Milano's Premier Multiservice Hub. Luxury urban services, executive office pods, and digital concierge solutions.">
-    <title>KANVA | Luxury Urban Services & Executive Solutions</title>
+    <title>KANVA | L’Eccellenza Urbana</title>
     
-    <!-- External Assets -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;350;400;500;600&display=swap" rel="stylesheet">
+    <!-- Ultra-Premium Fonts -->
+    <link rel="stylesheet" href="https://use.typekit.net/af/c3b1e3/00000000000000007e9b023f/30/l?primer=7cdbd44b4cd73a3df69dfa6d6560411833d71249b6574f26048e98327d70c44c&fvd=n4&v=3">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Inter:wght@100;300;600&display=swap" rel="stylesheet">
     
+    <!-- Dependencies: GSAP & Smooth Scroll -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
     <style>
-        /* =========================================
-           COMPLETE WEBSITE CSS VARIABLES
-           ========================================= */
         :root {
-            /* Premium Color Palette */
-            --primary-black: #0A0A0A;
-            --primary-dark: #1A1A1A;
-            --primary: #2A2A2A;
-            --primary-light: #3A3A3A;
-            
-            --accent: #C19A6B;  /* Warm Bronze */
-            --accent-light: #D4B483;
-            --accent-dark: #A87C4B;
-            
-            --bg-body: #F5F3EF;
-            --bg-card: #FFFFFF;
-            --bg-surface: #EFEDE9;
-            --bg-alt: #F8F7F4;
-            
-            --text-dark: #1A1A1A;
-            --text-main: #2A2A2A;
-            --text-muted: #5A5A5A;
-            --text-light: #8A8A8A;
-            --text-white: #FFFFFF;
-
-            /* Layout */
-            --container-width: 1280px;
-            --header-height: 70px;
-            --radius-sm: 4px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --radius-xl: 20px;
-
-            /* Effects */
-            --shadow-subtle: 0 2px 8px rgba(10, 10, 10, 0.04);
-            --shadow-medium: 0 8px 24px rgba(10, 10, 10, 0.08);
-            --shadow-elevated: 0 16px 48px rgba(10, 10, 10, 0.12);
-            --shadow-accent: 0 8px 24px rgba(193, 154, 107, 0.15);
-            
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            
+            --gold: #C5A059;
+            --black: #080808;
+            --clay: #1A1A1A;
+            --white: #F5F5F7;
+            --m-transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* =========================================
-           RESET & BASE STYLES
-           ========================================= */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
+        /* Essential Resets */
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { 
+            background: var(--black); 
+            color: var(--white); 
+            font-family: 'Inter', sans-serif; 
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            cursor: none; /* Custom cursor is mandatory for Top 10 */
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Cormorant Garamond', serif;
-            color: var(--text-dark);
-            font-weight: 500;
-            line-height: 1.2;
-            letter-spacing: -0.01em;
-        }
-
-        h1 {
-            font-size: clamp(3rem, 7vw, 5rem);
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-        }
-
-        h2 {
-            font-size: clamp(2.25rem, 5vw, 3.5rem);
-            margin-bottom: 1rem;
-        }
-
-        h3 {
-            font-size: 1.75rem;
-            margin-bottom: 0.75rem;
-        }
-
-        h4 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1.5rem;
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-
-        .lead {
-            font-size: 1.15rem;
-            color: var(--text-main);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* =========================================
-           UTILITY CLASSES
-           ========================================= */
-        .container {
-            width: 92%;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            padding: 80px 0;
-        }
-
-        .section-large {
-            padding: 120px 0;
-        }
-
-        .section-small {
-            padding: 80px 0;
-        }
-
-        .section-dark {
-            background: var(--primary-dark);
-            color: var(--text-white);
-        }
-
-        .section-dark h2,
-        .section-dark h3,
-        .section-dark p {
-            color: var(--text-white);
-        }
-
-        .section-alt {
-            background: var(--bg-alt);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-1 { margin-bottom: 0.5rem; }
-        .mb-2 { margin-bottom: 1rem; }
-        .mb-3 { margin-bottom: 2rem; }
-        .mb-4 { margin-bottom: 3rem; }
-        .mb-5 { margin-bottom: 4rem; }
-
-        .mt-1 { margin-top: 0.5rem; }
-        .mt-2 { margin-top: 1rem; }
-        .mt-3 { margin-top: 2rem; }
-        .mt-4 { margin-top: 3rem; }
-        .mt-5 { margin-top: 4rem; }
-
-        /* =========================================
-           HEADER & NAVIGATION
-           ========================================= */
-        .header {
+        /* --- PRELOADER --- */
+        #loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--header-height);
-            background: transparent;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(10, 10, 10, 0.08);
-            z-index: 1000;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
             display: flex;
             align-items: center;
-            transition: var(--transition);
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2vw;
+            letter-spacing: 10px;
         }
 
-        .header.scrolled {
-            height: 60px;
-            box-shadow: var(--shadow-subtle);
-            background: rgba(255, 255, 255, 0.95);
+        /* --- CUSTOM CURSOR --- */
+        #cursor {
+            position: fixed;
+            width: 8px; height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+        }
+        #cursor-follower {
+            position: fixed;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(197, 160, 89, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease-out;
         }
 
-        .header-inner {
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 30px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            z-index: 100;
         }
-
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.75rem;
+            font-size: 1.8rem;
             font-weight: 500;
-            color: var(--text-dark);
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-            padding-right: 1.5rem;
-            flex-shrink: 0;
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1px;
-            height: 24px;
-            background: var(--accent);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            list-style: none;
-        }
-
-        .nav-link {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-main);
-            position: relative;
-            padding: 0.5rem 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* Dropdown Styles */
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%) translateY(10px);
-            background: var(--bg-card);
-            min-width: 240px;
-            box-shadow: var(--shadow-elevated);
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            list-style: none;
-            padding: 1rem 0;
-            border-top: 3px solid var(--accent);
-            border-radius: 0 0 var(--radius-md) var(--radius-md);
-        }
-
-        .dropdown:hover .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        .dropdown-item {
-            display: block;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: var(--transition);
-            font-weight: 500;
-        }
-
-        .dropdown-item:hover {
-            background: var(--bg-alt);
-            color: var(--accent-dark);
-            padding-left: 1.75rem;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-         
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 2rem;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: var(--text-dark);
-            box-shadow: var(--shadow-accent);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--accent);
-            color: var(--accent);
-        }
-
-        .btn-outline:hover {
-            background: var(--accent);
-            color: var(--text-dark);
-        }
-
-        .btn-dark {
-            background: var(--primary-dark);
-            color: var(--text-white);
-        }
-
-        .btn-dark:hover {
-            background: var(--primary-black);
-            transform: translateY(-2px);
-        }
-
-        /* Mobile Menu Toggle Fixed */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            width: 30px;
-            height: 20px;
-            position: relative;
-            z-index: 1001;
-        }
-
-        .mobile-toggle span {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: var(--text-dark);
-            transition: all 0.3s ease;
-            left: 0;
-        }
-
-        .mobile-toggle span:nth-child(1) { top: 0; }
-        .mobile-toggle span:nth-child(2) { top: 9px; }
-        .mobile-toggle span:nth-child(3) { top: 18px; }
-
-        .mobile-toggle.active span:nth-child(1) {
-            transform: rotate(45deg);
-            top: 9px;
-        }
-        .mobile-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .mobile-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg);
-            top: 9px;
-        }
-
-        /* =========================================
-           HERO SECTION
-           ========================================= */
-        .hero {
-            padding-top: 100px;
-            padding-bottom: 100px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--bg-body) 0%, var(--bg-surface) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60vw;
-            height: 60vw;
-            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
-            opacity: 0.05;
-            filter: blur(40px);
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-subtitle {
-            font-size: 0.9rem;
-            text-transform: uppercase;
             letter-spacing: 3px;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
         }
+        .nav-items { display: flex; gap: 40px; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; }
+        .nav-items a { color: var(--white); text-decoration: none; opacity: 0.6; transition: 0.3s; }
+        .nav-items a:hover { opacity: 1; color: var(--gold); }
 
-        .hero-subtitle::before {
-            content: '';
-            width: 40px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem; 
-            border-top: 1px solid rgba(10, 10, 10, 0.1);
-            padding-top: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            display: block;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .hero-visual {
-            position: relative;
-            border-radius: var(--radius-xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-elevated);
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .hero-visual:hover .hero-image {
-            transform: scale(1.03);
-        }
-/* =========================================
-   REFINED ABOUT SECTION (MILANO EDITORIAL)
-   ========================================= */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1.3fr 1.5fr;
-    gap: 3rem;
-    align-items: center;
-    position: relative;
-}
-
-/* The Decorative Background Element */
-.about-grid::before {
-    content: 'KANVA';
-    position: absolute;
-    top: -70px;
-    left: -20px;
-    font-size: 10rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    color: var(--primary-black);
-    opacity: 0.03;
-    z-index: 0;
-    pointer-events: none;
-}
-
-.about-image-stack {
-    position: relative;
-    padding: 40px;
-}
-
-/* The Gold Frame behind the main image */
-.about-image-stack::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 70%;
-    height: 80%;
-    border: 1px solid var(--accent);
-    z-index: 0;
-    transform: translate(20px, 20px);
-}
-
-.about-img-main {
-    position: relative;
-    z-index: 1;
-    width: 90%;
-    height: 550px;
-    object-fit: cover;
-    filter: grayscale(20%);
-    transition: var(--transition);
-}
-
-.about-img-sub {
-    position: absolute;
-    bottom: -20px;
-    right: 0;
-    width: 45%;
-    height: 320px;
-    object-fit: cover;
-    z-index: 3;
-    border: 12px solid var(--bg-body);
-    box-shadow: var(--shadow-elevated);
-    transition: var(--transition);
-}
-
-/* Philosophy Card - Glassmorphism style */
-.philosophy-card {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(193, 154, 107, 0.2);
-    padding: 1.5rem;
-    margin: 3rem 0;
-    position: relative;
-    box-shadow: var(--shadow-subtle);
-}
-
-.philosophy-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background: linear-gradient(to bottom, var(--accent), var(--accent-dark));
-}
-
-.philosophy-card h3 {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    color: var(--accent-dark);
-    margin-bottom: 1rem;
-}
-
-.philosophy-card p {
-    font-family: 'Cormorant Garamond';
-    font-size: 1.4rem; 
-    line-height: 1.4;
-    color: var(--text-dark);
-}
-
-/* Values Grid with thin decorative lines */
-.about-values {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 4rem;
-}
-
-.value-item h4 {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-}
-
-.value-item h4::after {
-    content: '';
-    height: 1px;
-    flex-grow: 1;
-    background: var(--accent);
-    opacity: 0.5;
-}
-
-/* Hover Effects */
-.about-image-stack:hover .about-img-main {
-    filter: grayscale(0%);
-    transform: scale(1.02);
-}
-
-.about-image-stack:hover .about-img-sub {
-    transform: translateY(-15px);
-}
-
-/* Mobile Adjustments */
-@media (max-width: 1024px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 5rem;
-    }
-    .about-grid::before { font-size: 6rem; }
-    .about-image-stack { max-width: 550px; margin: 0 auto; }
-}
-        /* =========================================
-           SERVICES SECTION
-           ========================================= */
-        .section-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 4rem;
-        }
-
-        .section-subtitle {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-medium);
-            transition: var(--transition);
-            border: 1px solid rgba(10, 10, 10, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-elevated);
-        }
-
-        .service-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(193, 154, 107, 0.1);
-            border-radius: 50%;
+        /* --- HERO: ARCHITECTURAL MONOLITH --- */
+        .hero {
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-            font-size: 1.5rem;
-        }
-
-        .service-features {
-            list-style: none;
-            margin: 1.5rem 0;
-        }
-
-        .service-features li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
+            perspective: 1000px;
             position: relative;
-            color: var(--text-muted);
         }
-
-        .service-features li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .service-price {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(10, 10, 10, 0.1);
-        }
-
-        .price-amount {
+        .hero-title {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--text-dark);
+            font-size: 12vw;
+            line-height: 0.9;
+            text-align: center;
+            z-index: 2;
+            pointer-events: none;
         }
+        .hero-title span { display: block; overflow: hidden; }
+        .hero-title i { font-style: italic; font-weight: 300; }
 
-        /* =========================================
-           OFFICE POD SECTION
-           ========================================= */
-        .pod-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .pod-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        } 
-
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent); 
-            font-size: 2rem; 
-        }
-
-        .pod-visual {
-            border-radius: var(--radius-xl);
+        .hero-image-container {
+            position: absolute;
+            width: 25vw;
+            height: 35vw;
             overflow: hidden;
-            box-shadow: var(--shadow-elevated);
-            position: relative;
-        }
-
-        .pod-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            transition: transform 0.8s ease;
-        }
-
-        .pod-visual:hover .pod-image {
-            transform: scale(1.03);
-        }
-
-        /* =========================================
-           BOOKING SECTION
-           ========================================= */
-        .booking-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--bg-card);
-            border-radius: var(--radius-xl);
-            padding: 4rem;
-            box-shadow: var(--shadow-elevated);
-            position: relative;
+            top: 55%; left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1;
+            clip-path: inset(100% 0 0 0);
+        }
+        .hero-image-container img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            scale: 1.5;
         }
 
-        .form-grid {
+        /* --- BENTO GALLERY SECTION --- */
+        .bento-section {
+            padding: 150px 50px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
         }
-
-        .form-group {
+        .bento-item {
+            background: var(--clay);
             position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 1rem 1.5rem;
-            border: 1px solid rgba(10, 10, 10, 0.1);
-            border-radius: var(--radius-sm);
-            background: var(--bg-body);
-            font-family: inherit;
-            font-size: 1rem;
-            color: var(--text-dark);
-            transition: var(--transition);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(193, 154, 107, 0.1);
-        }
-
-        .time-slots {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .slot-btn {
-            padding: 0.875rem;
-            border: 1px solid rgba(10, 10, 10, 0.1);
-            background: var(--bg-body);
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .slot-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .slot-btn.selected {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--text-dark);
-        }
-
-        /* =========================================
-           TESTIMONIALS
-           ========================================= */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .testimonial-card {
-            background: var(--bg-card);
-            border-radius: var(--radius-lg);
-            padding: 2.5rem;
-            box-shadow: var(--shadow-medium);
-            position: relative;
-        }
-
-        .testimonial-quote {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-            font-style: italic;
-            margin-bottom: 2rem;
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .testimonial-quote::before {
-            content: '"';
-            position: absolute;
-            left: 0;
-            top: -10px;
-            font-size: 3rem;
-            color: var(--accent);
-            opacity: 0.3;
-            font-family: 'Cormorant Garamond', serif;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-white);
-            font-weight: 500;
-        }
-
-        .author-info h4 {
-            font-size: 1rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .author-info p {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin: 0;
-        }
-
-        /* =========================================
-           LOCATION SECTION
-           ========================================= */
-        .location-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .location-map {
-            height: 400px;
-            background: var(--bg-surface);
-            border-radius: var(--radius-lg);
             overflow: hidden;
-            position: relative;
+            border-radius: 2px;
+            min-height: 300px;
         }
+        .item-1 { grid-column: 1 / 7; height: 600px; }
+        .item-2 { grid-column: 7 / 13; height: 400px; }
+        .item-3 { grid-column: 1 / 5; height: 400px; margin-top: -200px; }
+        .item-4 { grid-column: 5 / 13; height: 500px; }
 
-        .map-placeholder {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #f0e6d2 0%, #e8dfca 100%);
+        .bento-content {
+            position: absolute;
+            bottom: 40px; left: 40px;
+            z-index: 2;
+        }
+        .bento-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            transition: 1s var(--m-transition);
+        }
+        .bento-item:hover img { opacity: 0.8; scale: 1.05; }
+
+        /* --- THE SERVICES HORIZONTAL SCROLL --- */
+        .horizontal-section {
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--text-muted);
+            background: var(--white);
+            color: var(--black);
         }
-
-        /* =========================================
-           FOOTER
-           ========================================= */
-        .footer {
-            background: var(--primary-dark);
-            color: var(--text-white);
-            padding: 3rem 0 1rem;
+        .horizontal-container {
+            display: flex;
+            padding-left: 10vw;
+            gap: 15vw;
         }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+        .service-card {
+            flex-shrink: 0;
+            width: 400px;
         }
-
-        .footer-logo {
+        .service-card h2 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: var(--text-white);
-            margin-bottom: 1.5rem;
+            font-size: 5rem;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #000;
         }
 
-        .footer h4 {
-            color: var(--text-white);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .footer ul {
-            list-style: none;
-        }
-
-        .footer li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: var(--transition);
-        }
-
-        .footer a:hover {
-            color: var(--accent);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 40px;
-            height: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-white);
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: var(--text-dark);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 2rem;
+        /* --- FOOTER --- */
+        footer {
+            padding: 100px 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.9rem;
+        }
+        .footer-big {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 15vw;
+            color: var(--gold);
+            text-decoration: none;
+            display: inline-block;
         }
 
-        /* =========================================
-           MODAL
-           ========================================= */
-        .modal-overlay {
+        /* Noise effect */
+        .noise {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05; pointer-events: none; z-index: 999;
         }
-
-        .modal-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--bg-card);
-            padding: 4rem;
-            border-radius: var(--radius-xl);
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease 0.1s;
-        }
-
-        .modal-overlay.open .modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .modal-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 2rem;
-            color: var(--text-dark);
-            font-size: 2rem;
-        }
-
-        /* =========================================
-           RESPONSIVE DESIGN & MOBILE NAVIGATION FIX
-           ========================================= */
-        @media (max-width: 1024px) {
-            .hero-content,
-            .pod-container,
-            .location-container {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-            
-            .hero-visual,
-            .pod-visual {
-                order: -1;
-            }
-            
-            .hero-image,
-            .pod-image {
-                height: 400px;
-            }
-            
-            .pod-features {
-                grid-template-columns: 1fr;
-            }
-            
-            .booking-container {
-                padding: 3rem;
-            }
-
-            .nav-menu {
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                height: calc(100vh - var(--header-height));
-                background: var(--bg-card);
-                flex-direction: column;
-                padding: 3rem 2rem;
-                gap: 0;
-                transform: translateX(100%);
-                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: var(--shadow-medium);
-                overflow-y: auto;
-                align-items: flex-start;
-            }
-            
-            .nav-menu.active {
-                transform: translateX(0);
-            }
-
-            .nav-link {
-                width: 100%;
-                font-size: 1.1rem;
-                padding: 1.25rem 0;
-                border-bottom: 1px solid rgba(10, 10, 10, 0.05);
-                justify-content: space-between;
-            }
-
-            /* Mobile Dropdown Logic */
-            .dropdown-menu {
-                position: static;
-                width: 100%;
-                opacity: 1;
-                visibility: visible;
-                transform: none;
-                display: none;
-                box-shadow: none;
-                background: var(--bg-alt);
-                padding: 0.5rem 0;
-                border-top: none;
-                margin-bottom: 1rem;
-            }
-
-            .dropdown.active .dropdown-menu {
-                display: block;
-            }
-
-            .dropdown.active .fa-chevron-down {
-                transform: rotate(180deg);
-            }
-
-            .dropdown-item {
-                padding: 1rem 1.5rem;
-                border-bottom: 1px solid rgba(0,0,0,0.03);
-            }
-            
-
-            .hero {
-                padding-top: 120px;
-            }
-            
-            .hero-content {
-                text-align: center;
-            }
-            
-            .hero-subtitle {
-                justify-content: center;
-            }
-            
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .section {
-                padding: 80px 0;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .booking-container {
-                padding: 2rem;
-            }
-            
-            .footer-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            h2 {
-                font-size: 2rem;
-            }
-            
-            .hero-image,
-            .pod-image {
-                height: 300px;
-            }
-            
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                padding: 2rem;
-            }
-        }
-
-        /* =========================================
-           CUSTOM SCROLLBAR
-           ========================================= */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-body);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-dark);
-        }
-          
- 
-.btn-whatsapp-arch {
-    position: relative;
-    padding: 12px 35px;
-    background: transparent;
-    color: #C19A6B;
-    border: 2px solid #C19A6B;
-    font-weight: 800;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-transform: uppercase;
-    font-family: sans-serif;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
-    z-index: 1;
-}
-
-.btn-whatsapp-arch::before {
-    content: '';
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    width: 100%;
-    height: 100%;
-    background: #C19A6B;
-    z-index: -1;
-    transition: all 0.2s ease;
-}
-
-.btn-whatsapp-arch:hover {
-    color: white;
-    transform: translate(2px, 2px);
-}
-
-.btn-whatsapp-arch:hover::before {
-    top: 0;
-    left: 0;
-}
-
-.btn-whatsapp-arch:active {
-    transform: scale(0.98);
-} 
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="container header-inner">
-            <a href="#home" class="logo">KANVA</a>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li class="dropdown">
-                    <a href="#services" class="nav-link">Services <i class="fas fa-chevron-down" style="font-size: 0.7rem;"></i></a>
-                    <ul class="dropdown-menu"> 
-                        <li><a href="#services" class="dropdown-item">Mobile & Connectivity</a></li>
-                        <li><a href="#services" class="dropdown-item">Document Center</a></li>
-                        <li><a href="#services" class="dropdown-item">Logistics Hub</a></li>
-                        <li><a href="#services" class="dropdown-item">Luggage Storage</a></li>
-                        <li><a href="#services" class="dropdown-item">Executive Pods</a></li>
-                        <li><a href="#services" class="dropdown-item">Financial Hub</a></li>
-                    </ul>
-                </li>
-                <li><a href="#office-pod" class="nav-link">Promotion</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            
-            <div class="header-actions"> 
-                 <button class="btn-whatsapp-arch">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.412 2.503 1.112 3.487l-.729 2.661 2.72-.714c.935.607 2.053.966 3.251.966 3.181 0 5.767-2.586 5.768-5.766 0-3.18-2.587-5.766-5.767-5.766h.013zm4.569 8.12c-.193.54-1.117 1.032-1.543 1.081-.395.047-.797.111-2.279-.475-1.895-.748-3.091-2.656-3.185-2.783-.095-.126-.769-.924-.769-1.769 0-.845.443-1.26.6-1.436.158-.175.351-.219.467-.219.117 0 .234 0 .336.005.106.005.246-.04.384.293.143.344.49 1.198.533 1.286.041.088.068.19.011.306-.058.117-.088.19-.175.293-.088.102-.184.227-.263.307-.091.091-.185.189-.079.37.106.182.469.774.996 1.244.679.605 1.252.793 1.43 1.01.176.216.117.336.065.443-.053.107-.234.275-.37.433-.137.158-.28.263-.467.366s-.11.134.11.365c.22.23.44.46.66.69l.46.46zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z"/>
-    </svg>
-    <span>Message Us</span>
-</button>
-                <button class="mobile-toggle" id="menuToggle" aria-label="Toggle Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
-    </header>
+    <div class="noise"></div>
+    <div id="loader">KANVA MILANO</div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <div class="hero-text">
-                <div class="hero-subtitle">Milano • Established 2015</div>
-                <h1>It’s all right here.</h1>
-                <p class="lead mb-4">Redefining urban convenience through sophisticated service solutions for Milan's most discerning residents and professionals. Experience unparalleled quality and attention to detail.</p>
-                
-                <div class="hero-actions">
-                    <a href="#services" class="btn btn-primary">Explore Services</a>
-                    <a href="#contact" class="btn btn-outline">Book Consultation</a>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">8+</span>
-                        <span class="stat-label">Premium Services</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">Concierge Support</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">4.9</span>
-                        <span class="stat-label">Client Rating</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="hero-visual">
-                <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80" alt="KANVA Luxury Interior" class="hero-image">
-            </div>
+    <nav>
+        <div class="logo">KANVA</div>
+        <div class="nav-items">
+            <a href="#about">Philosophy</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Concierge</a>
         </div>
-    </section>
-<section class="section-large" id="about">
-    <div class="container about-grid">
-        <!-- Visual Column -->
-        <div class="about-image-stack">
-           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80" alt="Milan Architecture" class="about-img-main">
-        </div>
+        <div class="contact-btn">MILANO, IT</div>
+    </nav>
 
-        <!-- Text Column -->
-        <div class="about-content">
-            <span class="section-subtitle">Our Heritage</span>
-            <h2 class="mb-3">The Art of Urban <br><span style="color: var(--accent);">Efficiency</span></h2>
-            <p>Since 2015, KANVA has operated as a sanctuary for the modern professional. Nestled in Milan's prestigious fashion district, we bridge the gap between high-end hospitality and essential urban logistics.</p>
-            
-            <div class="philosophy-card">
-                <h3>Our Philosophy</h3>
-                <p>“We do not simply provide services; we curate time, allowing our clients to navigate the city with effortless precision.”</p>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1 class="hero-title">
+                <span>THE ART OF</span>
+                <span><i>Precision.</i></span>
+            </h1>
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Luxury Interior">
             </div>
+        </section>
 
-            <div class="about-values">
-                <div class="value-item">
-                    <h4>Excellence</h4>
-                    <p style="font-size: 0.95rem;">Meticulous attention to detail in every connection and confidential document.</p>
-                </div>
-                <div class="value-item">
-                    <h4>Discretion</h4>
-                    <p style="font-size: 0.95rem;">A secure, private environment engineered for the world's most discerning executives.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    <!-- Services Section -->
-    <section class="section section-alt" id="services">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-subtitle">Our Offerings</div>
-                <h2>Curated Urban Services</h2>
-                <p class="lead">Designed for functionality and sophistication, each service is meticulously crafted to meet the highest standards of urban convenience.</p>
-            </div>
-            
-            <div class="services-grid">
-                <!-- Service 1 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile & Connectivity</h3>
-                    <p>Complete ecosystem solutions including international SIMs, data packages, and premium device management.</p>
-                    <ul class="service-features">
-                        <li>International SIM cards</li>
-                        <li>Data packages & top-ups</li>
-                        <li>Premium device setup</li>
-                        <li>24/7 technical support</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €5</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-print"></i>
-                    </div>
-                    <h3>Document Center</h3>
-                    <p>High-fidelity printing, scanning, and official documentation services for professionals and businesses.</p>
-                    <ul class="service-features">
-                        <li>High-resolution printing</li>
-                        <li>Passport & visa photography</li>
-                        <li>Document binding & lamination</li>
-                        <li>Confidential handling</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €0.20</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-box-open"></i>
-                    </div>
-                    <h3>Logistics Hub</h3>
-                    <p>Secure parcel handling, Amazon Locker, and premium shipping services with real-time tracking.</p>
-                    <ul class="service-features">
-                        <li>Secure storage (7 days)</li>
-                        <li>Professional packing</li>
-                        <li>International shipping</li>
-                        <li>Real-time tracking</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €3</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-suitcase-rolling"></i>
-                    </div>
-                    <h3>Luggage Storage</h3>
-                    <p>24/7 monitored secure storage for travelers in the heart of Milan's fashion district.</p>
-                    <ul class="service-features">
-                        <li>Fully insured coverage</li>
-                        <li>Climate controlled</li>
-                        <li>Flexible hourly rates</li>
-                        <li>Concierge assistance</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €5/hr</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
-                </div>
-                
-                <!-- Service 5 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-chair"></i>
-                    </div>
-                    <h3>Executive Pod</h3>
-                    <p>Sound-isolated workspace with premium amenities for focused productivity and meetings.</p>
-                    <ul class="service-features">
-                        <li>1Gbps fiber internet</li>
-                        <li>Acoustic privacy</li>
-                        <li>Complimentary refreshments</li>
-                        <li>Video conference ready</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €12/hr</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
-                </div>
-                
-                <!-- Service 6 -->
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-money-check-alt"></i>
-                    </div>
-                    <h3>Financial Hub</h3>
-                    <p>PagoPA, utility bills, international transfers, and premium financial services with secure handling.</p>
-                    <ul class="service-features">
-                        <li>Bill payments & tax processing</li>
-                        <li>Secure international transfers</li>
-                        <li>Document certification</li>
-                        <li>Multi-currency support</li>
-                    </ul>
-                    <div class="service-price">
-                        <span class="price-amount">From €1</span>
-                        <a href="#contact" class="btn btn-outline btn-sm">Book Now</a>
-                    </div>
+        <!-- Bento Philosophy Section -->
+        <section class="bento-section" id="about">
+            <div class="bento-item item-1">
+                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80">
+                <div class="bento-content">
+                    <p style="color: var(--gold); margin-bottom: 10px;">01. HERITAGE</p>
+                    <h3 style="font-size: 2rem;">Est. 2015 in the <br>Fashion District.</h3>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Executive Pod Section -->
-    <section class="section section-dark" id="office-pod">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-subtitle">Premium Workspace</div>
-                <h2>The Executive Office Pod</h2>
-                <p class="lead">A sanctuary of productivity in Milan's bustling center. Engineered for silence, equipped for speed, and designed for ultimate comfort.</p>
-            </div>
-            
-            <div class="pod-container">
-                <div class="pod-content">
-                    <h3 class="mb-3">Designed for Excellence</h3>
-                    <p class="mb-4">Experience unparalleled productivity with our sound-isolated executive pods. Perfect for focused work, confidential meetings, or video conferences in absolute privacy.</p>
-                    
-                    <div class="pod-features">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-volume-mute"></i>
-                            </div>
-                            <h4>Soundproof Design</h4>
-                            <p>45dB noise reduction for absolute concentration</p>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-wifi"></i>
-                            </div>
-                            <h4>1Gbps Fiber</h4>
-                            <p>Dedicated secure line for seamless connectivity</p>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-snowflake"></i>
-                            </div>
-                            <h4>Climate Control</h4>
-                            <p>HEPA air filtration & optimal temperature</p>
-                        </div>
-                        
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-video"></i>
-                            </div>
-                            <h4>Video Ready</h4>
-                            <p>Professional lighting & acoustics for meetings</p>
-                        </div>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <a href="#contact" class="btn btn-primary">Reserve Your Pod</a>
-                    </div>
-                </div>
-                
-                <div class="pod-visual">
-                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Executive Office Pod" class="pod-image">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-subtitle">Client Experiences</div>
-                <h2>Stories of Excellence</h2>
-                <p class="lead">Hear from our discerning clients about their KANVA experience in the heart of Milan.</p>
-            </div>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        The Executive Pod transformed my business trip. Absolute silence and premium amenities in the heart of Milan. The attention to detail is remarkable.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">AS</div>
-                        <div class="author-info">
-                            <h4>Alessandro S.</h4>
-                            <p>Financial Consultant</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        Moving to Milan was overwhelming, but KANVA's digital concierge handled everything from documents to connectivity seamlessly. Exceptional service.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">MJ</div>
-                        <div class="author-info">
-                            <h4>Maria J.</h4>
-                            <p>International Executive</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        The luggage storage near Montenapoleone is a lifesaver. Secure, professional, and incredibly convenient. KANVA understands premium service.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TB</div>
-                        <div class="author-info">
-                            <h4>Thomas B.</h4>
-                            <p>Luxury Travel Consultant</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Location Section -->
-    <section class="section section-alt" id="location">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-subtitle">Visit Us</div>
-                <h2>Our Milano Location</h2>
-                <p class="lead">Located in the heart of Milan's fashion district, easily accessible from anywhere in the city.</p>
-            </div>
-            
-            <div class="location-container">
-                <div class="location-info">
-                    <h3 class="mb-3">Via Montenapoleone 12</h3>
-                    <p class="mb-4">Situated in Milan's prestigious Quadrilatero della Moda, KANVA is at the center of luxury and convenience. Our location provides easy access to the city's finest amenities while offering a tranquil retreat from the bustling streets.</p>
-                    
-                    <div class="location-details">
-                        <h4 class="mb-2">Hours of Operation</h4>
-                        <p class="mb-3">Monday - Sunday: 7:00 AM - 10:00 PM</p>
-                        
-                        <h4 class="mb-2">Contact Information</h4>
-                        <p class="mb-1">Phone: +39 02 1289 01234</p>
-                        <p class="mb-3">Email: info@kanva.it</p>
-                        
-                        <h4 class="mb-2">Transportation</h4>
-                        <p>Metro: Montenapoleone (M3)<br>
-                        Parking: Secure garage available<br>
-                        Accessible: Fully wheelchair accessible</p>
-                    </div>
-                </div>
-                
-                <div class="location-map">
-                    <div class="map-placeholder">
-                        <div class="text-center">
-                            <i class="fas fa-map-marker-alt fa-3x mb-3" style="color: var(--accent);"></i>
-                            <p>Map of Milano Location<br><small>Via Montenapoleone 12, 20121</small></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Booking Section -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-subtitle">Reservation</div>
-                <h2>Book Your Experience</h2>
-                <p class="lead">Secure your Executive Pod or schedule a consultation with our concierge team.</p>
-            </div>
-            
-            <div class="booking-container">
-                <form id="bookingForm">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="name">Full Name *</label>
-                            <input type="text" id="name" class="form-control" placeholder="Johnathan Smith" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" placeholder="johnathan@company.com" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control" placeholder="+39 123 456 7890">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="service">Service Type *</label>
-                            <select id="service" class="form-control" required>
-                                <option value="">Select a service</option>
-                                <option value="pod">Executive Office Pod</option>
-                                <option value="consult">Digital Concierge Consultation</option>
-                                <option value="shipping">Premium Shipping Services</option>
-                                <option value="mobile">Mobile & Connectivity Setup</option>
-                                <option value="storage">Luggage Storage</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="date">Preferred Date *</label>
-                            <input type="date" id="date" class="form-control" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="guests">Number of Guests</label>
-                            <select id="guests" class="form-control">
-                                <option value="1">1 Person</option>
-                                <option value="2">2 People</option>
-                                <option value="3">3 People</option>
-                                <option value="4">4 People</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Select Time Slot *</label>
-                        <div class="time-slots" id="timeSlots">
-                            <!-- Generated by JavaScript -->
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notes">Additional Notes</label>
-                        <textarea id="notes" class="form-control" rows="3" placeholder="Special requests, accessibility needs, or specific requirements..."></textarea>
-                    </div>
-                    
-                    <div class="text-center mt-4">
-                        <button type="submit" class="btn btn-primary" style="padding: 1rem 3rem; font-size: 1rem;">
-                            <i class="fas fa-paper-plane"></i> Confirm Reservation
-                        </button>
-                        <p class="mt-2" style="font-size: 0.9rem; color: var(--text-light);">
-                            <i class="fas fa-lock"></i> Your information is secure and encrypted
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">KANVA</div>
-                    <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1.5rem;">
-                        Via Montenapoleone 12, 20121<br>
-                        Milano MI, Italy
+            <div class="bento-item item-2">
+                <div class="bento-content">
+                    <p style="font-size: 1.2rem; line-height: 1.6; opacity: 0.8;">
+                        We don't provide services. <br>
+                        We engineer time for those <br>
+                        who value it most.
                     </p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="https://wa.me/+393388050820" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4>Services</h4>
-                    <ul>
-                        <li><a href="#services">Executive Office Pods</a></li>
-                        <li><a href="#services">Digital Concierge</a></li>
-                        <li><a href="#services">Logistics & Shipping</a></li>
-                        <li><a href="#services">Mobile Solutions</a></li>
-                        <li><a href="#services">Luggage Storage</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#home">About KANVA</a></li>
-                        <li><a href="#testimonials">Client Stories</a></li>
-                        <li><a href="#contact">Careers</a></li>
-                        <li><a href="#contact">Press & Media</a></li>
-                        <li><a href="#contact">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="tel:+3902128901234">+39 02 1289 01234</a></li>
-                        <li><a href="mailto:info@kanva.it">info@kanva.it</a></li>
-                        <li><a href="https://wa.me/+393388050820" target="_blank">WhatsApp Business</a></li>
-                        <li style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem;">
-                            <i class="fas fa-clock"></i> Mon-Sun: 7:00-22:00
-                        </li>
-                    </ul>
                 </div>
             </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 KANVA Milano Multiservice. All rights reserved.</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">
-                    Via Montenapoleone 12, 20121 Milano MI • P.IVA 01234567890
-                </p>
+            <div class="bento-item item-3">
+                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80">
             </div>
-        </div>
-    </footer>
+            <div class="bento-item item-4">
+                <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80">
+                <div class="bento-content">
+                    <h3 style="font-size: 3rem; font-family: 'Cormorant Garamond';">The Sanctuary</h3>
+                    <p>Via Montenapoleone, 12</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- Modal -->
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <div class="modal-icon">
-                <i class="fas fa-check"></i>
+        <!-- Horizontal Services Section -->
+        <section class="horizontal-section" id="services">
+            <div class="horizontal-container">
+                <div class="service-card">
+                    <h2>Connectivity</h2>
+                    <p>Industrial-grade global data solutions and secure private networks.</p>
+                </div>
+                <div class="service-card">
+                    <h2>The Pod</h2>
+                    <p>A sound-isolated monolithic workspace engineered for focus.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Logistics</h2>
+                    <p>White-glove parcel handling and global expedited shipping.</p>
+                </div>
+                <div class="service-card">
+                    <h2>Finance</h2>
+                    <p>Bespoke payment processing and tax orchestration.</p>
+                </div>
             </div>
-            <h3 style="margin-bottom: 1rem;">Reservation Confirmed</h3>
-            <p style="margin-bottom: 1rem;">Thank you, <span id="modalName" style="font-weight: 600;"></span>.</p>
-            <p>Your <span id="modalService" style="font-weight: 600;"></span> has been reserved for:</p>
-            <p style="margin: 1.5rem 0; font-size: 1.25rem;">
-                <span id="modalDate" style="font-weight: 600; color: var(--accent);"></span><br>
-                at <span id="modalTime" style="font-weight: 600; color: var(--accent);"></span>
-            </p>
-            <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2rem;">
-                A confirmation email has been sent to your inbox.
-            </p>
-            <button class="btn btn-dark" onclick="closeModal()" style="width: 100%;">Close</button>
-        </div>
-    </div>
+        </section>
+
+        <footer>
+            <a href="mailto:concierge@kanva.it" class="footer-big">Contact Us</a>
+            <div style="margin-top: 50px; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px;">
+                &copy; 2026 KANVA MULTISERVICE MILANO. ALL RIGHTS RESERVED.
+            </div>
+        </footer>
+    </main>
 
     <script>
-        // Header scroll effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
+        // 1. Initialize Smooth Scroll (Lenis)
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         });
-        
-        // Fixed Mobile Menu Toggle and Dropdown Logic
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
-        const dropdownToggles = document.querySelectorAll('.dropdown > .nav-link');
-        
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // 2. Preloader
+        window.addEventListener('load', () => {
+            gsap.to("#loader", {
+                yPercent: -100,
+                duration: 1.2,
+                ease: "expo.inOut",
+                delay: 1
+            });
+            initAnimations();
         });
 
-        // Handle Mobile Dropdown Clicks
-        dropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', (e) => {
-                if (window.innerWidth <= 768) {
-                    e.preventDefault();
-                    const parent = toggle.parentElement;
-                    parent.classList.toggle('active');
+        // 3. Custom Magnetic Cursor
+        const cursor = document.getElementById('cursor');
+        const follower = document.getElementById('cursor-follower');
+        
+        document.addEventListener('mousemove', (e) => {
+            gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0 });
+            gsap.to(follower, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.3 });
+        });
+
+        // 4. GSAP Power Animations
+        function initAnimations() {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero Animation
+            const tl = gsap.timeline();
+            tl.from(".hero-title span", {
+                y: 200,
+                duration: 1.5,
+                ease: "expo.out",
+                stagger: 0.2,
+                delay: 1.2
+            })
+            .to(".hero-image-container", {
+                clipPath: "inset(0% 0 0 0)",
+                duration: 2,
+                ease: "expo.inOut"
+            }, "-=1")
+            .to(".hero-image-container img", {
+                scale: 1,
+                duration: 2,
+                ease: "expo.inOut"
+            }, "-=2");
+
+            // Horizontal Scroll
+            const horizontalSection = document.querySelector('.horizontal-section');
+            const horizontalContainer = document.querySelector('.horizontal-container');
+            
+            gsap.to(horizontalContainer, {
+                x: () => -(horizontalContainer.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: horizontalSection,
+                    start: "top top",
+                    end: () => "+=" + horizontalContainer.scrollWidth,
+                    scrub: 1,
+                    pin: true,
+                    invalidateOnRefresh: true,
                 }
             });
-        });
-        
-        // Close mobile menu on link click (if not a dropdown toggle)
-        document.querySelectorAll('.nav-menu a:not(.dropdown > .nav-link)').forEach(link => {
-            link.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
+
+            // Bento Items Parallax
+            gsap.utils.toArray('.bento-item img').forEach(img => {
+                gsap.fromTo(img, 
+                    { y: -50 }, 
+                    { 
+                        y: 50, 
+                        scrollTrigger: {
+                            trigger: img,
+                            scrub: true
+                        }
+                    }
+                );
             });
-        });
-        
-        // Active nav link based on scroll position
-        window.addEventListener('scroll', () => {
-            let current = '';
-            const sections = document.querySelectorAll('section');
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (scrollY >= (sectionTop - 200)) {
-                    current = section.getAttribute('id');
-                }
-            });
-            
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-        
-        // Generate time slots
-        const timeSlots = document.getElementById('timeSlots');
-        const slots = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'];
-        
-        slots.forEach(slot => {
-            const btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'slot-btn';
-            btn.textContent = slot;
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
-                btn.classList.add('selected');
-            });
-            timeSlots.appendChild(btn);
-        });
-        
-        // Set minimum date to tomorrow
-        const dateInput = document.getElementById('date');
-        if(dateInput) {
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            dateInput.min = tomorrow.toISOString().split('T')[0];
-            dateInput.value = tomorrow.toISOString().split('T')[0];
-        }
-        
-        // Form submission
-        document.getElementById('bookingForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const service = document.getElementById('service').options[document.getElementById('service').selectedIndex].text;
-            const date = document.getElementById('date').value;
-            const selectedTime = document.querySelector('.slot-btn.selected');
-            
-            if (!selectedTime) {
-                alert('Please select a time slot.');
-                return;
-            }
-            
-            const formattedDate = new Date(date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            
-            document.getElementById('modalName').textContent = name;
-            document.getElementById('modalService').textContent = service;
-            document.getElementById('modalDate').textContent = formattedDate;
-            document.getElementById('modalTime').textContent = selectedTime.textContent;
-            
-            document.getElementById('modal').classList.add('open');
-        });
-        
-        function closeModal() {
-            document.getElementById('modal').classList.remove('open');
-            document.getElementById('bookingForm').reset();
-            document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
         }
     </script>
 </body>
