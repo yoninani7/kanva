@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | ECHOTONGUE</title>
+    
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --primary-red: #c91313c9;
+            --dark-red: #b30000;
+            --bg-color: #000000fc;
+            --text-color: #e0e0e0;
+            --text-white: #fff;
+            --font-heading: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            background-image:
+                radial-gradient(white, rgba(255, 255, 255, .2) 1px, transparent 2px);
+            background-size: 30px 30px;
+        }
+        
+        /* --- 404 CONTENT --- */
+        .error-container {
+            max-width: 800px;
+            padding: 40px;
+            position: relative;
+        }
+        
+        /* 404 Number */
+        .error-number {
+            font-family: var(--font-heading);
+            font-size: 8rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            color: var(--text-white);
+            text-shadow: 0 0 20px rgba(192, 0, 0, 0.5);
+        }
+        
+        /* Error Message */
+        .error-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+        
+        .error-subtitle {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--primary-red);
+            font-weight: 600;
+        }
+        
+        .error-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #aaa;
+        }
+        
+        /* --- BUTTONS (From Previous Code) --- */
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background: radial-gradient(100% 120% at 50% 0%, #df0211 0%, #500D11 100%);
+            color: #fdfdfd;
+            border-radius: 6px;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: 16px;
+            letter-spacing: 0.7px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(192, 0, 0, 0.3);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-red);
+            color: var(--text-color);
+        }
+        
+        .btn-outline:hover {
+            background: radial-gradient(100% 120% at 50% 0%, #df0211 0%, #500D11 100%);
+            box-shadow: 0 15px 30px rgba(192, 0, 0, 0.3);
+            border: 2px solid #500D11;
+            color: #fdfdfd;
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-red);
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .error-number {
+                font-size: 6rem;
+            }
+            
+            .error-title {
+                font-size: 1.8rem;
+            }
+            
+            .error-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .error-number {
+                font-size: 5rem;
+            }
+            
+            .error-title {
+                font-size: 1.5rem;
+            }
+            
+            .error-container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="error-container">
+        <!-- 404 Number -->
+        <div class="error-number">
+            404
+        </div>
+        
+        <!-- Error Message -->
+        <h1 class="error-title">Page Not Found</h1>
+        
+        <h2 class="error-subtitle">Lost in the Galaxian Universe</h2>
+        
+        <p class="error-description">
+            The page you're looking for doesn't exist or has been moved. 
+            You've ventured beyond the known planets of the Echotongue universe.
+        </p>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="index.php" class="btn">
+                <i class="fas fa-home"></i> Return Home
+            </a>
+            <a href="purchasebook.php" class="btn btn-outline">
+                <i class="fas fa-book-open"></i> Buy the Book
+            </a>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.php">Home</a>
+            <a href="index.php#about">About</a>
+            <a href="purchasebook.php">Purchase</a>
+            <a href="blog.php">Blog</a>
+        </div>
+        <div class="copyright">
+            &copy; 2025 ECHOTONGUE by Hermona Zeleke. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>
