@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiService Hub Italia | Excellence in Milan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet">
+    <style>
+        /* ========== CSS Variables (The Luxury Palette) ========== */
+        :root {
+            --primary: #0f172a; /* Deep Midnight */
+            --secondary: #1e293b;
+            --accent: #c5a059; /* Champagne Gold */
+            --accent-hover: #e2c28d;
+            --text-main: #334155;
+            --text-light: #94a3b8;
+            --white: #ffffff;
+            --bg-soft: #f8fafc;
+            --glass: rgba(255, 255, 255, 0.8);
+            
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            --radius-lg: 24px;
+            --radius-md: 12px;
+        }
+
+        /* ========== Reset & Base ========== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+        section { padding: 120px 0; }
+        
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ========== Buttons ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            letter-spacing: 0.5px;
+            cursor: pointer;
+        }
+        .btn-gold {
+            background: var(--accent);
+            color: var(--white);
+            border: 1px solid var(--accent);
+        }
+        .btn-gold:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .btn-outline {
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* ========== Header ========== */
+        header {
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+        header.scrolled {
+            background: var(--glass);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { 
+            width: 40px; height: 40px; background: var(--primary); 
+            border-radius: 10px; display: flex; align-items: center; 
+            justify-content: center; color: var(--accent); 
+        }
+        .logo-text h1 { font-size: 1.4rem; margin: 0; color: var(--primary); }
+        .nav-links { display: flex; gap: 40px; list-style: none; }
+        .nav-links a { 
+            text-decoration: none; color: var(--primary); 
+            font-weight: 500; font-size: 0.9rem; 
+            position: relative; transition: 0.3s;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0;
+            width: 0; height: 2px; background: var(--accent); transition: 0.3s;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ========== Hero Section ========== */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 { color: white; font-size: 4.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; opacity: 0.9; }
+        .hero-btns { display: flex; justify-content: center; gap: 20px; }
+
+        /* ========== Partner Logos ========== */
+        .partners { padding: 60px 0; background: var(--bg-soft); border-bottom: 1px solid #eee; }
+        .partner-grid { display: flex; justify-content: space-around; align-items: center; opacity: 0.6; filter: grayscale(1); }
+        .partner-grid i { font-size: 2.5rem; }
+
+        /* ========== Stats Section ========== */
+        .stats { background: var(--primary); color: white; padding: 80px 0; }
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+        .stat-item h2 { color: var(--accent); font-size: 3rem; margin-bottom: 10px; }
+        .stat-item p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; }
+
+        /* ========== Services Grid ========== */
+        .section-title { text-align: center; margin-bottom: 80px; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 20px; }
+        .section-title span { color: var(--accent); font-style: italic; }
+
+        .service-card {
+            background: var(--white);
+            padding: 50px;
+            border-radius: var(--radius-lg);
+            border: 1px solid #f1f5f9;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+            border-color: var(--accent);
+        }
+        .service-card i {
+            font-size: 2.5rem; color: var(--accent); margin-bottom: 30px; display: block;
+        }
+        .service-card h3 { font-size: 1.8rem; margin-bottom: 20px; }
+        .service-card ul { list-style: none; margin-bottom: 30px; }
+        .service-card li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 0.95rem; }
+        .service-card li i { font-size: 1rem; margin: 0; }
+
+        /* ========== Cultural Heritage Section (Spices) ========== */
+        .heritage { background: #faf9f6; overflow: hidden; }
+        .heritage-flex { display: flex; align-items: center; gap: 80px; }
+        .heritage-image { flex: 1; position: relative; }
+        .heritage-image img { width: 100%; border-radius: var(--radius-lg); box-shadow: 30px 30px 0 var(--accent); }
+        .heritage-text { flex: 1; }
+        .heritage-text h2 { font-size: 3.5rem; margin-bottom: 30px; }
+        .spice-tag { 
+            display: inline-block; padding: 5px 15px; background: #efebe3; 
+            border-radius: 20px; font-size: 0.8rem; font-weight: 600; 
+            color: #846a32; margin-bottom: 20px;
+        }
+
+        /* ========== Gallery Section ========== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 300px);
+            gap: 20px;
+        }
+        .gallery-item { border-radius: var(--radius-md); overflow: hidden; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .item-1 { grid-column: span 2; }
+        .item-4 { grid-column: span 2; }
+
+        /* ========== Footer ========== */
+        footer { background: var(--primary); color: white; padding: 100px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 60px; margin-bottom: 60px; }
+        .footer-col h4 { color: var(--accent); margin-bottom: 30px; font-family: 'Inter', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 1024px) {
+            .heritage-flex { flex-direction: column; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero h1 { font-size: 3rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <header id="header">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                <div class="logo-text"><h1>MultiService Hub</h1></div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#heritage">The Heritage</a></li>
+                <li><a href="#office">Workspaces</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="btn btn-gold">Book Consultation</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="reveal">The Pinnacle of <br><span>Service Excellence.</span></h1>
+            <p class="reveal">A sophisticated all-in-one destination in the heart of Milan. We blend professional logistics, financial freedom, and cultural authenticity under one elegant roof.</p>
+            <div class="hero-btns reveal">
+                <a href="#services" class="btn btn-gold">Explore Services</a>
+                <a href="#heritage" class="btn btn-outline" style="color: white; border-color: white;">Our Heritage</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Slider -->
+    <div class="partners">
+        <div class="container partner-grid">
+            <i class="fab fa-dhl"></i>
+            <i class="fab fa-ups"></i>
+            <i class="fab fa-western-union"></i>
+            <i class="fab fa-fedex"></i>
+            <i class="fab fa-apple-pay"></i>
+            <i class="fab fa-visa"></i>
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <section class="stats">
+        <div class="container stats-grid">
+            <div class="stat-item">
+                <h2 class="counter">12k</h2>
+                <p>Global Clients</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter">85k</h2>
+                <p>Parcels Handled</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter">15+</h2>
+                <p>Service Categories</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="counter">4.9</h2>
+                <p>Client Rating</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our <span>Premium</span> Portfolio</h2>
+                <p>Curated solutions for the modern professional and global traveler.</p>
+            </div>
+            <div class="services-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+                <!-- Service 1 -->
+                <div class="service-card reveal">
+                    <i class="fas fa-paper-plane"></i>
+                    <h3>Global Logistics</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Express Parcel Shipping</li>
+                        <li><i class="fas fa-check"></i> Secure Luggage Concierge</li>
+                        <li><i class="fas fa-check"></i> International Freight Hub</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn">View Details</a>
+                </div>
+                <!-- Service 2 -->
+                <div class="service-card reveal">
+                    <i class="fas fa-vault"></i>
+                    <h3>Financial Freedom</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Multi-Currency Transfer</li>
+                        <li><i class="fas fa-check"></i> Corporate Bill Management</li>
+                        <li><i class="fas fa-check"></i> Tax & Fiscal Assistance</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn">Manage Funds</a>
+                </div>
+                <!-- Service 3 -->
+                <div class="service-card reveal">
+                    <i class="fas fa-laptop-code"></i>
+                    <h3>Digital Solutions</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Premium Global SIMs</li>
+                        <li><i class="fas fa-check"></i> ICAO Document Photos</li>
+                        <li><i class="fas fa-check"></i> Professional IT Support</li>
+                    </ul>
+                    <a href="#" class="btn-outline btn">Connect Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Heritage Section -->
+    <section class="heritage" id="heritage">
+        <div class="container heritage-flex">
+            <div class="heritage-image reveal">
+                <img src="https://images.unsplash.com/photo-1599940824399-b87987cb9624?auto=format&fit=crop&w=800&q=80" alt="Spices">
+            </div>
+            <div class="heritage-text reveal">
+                <span class="spice-tag">Authentic Sourcing</span>
+                <h2>Taste of the <span>Horn of Africa</span></h2>
+                <p>We honor our roots by bringing the finest Ethiopian and Eritrean spices to Milan. Sourced directly from local farmers, our Berbere, Mitmita, and Koseret represent the soul of East African cuisine.</p>
+                <div style="margin: 30px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 5px;">Pure Berbere</h4>
+                        <p style="font-size: 0.85rem;">The heart of every stew.</p>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--accent); margin-bottom: 5px;">Highland Coffee</h4>
+                        <p style="font-size: 0.85rem;">Organic Arabica beans.</p>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-gold">Inquire for Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="container">
+        <div class="section-title reveal">
+            <h2>The <span>Hub</span> Experience</h2>
+            <p>A glimpse into our Milan headquarters.</p>
+        </div>
+        <div class="gallery-grid reveal">
+            <div class="gallery-item item-1"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1517502884422-41eaead166d4?auto=format&fit=crop&w=800&q=80"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1556740734-7f95626903fb?auto=format&fit=crop&w=800&q=80"></div>
+            <div class="gallery-item item-4"><img src="https://images.unsplash.com/photo-1431540015161-0bf868a2d407?auto=format&fit=crop&w=800&q=80"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 30px;">
+                        <div class="logo-icon"><i class="fas fa-crown"></i></div>
+                        <div class="logo-text"><h1 style="color: white;">MultiService Hub</h1></div>
+                    </a>
+                    <p style="opacity: 0.6; margin-bottom: 30px;">Setting the standard for integrated services in Italy. Elegant, efficient, and essential.</p>
+                    <div style="display: flex; gap: 15px;">
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>The Hub</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Vision</a></li>
+                        <li><a href="#">Office Pods</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Logistics</a></li>
+                        <li><a href="#">Finances</a></li>
+                        <li><a href="#">Spices</a></li>
+                        <li><a href="#">Travel Sim</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Visit Us</h4>
+                    <p style="opacity: 0.6;">Via Dante Alighieri, 15<br>20121 Milano MI, Italy</p>
+                    <p style="margin-top: 20px; color: var(--accent);">+39 02 1234 5678</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 MultiService Hub Italia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+
+        // Header Scroll Effect
+        window.addEventListener("scroll", function() {
+            const header = document.getElementById("header");
+            if (window.scrollY > 50) {
+                header.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+            }
+        });
+
+        // Initial check for reveal
+        reveal();
+    </script>
+</body>
+</html>
