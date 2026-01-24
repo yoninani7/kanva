@@ -272,149 +272,94 @@
            4. RESTORED HERO SLIDER WITH 4 SLIDES - FIXED IMAGES
            ================================================================
         */
-      .hero-container {
-        height: 100vh;
-        min-height: 700px;
-        position: relative;
-        overflow: hidden;
-        user-select: none;
-      }
+      /* FIXED LAYERED HERO */
+ /* REFINED HERO STYLE */
+.hero-wrapper {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+}
 
-      .hero-slider {
-        display: flex;
-        width: 400%;
-        height: 100%;
-        transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
-        will-change: transform;
-      }
+.hero-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    display: flex;
+    align-items: center;
+}
 
-      .hero-section {
-        width: 25%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        padding: 0 8%;
-        position: relative;
-        overflow: hidden;
-        flex-shrink: 0;
-      }
+.hero-slide.active {
+    opacity: 1;
+    z-index: 10;
+}
 
-      /* Hero 1: Main Hub - Store/Shop interior */
-      .hero-1 {
-        background: linear-gradient(135deg, rgba(140, 115, 85, 0.85), rgba(109, 89, 66, 0.7)),
-                    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
-      }
-      
-      /* Hero 2: Digital Services - Tech/Connectivity */
-      .hero-2 {
-        background: linear-gradient(135deg, rgba(42, 92, 139, 0.85), rgba(26, 58, 95, 0.7)),
-                    url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
-      }
-      
-      /* Hero 3: Event Organizing - Conference/Event */
-      .hero-3 {
-        background: linear-gradient(135deg, rgba(10, 124, 113, 0.85), rgba(13, 156, 142, 0.7)),
-                    url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
-      }
-      
-      /* Hero 4: Business Solutions - Office/Business */
-      .hero-4 {
-        background: linear-gradient(135deg, rgba(139, 0, 0, 0.85), rgba(109, 70, 107, 0.7)),
-                    url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
-      }
+/* Background Image - Lower brightness for better text readability */
+.slide-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.35); /* Makes image darker so text is clear */
+    transform: scale(1.05);
+    transition: transform 6s ease-out;
+}
 
-      .hero-content {
-        position: relative;
-        z-index: 10;
-        max-width: 700px;
-        color: white;
-      }
+.hero-slide.active .slide-bg {
+    transform: scale(1);
+}
 
-      .hero-section h1 {
-        font-size: clamp(2.5rem, 5vw, 4.5rem);
-        line-height: 1.1;
-        margin-bottom: 25px;
-        color: white;
-      }
+.slide-content {
+    position: relative;
+    z-index: 30;
+    color: white;
+    width: 100%;
+    padding: 0 12%; /* Added padding for space from side navs */
+}
 
-      .hero-section h1 b {
-        font-weight: 200;
-        color: var(--accent-sand);
-      }
-      .hero-2 h1 b {
-        color: #a3d5ff;
-      }
-      .hero-3 h1 b {
-        color: #a3ffe6;
-      }
-      .hero-4 h1 b {
-        color: #ffb3b3;
-      }
+.slide-content h1 {
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 20px;
+}
 
-      .hero-section p {
-        max-width: 500px;
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 1.1rem;
-        margin-bottom: 40px;
-        line-height: 1.7;
-      }
+/* SIDE NAVIGATION BUTTONS */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
 
-      .hero-indicators {
-        position: absolute;
-        bottom: 40px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        z-index: 100;
-      }
-      .hero-indicator {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.4);
-        border: 2px solid rgba(255, 255, 255, 0.6);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-      .hero-indicator.active {
-        background: var(--accent-sand);
-        border-color: var(--accent-sand);
-        transform: scale(1.2);
-        box-shadow: 0 0 10px rgba(212, 197, 185, 0.5);
-      }
+.nav-btn:hover {
+    background: var(--accent-gold);
+    border-color: var(--accent-gold);
+}
 
-      .hero-nav {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        padding: 0 4%;
-        z-index: 100;
-      }
-      .hero-nav-btn {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.9);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        color: var(--accent-gold);
-        font-size: 1.2rem;
-        transition: all 0.3s ease;
-        border: 1px solid var(--border-refined);
-        box-shadow: var(--shadow-subtle);
-      }
-      .hero-nav-btn:hover {
-        background: var(--accent-gold);
-        color: white;
-        transform: scale(1.1);
-      }
+.nav-btn.prev { left: 30px; }
+.nav-btn.next { right: 30px; }
 
+@media (max-width: 768px) {
+    .nav-btn { width: 45px; height: 45px; }
+    .nav-btn.prev { left: 10px; }
+    .nav-btn.next { right: 10px; }
+}
       .btn-premium {
         padding: 18px 40px;
         background: var(--accent-gold);
@@ -941,35 +886,7 @@
         color: var(--text-muted);
         border: 1px solid var(--border-refined);
       }
-
-      /* Statistics */
-      .stats-section {
-        padding: 100px 8%;
-        background: linear-gradient(135deg, var(--accent-graphite) 0%, #2a2a2a 100%);
-        color: white;
-      }
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 40px;
-        text-align: center;
-      }
-      .stat-item {
-        padding: 30px;
-      }
-      .stat-number {
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 10px;
-        font-family: "Space Mono", monospace;
-      }
-      .stat-label {
-        font-size: 0.9rem;
-        opacity: 0.9;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
+ 
       /* Smart Assistant */
       .smart-assist-section {
         padding: 120px 8%;
@@ -1147,7 +1064,136 @@
           padding: 60px 5%;
         }
       }
-    </style>
+        /* 
+           ================================================================
+           11. REFINED EDITORIAL ABOUT (RESPONSIVE & PROPORTIONAL)
+           ================================================================
+        */
+      .about-art { 
+        padding-top: 100px; 
+        padding-left: 80px;
+        padding-right: 80px;
+        background: var(--bg-ivory);
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle Watermark - Responsive size */
+      .about-art::before {
+        content: "M";
+        position: absolute;
+        top: 50%;
+        left: -5%;
+        transform: translateY(-50%);
+        font-family: "Fraunces", serif;
+        font-size: clamp(20rem, 40vw, 50rem);
+        color: rgba(140, 115, 85, 0.04);
+        font-weight: 100;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .about-art-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 0;
+        align-items: center;
+        position: relative;
+        z-index: 2;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .about-art-image {
+        grid-column: 1 / 9;
+        grid-row: 1;
+        width: 100%;
+        z-index: 1;
+      }
+
+      .about-art-image img {
+        width: 100%;
+        display: block;
+        /* Maintains artistic vertical proportion */
+        aspect-ratio: 4 / 3; 
+        object-fit: cover;
+        filter: sepia(15%) contrast(1.05);
+        border-radius: 2px;
+      }
+
+      .about-art-content {
+        grid-column: 7 / 13;
+        grid-row: 1;
+        background: var(--bg-ivory);
+        padding: clamp(30px, 5vw, 80px);
+        border: 1px solid var(--border-refined);
+        box-shadow: var(--shadow-elevated);
+        z-index: 2;
+        /* Use relative positioning for the overlap */
+        transform: translateX(0); 
+      }
+
+      .about-art-content h2 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        margin-bottom: 25px;
+        line-height: 1.1;
+      }
+
+      .about-art-content h2 span {
+        font-weight: 600;
+        color: var(--accent-gold);
+        display: block;
+      }
+
+      .about-art-content p {
+        font-size: clamp(0.9rem, 1.2vw, 1.05rem);
+        color: var(--text-muted);
+        line-height: 1.8;
+        margin-bottom: 30px;
+      }
+
+      .art-signature {
+        font-family: "Space Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: var(--accent-gold);
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .art-signature::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--accent-sand);
+      }
+
+      /* Tablet Breakpoint */
+      @media (max-width: 1024px) {
+        .about-art { padding: 80px 5%; }
+        .about-art-image { grid-column: 1 / 11; }
+        .about-art-content { 
+          grid-column: 5 / 13; 
+          padding: 40px;
+        }
+      }
+
+      /* Mobile Breakpoint */
+      @media (max-width: 768px) {
+        .about-art-grid { display: flex; flex-direction: column; }
+        .about-art-image { width: 100%; order: 1; }
+        .about-art-image img { aspect-ratio: 16 / 9; } /* Wider on mobile */
+        .about-art-content { 
+          width: 90%; 
+          margin-top: -50px; /* Overlaps vertically instead */
+          order: 2;
+          padding: 30px 25px;
+        }
+        .about-art-content h2 { font-size: 2.2rem; }
+      }
+   </style>
   </head>
   <body>
     <!-- Navigation with Improved Dropdown -->
@@ -1236,147 +1282,86 @@
     </nav>
 
     <!-- Restored Hero Slider -->
-    <section class="hero-container" id="hero">
-      <div class="hero-slider" id="heroSlider">
-        <!-- Hero 1: Main Hub -->
-        <div class="hero-section hero-1">
-          <div class="hero-content">
-            <div class="mono" style="color: var(--accent-sand); margin-bottom: 20px">
-              Milan Integrated Services Hub
-            </div>
-            <h1>The <b>Central Store.</b></h1>
-            <p>
-              From <b>mobile accessories</b> and <b>SIM cards</b> to <b>luggage storage</b>,
-              <b>printing</b>, and <b>parcel pickup</b>. We provide
-              <b>smart assistance</b>, <b>money transfers</b>, and <b>event organization</b>
-              all in one central location.
-            </p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap">
-              <button class="btn-premium" onclick="location.href = '#services'">
-                Explore Services
-              </button>
-              <button class="btn-premium secondary" onclick="location.href = '#pods'">
-                Book Office Pod
-              </button>
-            </div>
-          </div>
-        </div>
+<section class="hero-wrapper" id="hero">
+    <!-- Navigation Buttons -->
+    <button class="nav-btn prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+    <button class="nav-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
 
-        <!-- Hero 2: Digital Services -->
-        <div class="hero-section hero-2">
-          <div class="hero-content">
-            <div class="mono" style="color: #a3d5ff; margin-bottom: 20px">
-              Digital & Communication Hub
-            </div>
-            <h1>Connectivity <b>Suite.</b></h1>
-            <p>
-              Premium digital services including <b>5G SIM activations</b>,
-              <b>global money transfers</b>, <b>document processing</b>, and
-              <b>tech support</b>. Professional solutions for modern needs.
-            </p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap">
-              <button class="btn-premium secondary" onclick="location.href = '#connectivity'">
-                View Digital Hub
-              </button>
-              <button class="btn-premium" onclick="location.href = '#logistics'">
-                Logistics Services
-              </button>
-            </div>
-          </div>
+    <!-- Slide 1 -->
+    <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1616422285623-13ff0169293c?q=80&w=2000" class="slide-bg">
+        <div class="slide-content">
+            <span class="mono" style="color: var(--accent-gold)">Marula Milano</span>
+            <h1>The Hub <span>Experience.</span></h1>
+            <p>Your sanctuary in Milan for logistics, connectivity, and professional services.</p>
+            <button class="btn-premium" onclick="location.href='#services'">Explore Services</button>
         </div>
+    </div>
 
-        <!-- Hero 3: Event Organizing -->
-        <div class="hero-section hero-3">
-          <div class="hero-content">
-            <div class="mono" style="color: #a3ffe6; margin-bottom: 20px">
-              Professional Event Solutions
-            </div>
-            <h1>Event <b>Organizing.</b></h1>
-            <p>
-              Comprehensive event management services for corporate gatherings,
-              private celebrations, and professional conferences. From venue
-              selection to flawless execution.
-            </p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap">
-              <button class="btn-premium tertiary" onclick="location.href = '#events'">
-                Plan Your Event
-              </button>
-              <button class="btn-premium" onclick="location.href = '#testimonials'">
-                See Reviews
-              </button>
-            </div>
-          </div>
+    <!-- Slide 2 -->
+    <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=2000" class="slide-bg">
+        <div class="slide-content">
+            <span class="mono">Worldwide Reach</span>
+            <h1>Secure <span>Asset Flow.</span></h1>
+            <p>Official terminal for UPS, DHL, and Amazon. High-security luggage storage.</p>
+            <button class="btn-premium" onclick="location.href='#logistics'">Ship Now</button>
         </div>
+    </div>
 
-        <!-- Hero 4: Business Solutions -->
-        <div class="hero-section hero-4">
-          <div class="hero-content">
-            <div class="mono" style="color: #ffb3b3; margin-bottom: 20px">
-              Business Support Center
-            </div>
-            <h1>Business <b>Support.</b></h1>
-            <p>
-              Complete business support including <b>ticket office</b>,
-              <b>document processing</b>, <b>office pods</b>, and
-              <b>professional assistance</b>. Your business hub in Milan.
-            </p>
-            <div style="display: flex; gap: 20px; flex-wrap: wrap">
-              <button class="btn-premium" onclick="location.href = '#smart-assist'">
-                Smart Assistant
-              </button>
-              <button class="btn-premium secondary" onclick="location.href = '#location'">
-                Contact Us
-              </button>
-            </div>
-          </div>
+    <!-- Slide 3 -->
+    <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000" class="slide-bg">
+        <div class="slide-content">
+            <span class="mono">Digital Edge</span>
+            <h1>Always <span>Synchronized.</span></h1>
+            <p>5G connectivity and private soundproof pods for the modern professional.</p>
+            <button class="btn-premium" onclick="location.href='#pods'">Book a Pod</button>
         </div>
-      </div>
+    </div>
 
-      <!-- Hero Navigation -->
-      <div class="hero-nav">
-        <div class="hero-nav-btn" id="prevHero">
-          <i class="fas fa-chevron-left"></i>
+    <!-- Slide 4 -->
+    <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2000" class="slide-bg">
+        <div class="slide-content">
+            <span class="mono">Curated Events</span>
+            <h1>Signature <span>Occasions.</span></h1>
+            <p>From corporate summits to private celebrations in the heart of Milan.</p>
+            <button class="btn-premium" onclick="location.href='#events'">Start Planning</button>
         </div>
-        <div class="hero-nav-btn" id="nextHero">
-          <i class="fas fa-chevron-right"></i>
-        </div>
-      </div>
+    </div>
 
-      <!-- Hero Indicators -->
-      <div class="hero-indicators" id="heroIndicators">
-        <div class="hero-indicator active" data-slide="0"></div>
-        <div class="hero-indicator" data-slide="1"></div>
-        <div class="hero-indicator" data-slide="2"></div>
-        <div class="hero-indicator" data-slide="3"></div>
-      </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="stats-section">
-      <div class="section-header" style="color: white;">
-        <p>Trusted by Milan</p>
-        <h2>Our Impact in Numbers</h2>
-      </div>
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">5,000+</div>
-          <div class="stat-label">Happy Clients</div>
+    <!-- Bottom Indicator Dots -->
+    <div class="hero-nav-labels" style="bottom: 30px; right: 50%; transform: translateX(50%); color: white;">
+        <div class="nav-label active" data-index="0">01</div>
+        <div class="nav-label" data-index="1">02</div>
+        <div class="nav-label" data-index="2">03</div>
+        <div class="nav-label" data-index="3">04</div>
+    </div>
+</section>
+    
+<!-- Artistic Editorial About Section -->
+    <section id="about" class="about-art">
+      <div class="about-art-grid">
+        <div class="about-art-image">
+          <img 
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1400&q=80" 
+            alt="The Marula Hub" 
+          />
         </div>
-        <div class="stat-item">
-          <div class="stat-number">98%</div>
-          <div class="stat-label">Satisfaction Rate</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">24/7</div>
-          <div class="stat-label">Support Available</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">50+</div>
-          <div class="stat-label">Events Organized</div>
+        
+        <div class="about-art-content">
+          <div class="mono" style="margin-bottom: 15px; color: var(--accent-gold);">Our Heritage</div>
+          <h2>
+            Curating <span>Simplicity.</span>
+          </h2>
+          <p>
+            Marula Store is an integrated sanctuary for the modern global citizen. By merging high-end logistics with professional workspace solutions, we act as the silent architecture behind your success in Milan.
+          </p>
+          <div class="art-signature">Marula Store Milano</div>
         </div>
       </div>
     </section>
-
     <!-- Services Overview -->
     <section class="services-overview" id="services">
       <div class="section-header">
@@ -1894,45 +1879,60 @@
 
     <script>
       /* Hero Slider Functionality */
-      let currentSlide = 0;
-      const totalSlides = 4;
-      const heroSlider = document.getElementById('heroSlider');
-      const indicators = document.querySelectorAll('.hero-indicator');
-      let slideInterval;
+      document.addEventListener('DOMContentLoaded', () => {
+    const slides = document.querySelectorAll('.hero-slide');
+    const labels = document.querySelectorAll('.nav-label');
+    const nextBtn = document.getElementById('heroNext');
+    const prevBtn = document.getElementById('heroPrev');
+    let currentSlide = 0;
+    let slideInterval;
 
-      function goToSlide(slideIndex) {
-        currentSlide = slideIndex;
-        heroSlider.style.transform = `translateX(-${currentSlide * 25}%)`;
+    function showSlide(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        labels.forEach(l => l.classList.remove('active'));
         
-        indicators.forEach((indicator, index) => {
-          if (index === currentSlide) {
-            indicator.classList.add('active');
-          } else {
-            indicator.classList.remove('active');
-          }
-        });
-        
-        resetSlideInterval();
-      }
+        // Handle index wrapping (going from last to first or vice versa)
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
 
-      function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        goToSlide(currentSlide);
-      }
+        slides[index].classList.add('active');
+        labels[index].classList.add('active');
+        currentSlide = index;
+    }
 
-      function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        goToSlide(currentSlide);
-      }
+    function startTimer() {
+        slideInterval = setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 6000);
+    }
 
-      function startSlideInterval() {
-        slideInterval = setInterval(nextSlide, 5000);
-      }
-
-      function resetSlideInterval() {
+    // Reset timer whenever user clicks a button
+    function resetTimer() {
         clearInterval(slideInterval);
-        startSlideInterval();
-      }
+        startTimer();
+    }
+
+    // Button Listeners
+    nextBtn.addEventListener('click', () => {
+        showSlide(currentSlide + 1);
+        resetTimer();
+    });
+
+    prevBtn.addEventListener('click', () => {
+        showSlide(currentSlide - 1);
+        resetTimer();
+    });
+
+    // Dot/Label Listeners
+    labels.forEach((label, i) => {
+        label.addEventListener('click', () => {
+            showSlide(i);
+            resetTimer();
+        });
+    });
+
+    startTimer();
+});
 
       /* Data Arrays */
       const HUB_SERVICES = [
