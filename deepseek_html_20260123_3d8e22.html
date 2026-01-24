@@ -1,0 +1,2424 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kanva Store | Premium Integrated Services Hub</title>
+
+    <!-- Premium Typography -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;300;400;600;800&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <style>
+      /* 
+           ================================================================
+           1. ENHANCED COLOR SYSTEM - PROFESSIONAL LIGHT MODE
+           ================================================================
+        */
+      :root {
+        --bg-ivory: #ffffff;
+        --bg-alabaster: #f9f9f9;
+        --bg-frost: #f1f3f4;
+        --accent-gold: #8c7355;
+        --accent-sand: #d4c5b9;
+        --accent-emerald: #0a7c71;
+        --accent-sapphire: #2a5c8b;
+        --accent-burgundy: #8b0000;
+        --accent-mauve: #6d466b;
+        --accent-teal: #1d7874;
+        --text-obsidian: #1a1a1a;
+        --text-slate: #4a4a4a;
+        --text-muted: #757575;
+        --border-refined: rgba(0, 0, 0, 0.08);
+        --transition-smooth: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+        --shadow-subtle: 0 20px 40px rgba(0, 0, 0, 0.05);
+        --shadow-elevated: 0 30px 60px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 
+           ================================================================
+           2. CORE SYSTEM STYLES
+           ================================================================
+        */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: var(--bg-ivory);
+        color: var(--text-slate);
+        font-family: "Lexend Deca", sans-serif;
+        overflow-x: hidden;
+        line-height: 1.6;
+        cursor: default;
+      }
+
+      h1,
+      h2,
+      h3,
+      .serif {
+        font-family: "Fraunces", serif;
+        font-weight: 300;
+        color: var(--text-obsidian);
+      }
+      .mono {
+        font-family: "Space Mono", monospace;
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--bg-ivory);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent-gold);
+        border-radius: 4px;
+      }
+
+      /* 
+           ================================================================
+           3. ENHANCED NAVIGATION
+           ================================================================
+        */
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 5000;
+        padding: 15px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: var(--transition-smooth);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-refined);
+      }
+      nav.scrolled {
+        padding: 10px 8%;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+      }
+      .logo {
+        font-size: 1.4rem;
+        font-weight: 800;
+        letter-spacing: 4px;
+        text-decoration: none;
+        color: var(--text-obsidian);
+        text-transform: uppercase;
+      }
+      .logo span {
+        color: var(--accent-gold);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        list-style: none;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: var(--text-muted);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: 0.3s;
+        position: relative;
+      }
+      .nav-links a:after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: var(--accent-gold);
+        transition: width 0.3s ease;
+      }
+      .nav-links a:hover {
+        color: var(--accent-gold);
+      }
+      .nav-links a:hover:after {
+        width: 100%;
+      }
+
+      /* 
+           ================================================================
+           4. ENHANCED DYNAMIC HERO SECTION
+           ================================================================
+        */
+      .hero-container {
+        height: 100vh;
+        overflow: hidden;
+        position: relative;
+        user-select: none;
+        background: #000;
+      }
+
+      .hero-container.dragging {
+        cursor: grabbing;
+      }
+
+      .hero-slider {
+        display: flex;
+        width: 400%;
+        height: 100%;
+        transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        will-change: transform;
+      }
+
+      .hero-section {
+        width: 25%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 8%;
+        position: relative;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      /* Enhanced Hero Backgrounds with Gradient Overlays */
+      .hero-1 {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+                    url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+      }
+      .hero-2 {
+        background: linear-gradient(135deg, rgba(42, 92, 139, 0.7), rgba(26, 58, 95, 0.4)),
+                    url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+      }
+      .hero-3 {
+        background: linear-gradient(135deg, rgba(10, 124, 113, 0.7), rgba(13, 156, 142, 0.4)),
+                    url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+      }
+      .hero-4 {
+        background: linear-gradient(135deg, rgba(139, 0, 0, 0.7), rgba(109, 70, 107, 0.4)),
+                    url('https://images.unsplash.com/photo-1545235617-9465d2a55698?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80') center/cover;
+      }
+
+      /* Floating Elements for Depth */
+      .hero-floating-elements {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .hero-floating-element {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        animation: float 20s infinite ease-in-out;
+      }
+
+      .hero-floating-element:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .hero-floating-element:nth-child(2) {
+        width: 80px;
+        height: 80px;
+        top: 60%;
+        right: 15%;
+        animation-delay: -5s;
+      }
+
+      .hero-floating-element:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        bottom: 30%;
+        left: 20%;
+        animation-delay: -10s;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        33% {
+          transform: translateY(-30px) rotate(5deg);
+        }
+        66% {
+          transform: translateY(20px) rotate(-5deg);
+        }
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100%;
+        padding: 60px 0;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 6vw, 5.5rem);
+        line-height: 1.1;
+        margin-bottom: 25px;
+        color: white;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: titleReveal 1s ease forwards 0.3s;
+      }
+
+      @keyframes titleReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-title b {
+        font-weight: 200;
+        color: var(--accent-sand);
+      }
+      .hero-2 .hero-title b {
+        color: #a3d5ff;
+      }
+      .hero-3 .hero-title b {
+        color: #a3ffe6;
+      }
+      .hero-4 .hero-title b {
+        color: #ffb3b3;
+      }
+
+      .hero-section p {
+        max-width: 500px;
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+        line-height: 1.7;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: textReveal 1s ease forwards 0.6s;
+      }
+
+      @keyframes textReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-indicators {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 12px;
+        z-index: 100;
+      }
+      .hero-indicator {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      .hero-indicator.active {
+        background: var(--accent-sand);
+        border-color: var(--accent-sand);
+        transform: scale(1.2);
+        box-shadow: 0 0 10px rgba(212, 197, 185, 0.5);
+      }
+
+      .hero-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 4%;
+        z-index: 100;
+      }
+      .hero-nav-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: var(--accent-gold);
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        border: 1px solid var(--border-refined);
+        box-shadow: var(--shadow-subtle);
+      }
+      .hero-nav-btn:hover {
+        background: var(--accent-gold);
+        color: white;
+        transform: scale(1.1);
+      }
+
+      /* Animated Gradient Border for Buttons */
+      .hero-buttons {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: buttonReveal 1s ease forwards 0.9s;
+      }
+
+      @keyframes buttonReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .btn-glow {
+        padding: 18px 40px;
+        border: none;
+        background: linear-gradient(135deg, var(--accent-gold), #a3886b);
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.4s;
+        position: relative;
+        overflow: hidden;
+        border-radius: 2px;
+      }
+
+      .btn-glow:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+      }
+
+      .btn-glow:hover:before {
+        transform: translateX(100%);
+      }
+
+      .btn-glow:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(140, 115, 85, 0.4);
+      }
+
+      .btn-glow.secondary {
+        background: linear-gradient(135deg, var(--accent-sapphire), #3a6ea5);
+      }
+      .btn-glow.secondary:hover {
+        box-shadow: 0 10px 20px rgba(42, 92, 139, 0.4);
+      }
+
+      .btn-glow.tertiary {
+        background: linear-gradient(135deg, var(--accent-emerald), #0d9c8e);
+      }
+      .btn-glow.tertiary:hover {
+        box-shadow: 0 10px 20px rgba(10, 124, 113, 0.4);
+      }
+
+      .btn-glow.quaternary {
+        background: linear-gradient(135deg, var(--accent-burgundy), #a85252);
+      }
+      .btn-glow.quaternary:hover {
+        box-shadow: 0 10px 20px rgba(139, 0, 0, 0.4);
+      }
+
+      /* Modern Header Tag */
+      .hero-tag {
+        display: inline-block;
+        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 20px;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: tagReveal 0.8s ease forwards 0.1s;
+      }
+
+      @keyframes tagReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* 
+           ================================================================
+           5. REALISTIC EVENT ORGANIZING SECTION
+           ================================================================
+        */
+      .events-section {
+        padding: 120px 8%;
+        background: var(--bg-alabaster);
+      }
+
+      .event-showcase {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-top: 60px;
+        align-items: center;
+      }
+
+      .event-categories {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .event-category-card {
+        background: var(--bg-ivory);
+        border: 1px solid var(--border-refined);
+        border-radius: 4px;
+        padding: 30px;
+        transition: var(--transition-smooth);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .event-category-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-gold);
+        box-shadow: var(--shadow-elevated);
+      }
+
+      .event-category-card.active {
+        border-color: var(--accent-gold);
+        background: linear-gradient(135deg, var(--bg-ivory), #fffaf0);
+      }
+
+      .event-icon {
+        font-size: 2rem;
+        color: var(--accent-gold);
+        margin-bottom: 15px;
+      }
+
+      .event-category-card h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: var(--text-obsidian);
+      }
+
+      .event-category-card p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+      }
+
+      .event-detail-panel {
+        background: var(--bg-ivory);
+        border: 1px solid var(--border-refined);
+        border-radius: 4px;
+        padding: 40px;
+        box-shadow: var(--shadow-subtle);
+      }
+
+      .event-detail-panel h3 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        color: var(--accent-gold);
+      }
+
+      .event-feature-list {
+        list-style: none;
+        margin: 25px 0;
+      }
+
+      .event-feature-list li {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-refined);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .event-feature-list li:last-child {
+        border-bottom: none;
+      }
+
+      .event-feature-list i {
+        color: var(--accent-emerald);
+      }
+
+      .event-pricing {
+        background: var(--bg-frost);
+        padding: 20px;
+        border-radius: 4px;
+        margin-top: 30px;
+      }
+
+      .event-pricing h4 {
+        color: var(--accent-sapphire);
+        margin-bottom: 10px;
+      }
+
+      /* 
+           ================================================================
+           6. SERVICES OVERVIEW SECTION
+           ================================================================
+        */
+      .services-overview {
+        padding: 120px 8%;
+        background: var(--bg-alabaster);
+      }
+      .section-header {
+        text-align: center;
+        margin-bottom: 70px;
+      }
+      .section-header h2 {
+        font-size: 3.5rem;
+        margin-bottom: 15px;
+      }
+      .section-header p {
+        color: var(--accent-gold);
+        letter-spacing: 3px;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+      .section-header .subtitle {
+        font-size: 1rem;
+        color: var(--text-muted);
+        letter-spacing: normal;
+        text-transform: none;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 80px;
+      }
+      .service-overview-card {
+        background: var(--bg-ivory);
+        border: 1px solid var(--border-refined);
+        border-radius: 4px;
+        padding: 40px 30px;
+        transition: var(--transition-smooth);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        box-shadow: var(--shadow-subtle);
+        height: 100%;
+      }
+      .service-overview-card:hover {
+        border-color: var(--accent-gold);
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-elevated);
+      }
+      .service-overview-card i {
+        font-size: 2.5rem;
+        color: var(--accent-gold);
+        margin-bottom: 25px;
+      }
+      .service-overview-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+      .service-overview-card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 25px;
+        line-height: 1.7;
+      }
+      .service-overview-card .service-tag {
+        display: inline-block;
+        padding: 5px 12px;
+        background: var(--bg-frost);
+        color: var(--accent-gold);
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-top: auto;
+        border-radius: 2px;
+      }
+
+      /* 
+           ================================================================
+           7. REALISTIC BUSINESS SOLUTIONS SECTIONS
+           ================================================================
+        */
+
+      /* Tech Solutions Hub */
+      .tech-solutions-section {
+        padding: 120px 8%;
+        background: linear-gradient(135deg, #f8faff 0%, #f0f5ff 100%);
+      }
+
+      .tech-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .tech-card {
+        background: var(--bg-ivory);
+        border-radius: 4px;
+        padding: 40px 30px;
+        border: 1px solid var(--border-refined);
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tech-card:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: var(--accent-sapphire);
+        transform: scaleY(0);
+        transition: transform 0.3s ease;
+      }
+
+      .tech-card:hover:before {
+        transform: scaleY(1);
+      }
+
+      .tech-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-elevated);
+      }
+
+      .tech-icon {
+        font-size: 2.5rem;
+        color: var(--accent-sapphire);
+        margin-bottom: 20px;
+      }
+
+      /* Professional Workspace */
+      .workspace-section {
+        padding: 120px 8%;
+        background: var(--bg-ivory);
+      }
+
+      .workspace-showcase {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .workspace-card {
+        background: var(--bg-alabaster);
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid var(--border-refined);
+        transition: var(--transition-smooth);
+      }
+
+      .workspace-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-elevated);
+      }
+
+      .workspace-image {
+        height: 200px;
+        background: var(--bg-frost);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-gold);
+        font-size: 3rem;
+      }
+
+      .workspace-info {
+        padding: 30px;
+      }
+
+      /* Business Networking */
+      .networking-section {
+        padding: 120px 8%;
+        background: radial-gradient(circle at top, #fff, #faf5ff);
+      }
+
+      .networking-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .stat-card {
+        text-align: center;
+        padding: 30px;
+        background: var(--bg-ivory);
+        border-radius: 4px;
+        border: 1px solid var(--border-refined);
+        transition: var(--transition-smooth);
+      }
+
+      .stat-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-mauve);
+        box-shadow: var(--shadow-subtle);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--accent-mauve);
+        margin-bottom: 10px;
+        font-family: "Space Mono", monospace;
+      }
+
+      /* Professional Support */
+      .support-section {
+        padding: 120px 8%;
+        background: var(--bg-alabaster);
+      }
+
+      .support-features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .support-feature {
+        display: flex;
+        gap: 20px;
+        align-items: flex-start;
+      }
+
+      .support-icon {
+        flex-shrink: 0;
+        width: 50px;
+        height: 50px;
+        background: var(--bg-frost);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-emerald);
+        font-size: 1.2rem;
+      }
+
+      /* 
+           ================================================================
+           8. OTHER EXISTING SECTIONS
+           ================================================================
+        */
+      .id-mandatory-strip {
+        background: #faf2f2;
+        color: #b03a2e;
+        padding: 30px 8%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        border-top: 1px solid #f2d7d5;
+        border-bottom: 1px solid #f2d7d5;
+        font-size: 0.8rem;
+        letter-spacing: 3px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+
+      .logistics-hub {
+        padding: 100px 8%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+      .log-box {
+        background: var(--bg-alabaster);
+        padding: 50px;
+        border-left: 4px solid var(--accent-gold);
+        box-shadow: var(--shadow-subtle);
+        transition: var(--transition-smooth);
+      }
+      .log-box:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-elevated);
+      }
+      .log-box h3 {
+        margin-bottom: 20px;
+        font-size: 2rem;
+      }
+      .log-box:nth-child(2) {
+        border-left-color: var(--accent-sapphire);
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        grid-auto-rows: 220px;
+        gap: 20px;
+        padding: 0 8% 100px;
+      }
+      .service-card {
+        background: var(--bg-ivory);
+        border: 1px solid var(--border-refined);
+        border-radius: 4px;
+        padding: 40px;
+        transition: var(--transition-smooth);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+        box-shadow: var(--shadow-subtle);
+      }
+      .service-card:hover {
+        border-color: var(--accent-gold);
+        transform: translateY(-5px);
+        background: #fff;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+      }
+      .service-card i {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        font-size: 1.8rem;
+        color: var(--accent-gold);
+        opacity: 0.4;
+      }
+      .service-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+      }
+      .service-card p {
+        font-size: 0.8rem;
+        color: var(--text-muted);
+      }
+
+      .card-lg {
+        grid-column: span 6;
+        grid-row: span 2;
+      }
+      .card-md {
+        grid-column: span 4;
+        grid-row: span 1;
+      }
+      .card-sm {
+        grid-column: span 3;
+        grid-row: span 1;
+      }
+
+      /* Testimonials */
+      .testimonials-section {
+        padding: 120px 8%;
+        background: var(--bg-frost);
+      }
+      .testimonials-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+      .testimonial-card {
+        background: var(--bg-ivory);
+        padding: 40px;
+        border-radius: 4px;
+        box-shadow: var(--shadow-subtle);
+        border: 1px solid var(--border-refined);
+      }
+      .testimonial-text {
+        font-style: italic;
+        color: var(--text-slate);
+        margin-bottom: 25px;
+        line-height: 1.8;
+      }
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .author-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: var(--accent-sand);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--accent-gold);
+        font-weight: bold;
+      }
+
+      /* Location & Contact */
+      .location-section {
+        padding: 120px 8%;
+        background: var(--bg-alabaster);
+      }
+      .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        margin-top: 60px;
+      }
+      .location-info h3 {
+        font-size: 2rem;
+        margin-bottom: 25px;
+      }
+      .contact-details {
+        margin-top: 40px;
+      }
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+      .contact-item i {
+        color: var(--accent-gold);
+        font-size: 1.2rem;
+        width: 30px;
+      }
+      .map-placeholder {
+        height: 400px;
+        background: var(--bg-frost);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+        border: 1px solid var(--border-refined);
+      }
+
+      /* Statistics */
+      .stats-section {
+        padding: 100px 8%;
+        background: linear-gradient(135deg, #2a5c8b 0%, #1a3a5f 100%);
+        color: white;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 40px;
+        text-align: center;
+      }
+      .stat-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        font-family: "Space Mono", monospace;
+      }
+      .stat-label {
+        font-size: 0.9rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      /* 
+           ================================================================
+           9. SMART ASSISTANCE & FOOTER
+           ================================================================
+        */
+      #smart-assist {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        z-index: 9000;
+      }
+      .assist-ball {
+        width: 70px;
+        height: 70px;
+        background: var(--text-obsidian);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+      .assist-ball:hover {
+        transform: scale(1.1);
+      }
+
+      footer {
+        padding: 100px 8% 50px;
+        background: #fff;
+        border-top: 1px solid var(--border-refined);
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr 1fr;
+        gap: 80px;
+      }
+      .footer-col h4 {
+        color: var(--accent-gold);
+        text-transform: uppercase;
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        margin-bottom: 30px;
+      }
+
+      /* WhatsApp Button */
+      .whatsapp {
+        display: inline-flex;
+        align-items: center;
+        background-color: #25d365c4;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-family: Helvetica, Arial, sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(37, 211, 101, 0.3);
+      }
+      .whatsapp:hover {
+        background-color: #25d365;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(37, 211, 101, 0.4);
+      }
+
+      /* 
+           ================================================================
+           10. RESPONSIVE DESIGN
+           ================================================================
+        */
+      @media (max-width: 1200px) {
+        .service-grid {
+          grid-template-columns: repeat(2, 1fr);
+          grid-auto-rows: auto;
+        }
+        .card-lg,
+        .card-md,
+        .card-sm {
+          grid-column: span 2;
+          height: 300px;
+        }
+        .footer-grid,
+        .event-showcase {
+          grid-template-columns: 1fr;
+          gap: 50px;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .logistics-hub,
+        .location-grid {
+          grid-template-columns: 1fr;
+        }
+        .hero-nav {
+          display: none;
+        }
+        .nav-links {
+          gap: 20px;
+        }
+        .event-categories {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero-content {
+          padding: 40px 0;
+        }
+        .hero-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+        }
+        .hero-buttons {
+          flex-direction: column;
+        }
+        .services-grid,
+        .testimonials-container,
+        .tech-grid,
+        .workspace-showcase,
+        .networking-stats,
+        .support-features {
+          grid-template-columns: 1fr;
+        }
+        .nav-links {
+          display: none;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero-section p {
+          font-size: 1rem;
+        }
+        .section-header h2 {
+          font-size: 2.5rem;
+        }
+        .log-box,
+        .service-overview-card,
+        .event-category-card,
+        .tech-card {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav id="navbar">
+      <a href="#" class="logo">MARULA<span> Store</span></a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#tech-solutions">Tech Solutions</a></li>
+        <li><a href="#events">Event Planning</a></li>
+        <li><a href="#location">Contact</a></li>
+      </ul>
+      <a href="https://wa.me/1234567890" class="whatsapp">
+        <svg
+          style="margin-right: 8px"
+          width="18"
+          height="18"
+          viewBox="0 0 448 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="white"
+            d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.6-30.6-38.1-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.7 2.8-3.2 3.7-5.5 5.5-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 34.9 2.2 10.6-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"
+          />
+        </svg>
+        Chat on WhatsApp
+      </a>
+    </nav>
+
+    <!-- Enhanced Dynamic Hero Section -->
+    <section class="hero-container" id="hero">
+      <div class="hero-slider" id="heroSlider">
+        <!-- Hero 1: Business Hub -->
+        <div class="hero-section hero-1">
+          <div class="hero-floating-elements">
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+          </div>
+          <div class="hero-content">
+            <div class="mono hero-tag">Milan Business Hub</div>
+            <h1 class="hero-title">Integrated <b>Business Solutions</b></h1>
+            <p>
+              From professional workspaces and tech support to logistics and event planning.
+              Everything your business needs, all in one premium Milan location.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn-glow" onclick="location.href = '#services'">
+                Explore Services
+              </button>
+              <button class="btn-glow secondary" onclick="location.href = '#tech-solutions'">
+                Tech Solutions
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero 2: Tech Innovation -->
+        <div class="hero-section hero-2">
+          <div class="hero-floating-elements">
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+          </div>
+          <div class="hero-content">
+            <div class="mono hero-tag">Technology & Innovation</div>
+            <h1 class="hero-title">Digital <b>Transformation Hub</b></h1>
+            <p>
+              Cutting-edge tech solutions including cloud services, cybersecurity,
+              IT infrastructure, and professional consulting for modern businesses.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn-glow secondary" onclick="location.href = '#tech-solutions'">
+                View Tech Hub
+              </button>
+              <button class="btn-glow" onclick="location.href = '#workspace'">
+                Workspace Solutions
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero 3: Professional Services -->
+        <div class="hero-section hero-3">
+          <div class="hero-floating-elements">
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+          </div>
+          <div class="hero-content">
+            <div class="mono hero-tag">Professional Services</div>
+            <h1 class="hero-title">Premium <b>Business Support</b></h1>
+            <p>
+              Comprehensive business services including document processing,
+              financial services, communication solutions, and professional consulting.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn-glow tertiary" onclick="location.href = '#services'">
+                Business Services
+              </button>
+              <button class="btn-glow" onclick="location.href = '#support'">
+                Professional Support
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero 4: Networking & Events -->
+        <div class="hero-section hero-4">
+          <div class="hero-floating-elements">
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+          </div>
+          <div class="hero-content">
+            <div class="mono hero-tag">Community & Networking</div>
+            <h1 class="hero-title">Business <b>Networking Hub</b></h1>
+            <p>
+              Connect with Milan's business community through professional events,
+              networking sessions, and collaborative opportunities.
+            </p>
+            <div class="hero-buttons">
+              <button class="btn-glow quaternary" onclick="location.href = '#networking'">
+                Join Network
+              </button>
+              <button class="btn-glow" onclick="location.href = '#events'">
+                Event Planning
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Navigation -->
+      <div class="hero-nav">
+        <div class="hero-nav-btn" id="prevHero">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="hero-nav-btn" id="nextHero">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+
+      <!-- Hero Indicators -->
+      <div class="hero-indicators" id="heroIndicators">
+        <div class="hero-indicator active" data-slide="0"></div>
+        <div class="hero-indicator" data-slide="1"></div>
+        <div class="hero-indicator" data-slide="2"></div>
+        <div class="hero-indicator" data-slide="3"></div>
+      </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+      <div class="section-header" style="color: white;">
+        <p>Trusted by Milan Businesses</p>
+        <h2>Our Business Impact</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">850+</div>
+          <div class="stat-label">Business Clients</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98.5%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">24/7</div>
+          <div class="stat-label">Professional Support</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">200+</div>
+          <div class="stat-label">Events Hosted</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="services-overview" id="services">
+      <div class="section-header">
+        <p>Comprehensive Business Solutions</p>
+        <h2>Integrated Services Hub</h2>
+        <p class="subtitle">
+          Everything your business needs in one premium Milan location. From tech solutions
+          to professional support and networking opportunities.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-overview-card">
+          <i class="fas fa-sim-card"></i>
+          <h3>Digital Connectivity</h3>
+          <p>
+            Instant 5G SIM activations for all major Italian providers, international
+            roaming solutions, and mobile accessories.
+          </p>
+          <span class="service-tag">Communication</span>
+        </div>
+
+        <div class="service-overview-card">
+          <i class="fas fa-box-open"></i>
+          <h3>Logistics & Storage</h3>
+          <p>
+            Authorized parcel collection hub for UPS, DHL, and Amazon. Secure luggage
+            storage with 24/7 monitoring.
+          </p>
+          <span class="service-tag">Logistics</span>
+        </div>
+
+        <div class="service-overview-card">
+          <i class="fas fa-briefcase"></i>
+          <h3>Office Solutions</h3>
+          <p>
+            Private soundproof office pods with high-speed fiber internet, perfect
+            for focused work and professional meetings.
+          </p>
+          <span class="service-tag">Workspace</span>
+        </div>
+
+        <div class="service-overview-card">
+          <i class="fas fa-money-bill-transfer"></i>
+          <h3>Financial Services</h3>
+          <p>
+            Authorized Western Union & RIA partner for global money transfers,
+            bill payments, and financial document processing.
+          </p>
+          <span class="service-tag">Finance</span>
+        </div>
+
+        <div class="service-overview-card">
+          <i class="fas fa-print"></i>
+          <h3>Document Studio</h3>
+          <p>
+            High-resolution printing, scanning, copying, and ICAO-compliant biometric
+            passport photography for visas and documents.
+          </p>
+          <span class="service-tag">Documents</span>
+        </div>
+
+        <div class="service-overview-card">
+          <i class="fas fa-users"></i>
+          <h3>Business Network</h3>
+          <p>
+            Professional networking events, workshops, and collaboration opportunities
+            within Milan's business community.
+          </p>
+          <span class="service-tag">Community</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Solutions Section -->
+    <section id="tech-solutions" class="tech-solutions-section">
+      <div class="section-header">
+        <p>Modern Technology Solutions</p>
+        <h2>Business Tech Hub</h2>
+        <p class="subtitle">
+          Cutting-edge technology services to power your business growth and digital transformation.
+        </p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <h3>Cloud Solutions</h3>
+          <p>Secure cloud storage, backup solutions, and cloud migration services for businesses.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Cybersecurity</h3>
+          <p>Comprehensive security audits, threat monitoring, and data protection services.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-network-wired"></i>
+          </div>
+          <h3>IT Infrastructure</h3>
+          <p>Professional network setup, hardware procurement, and IT system management.</p>
+        </div>
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-robot"></i>
+          </div>
+          <h3>AI Integration</h3>
+          <p>Artificial intelligence solutions for automation, analytics, and customer experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ID Strip -->
+    <div class="id-mandatory-strip">
+      <i class="fas fa-id-shield"></i>
+      <span
+        >Security Protocol: Valid Government-issued Photo ID is MANDATORY for
+        all Parcel & Finance Services</span
+      >
+    </div>
+
+    <!-- Logistics Hub -->
+    <section id="logistics" class="logistics-hub">
+      <div class="log-box">
+        <div class="mono" style="margin-bottom: 15px">Parcel Logistics</div>
+        <h3>Authorised Collection Hub</h3>
+        <p style="color: var(--text-muted); margin-bottom: 30px">
+          We act as the official Milanese terminal for the world's leading
+          couriers. Secure handling for your high-value shipments.
+        </p>
+        <ul style="list-style: none">
+          <li
+            style="
+              padding: 15px 0;
+              border-bottom: 1px solid var(--border-refined);
+            "
+          >
+            <i
+              class="fab fa-ups"
+              style="color: var(--accent-gold); margin-right: 15px"
+            ></i>
+            UPS Access Point™
+          </li>
+          <li
+            style="
+              padding: 15px 0;
+              border-bottom: 1px solid var(--border-refined);
+            "
+          >
+            <i
+              class="fab fa-dhl"
+              style="color: var(--accent-gold); margin-right: 15px"
+            ></i>
+            DHL Express Service
+          </li>
+          <li style="padding: 15px 0">
+            <i
+              class="fab fa-amazon"
+              style="color: var(--accent-gold); margin-right: 15px"
+            ></i>
+            Amazon Hub Pickup
+          </li>
+        </ul>
+      </div>
+      <div class="log-box">
+        <div class="mono" style="margin-bottom: 15px">Business Storage</div>
+        <h3>Secure Storage Vault</h3>
+        <p style="color: var(--text-muted); margin-bottom: 30px">
+          Professional storage solutions for documents, equipment, and business materials.
+          Climate-controlled with 24/7 security monitoring.
+        </p>
+        <div
+          style="
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-obsidian);
+          "
+        >
+          From €8.00 <small style="font-size: 0.8rem; opacity: 0.5">/ Day</small>
+        </div>
+        <button class="btn-glow" style="width: 100%;">
+          Reserve Storage Space
+        </button>
+      </div>
+    </section>
+
+    <!-- Realistic Event Organizing Section -->
+    <section id="events" class="events-section">
+      <div class="section-header">
+        <p>Professional Event Solutions</p>
+        <h2>Event Planning & Management</h2>
+        <p class="subtitle">
+          Comprehensive event management services tailored for Milan's business community.
+          From intimate meetings to large conferences.
+        </p>
+      </div>
+
+      <div class="event-showcase">
+        <div>
+          <div class="event-categories" id="eventCategories">
+            <div class="event-category-card active" data-category="corporate">
+              <div class="event-icon">
+                <i class="fas fa-building"></i>
+              </div>
+              <h4>Corporate Events</h4>
+              <p>Meetings, conferences, and corporate gatherings with professional coordination.</p>
+            </div>
+            <div class="event-category-card" data-category="networking">
+              <div class="event-icon">
+                <i class="fas fa-handshake"></i>
+              </div>
+              <h4>Networking Events</h4>
+              <p>Professional mixers and business connection events for community building.</p>
+            </div>
+            <div class="event-category-card" data-category="training">
+              <div class="event-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h4>Training & Workshops</h4>
+              <p>Professional development sessions and skill-building workshops.</p>
+            </div>
+            <div class="event-category-card" data-category="product">
+              <div class="event-icon">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <h4>Product Launches</h4>
+              <p>Strategic launch events with media management and audience engagement.</p>
+            </div>
+          </div>
+        </div>
+        <div class="event-detail-panel" id="eventDetailPanel">
+          <h3>Corporate Events</h3>
+          <p>Professional event planning for corporate meetings, conferences, and business gatherings in Milan.</p>
+          
+          <ul class="event-feature-list">
+            <li><i class="fas fa-check"></i> Venue selection and booking</li>
+            <li><i class="fas fa-check"></i> Professional AV equipment setup</li>
+            <li><i class="fas fa-check"></i> Catering and hospitality services</li>
+            <li><i class="fas fa-check"></i> Event coordination and management</li>
+            <li><i class="fas fa-check"></i> Post-event follow-up and reporting</li>
+          </ul>
+
+          <div class="event-pricing">
+            <h4>Starting from €2,500</h4>
+            <p>Custom packages available based on event size and requirements</p>
+          </div>
+
+          <button class="btn-glow" style="margin-top: 20px; width: 100%;">
+            <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>
+            Schedule Consultation
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Workspace Section -->
+    <section id="workspace" class="workspace-section">
+      <div class="section-header">
+        <p>Premium Workspace Solutions</p>
+        <h2>Professional Workspaces</h2>
+        <p class="subtitle">
+          Flexible workspace solutions designed for productivity, collaboration, and professional growth.
+        </p>
+      </div>
+
+      <div class="workspace-showcase">
+        <div class="workspace-card">
+          <div class="workspace-image">
+            <i class="fas fa-door-closed"></i>
+          </div>
+          <div class="workspace-info">
+            <h3>Private Office Pods</h3>
+            <p>Soundproof, fully-equipped private offices for focused work and confidential meetings.</p>
+            <div style="margin-top: 20px; font-weight: 600; color: var(--accent-gold);">
+              From €25/hour
+            </div>
+          </div>
+        </div>
+        <div class="workspace-card">
+          <div class="workspace-image">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="workspace-info">
+            <h3>Meeting Rooms</h3>
+            <p>Professional meeting spaces with video conferencing and presentation equipment.</p>
+            <div style="margin-top: 20px; font-weight: 600; color: var(--accent-gold);">
+              From €40/hour
+            </div>
+          </div>
+        </div>
+        <div class="workspace-card">
+          <div class="workspace-image">
+            <i class="fas fa-building"></i>
+          </div>
+          <div class="workspace-info">
+            <h3>Virtual Office</h3>
+            <p>Prestigious business address, mail handling, and call answering services.</p>
+            <div style="margin-top: 20px; font-weight: 600; color: var(--accent-gold);">
+              From €79/month
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Networking Section -->
+    <section id="networking" class="networking-section">
+      <div class="section-header">
+        <p>Professional Community</p>
+        <h2>Business Networking Hub</h2>
+        <p class="subtitle">
+          Connect with Milan's business community through exclusive networking opportunities
+          and collaborative events.
+        </p>
+      </div>
+
+      <div class="networking-stats">
+        <div class="stat-card">
+          <div class="stat-number">Monthly</div>
+          <div class="stat-label">Networking Events</div>
+          <p style="margin-top: 10px; font-size: 0.9rem;">Regular professional mixers</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">500+</div>
+          <div class="stat-label">Active Members</div>
+          <p style="margin-top: 10px; font-size: 0.9rem;">Milan business community</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Industry</div>
+          <div class="stat-label">Specific Groups</div>
+          <p style="margin-top: 10px; font-size: 0.9rem;">Tech, Finance, Creative</p>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Free</div>
+          <div class="stat-label">Member Events</div>
+          <p style="margin-top: 10px; font-size: 0.9rem;">For premium members</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Professional Support Section -->
+    <section id="support" class="support-section">
+      <div class="section-header">
+        <p>Business Support Services</p>
+        <h2>Professional Support</h2>
+        <p class="subtitle">
+          Comprehensive support services to help your business operate smoothly and efficiently.
+        </p>
+      </div>
+
+      <div class="support-features">
+        <div class="support-feature">
+          <div class="support-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div>
+            <h3>24/7 Business Support</h3>
+            <p>Round-the-clock assistance for technical issues and service inquiries.</p>
+          </div>
+        </div>
+        <div class="support-feature">
+          <div class="support-icon">
+            <i class="fas fa-file-contract"></i>
+          </div>
+          <div>
+            <h3>Document Processing</h3>
+            <p>Professional printing, scanning, and document preparation services.</p>
+          </div>
+        </div>
+        <div class="support-feature">
+          <div class="support-icon">
+            <i class="fas fa-concierge-bell"></i>
+          </div>
+          <div>
+            <h3>Administrative Services</h3>
+            <p>Mail handling, call answering, and administrative support.</p>
+          </div>
+        </div>
+        <div class="support-feature">
+          <div class="support-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div>
+            <h3>Business Consulting</h3>
+            <p>Professional advice on Milan business operations and regulations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Hub Services -->
+    <section id="hub">
+      <div class="section-header">
+        <p>Digital & Communication Services</p>
+        <h2>Connectivity Suite</h2>
+      </div>
+
+      <div class="service-grid" id="service-root">
+        <!-- Services rendered by JS Logic -->
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials-section">
+      <div class="section-header">
+        <p>Client Experiences</p>
+        <h2>What Our Clients Say</h2>
+        <p class="subtitle">
+          Trusted by professionals, businesses, and startups across Milan.
+        </p>
+      </div>
+
+      <div class="testimonials-container">
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "The event planning team handled our product launch flawlessly. Every detail was
+            perfect, and the venue setup was exactly what we envisioned. Highly recommended!"
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">SR</div>
+            <div class="author-info">
+              <h4>Sophia Rossi</h4>
+              <p>Marketing Director, Tech Startup</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "As a remote worker, the private office pods are a game-changer. Fast internet,
+            comfortable setup, and professional environment. It's my second office in Milan."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">MG</div>
+            <div class="author-info">
+              <h4>Marco Giordano</h4>
+              <p>Freelance Consultant</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-text">
+            "The networking events have been invaluable for growing my professional contacts.
+            I've secured three new clients through connections made here in just two months."
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AF</div>
+            <div class="author-info">
+              <h4>Alessia Ferrari</h4>
+              <p>Business Consultant</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Location & Contact -->
+    <section id="location" class="location-section">
+      <div class="section-header">
+        <p>Visit Our Business Hub</p>
+        <h2>Location & Contact</h2>
+        <p class="subtitle">
+          Centrally located in Milan with easy access to public transportation and business districts.
+        </p>
+      </div>
+
+      <div class="location-grid">
+        <div class="location-info">
+          <h3>Our Milan Headquarters</h3>
+          <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.7">
+            Strategically located in central Milan, our premium business hub offers easy access
+            to major transportation links and business centers. We welcome both appointments and walk-ins.
+          </p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <div>
+                <strong>Business Address</strong><br />
+                Via della Moscova, 12, 20121 Milano MI, Italy
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-clock"></i>
+              <div>
+                <strong>Business Hours</strong><br />
+                Mon-Fri: 8:00 AM - 8:00 PM<br />
+                Sat-Sun: 9:00 AM - 6:00 PM
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <div>
+                <strong>Business Line</strong><br />
+                +39 02 1234 5678
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <div>
+                <strong>Business Inquiries</strong><br />
+                business@kanvastore.it
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 40px">
+            <button class="btn-glow" onclick="window.open('https://maps.google.com', '_blank')">
+              <i class="fas fa-directions" style="margin-right: 10px"></i>
+              Get Business Directions
+            </button>
+          </div>
+        </div>
+
+        <div class="map-placeholder">
+          <div style="text-align: center">
+            <i class="fas fa-map-marked-alt" style="font-size: 3rem; margin-bottom: 20px; color: var(--accent-sand);"></i>
+            <p>Business Location Map<br /><small>Central Milan Business District</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Smart Assistant -->
+    <div id="smart-assist">
+      <div class="assist-window" id="assist-ui">
+        <div class="assist-header">Business Assistant</div>
+        <div class="assist-msgs" id="assist-flow">
+          <div class="msg bot">
+            Welcome to Kanva Business Hub. I can assist with workspace booking, event planning,
+            tech solutions, or business services. How may I help?
+          </div>
+        </div>
+        <div style="padding: 15px; display: flex; gap: 10px">
+          <input
+            type="text"
+            id="user-msg"
+            placeholder="Ask about business services..."
+            style="
+              flex: 1;
+              background: var(--bg-frost);
+              border: 1px solid var(--border-refined);
+              color: var(--text-obsidian);
+              padding: 10px;
+              border-radius: 2px;
+            "
+          />
+          <button
+            onclick="handleChat()"
+            style="
+              background: var(--accent-gold);
+              border: none;
+              padding: 0 15px;
+              cursor: pointer;
+              color: #fff;
+            "
+          >
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+      <div class="assist-ball" onclick="toggleAssist()">
+        <i class="fas fa-microchip"></i>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="#" class="logo">KANVA<span> Store</span></a>
+          <p
+            style="
+              margin-top: 30px;
+              color: var(--text-muted);
+              font-size: 0.8rem;
+              line-height: 2;
+            "
+          >
+            Premium Integrated Business Solutions based in Milan. Your comprehensive
+            hub for workspace, technology, events, and professional services.
+          </p>
+          <div style="margin-top: 30px; display: flex; gap: 15px">
+            <a href="#" style="color: var(--text-muted);"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: var(--text-muted);"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: var(--text-muted);"><i class="fab fa-twitter"></i></a>
+            <a href="#" style="color: var(--text-muted);"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Business Services</h4>
+          <ul>
+            <li>Workspace Solutions</li>
+            <li>Tech Hub Services</li>
+            <li>Event Planning</li>
+            <li>Business Networking</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support Services</h4>
+          <ul>
+            <li>24/7 Business Support</li>
+            <li>Document Processing</li>
+            <li>Administrative Services</li>
+            <li>Professional Consulting</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li>Business Blog</li>
+            <li>Event Calendar</li>
+            <li>Member Portal</li>
+            <li>Business Tools</li>
+          </ul>
+        </div>
+      </div>
+      <div
+        style="
+          margin-top: 80px;
+          padding-top: 40px;
+          border-top: 1px solid var(--border-refined);
+          display: flex;
+          justify-content: space-between;
+          font-size: 0.7rem;
+          color: var(--text-muted);
+        "
+      >
+        <p>&copy; 2026 KANVA STORE MILANO. BUSINESS SOLUTIONS HUB.</p>
+        <div style="display: flex; gap: 30px">
+          <span>PRIVACY POLICY</span>
+          <span>TERMS OF SERVICE</span>
+          <span>BUSINESS INQUIRIES</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      /* Enhanced Data Arrays */
+      const HUB_SERVICES = [
+        {
+          id: 1,
+          title: "Business Connectivity",
+          icon: "fa-sim-card",
+          desc: "5G business solutions, international roaming, and corporate mobile plans.",
+          size: "card-lg",
+        },
+        {
+          id: 2,
+          title: "Business Finance",
+          icon: "fa-money-bill-transfer",
+          desc: "Corporate money transfers, international payments, and financial services.",
+          size: "card-md",
+        },
+        {
+          id: 3,
+          title: "Business Support",
+          icon: "fa-headset",
+          desc: "24/7 business support, administrative services, and professional assistance.",
+          size: "card-md",
+        },
+        {
+          id: 4,
+          title: "Document Solutions",
+          icon: "fa-print",
+          desc: "Professional printing, scanning, and document management for businesses.",
+          size: "card-sm",
+        },
+        {
+          id: 5,
+          title: "Business Identity",
+          icon: "fa-id-card",
+          desc: "Professional photography and document services for business credentials.",
+          size: "card-sm",
+        },
+        {
+          id: 6,
+          title: "Tech Solutions",
+          icon: "fa-microchip",
+          desc: "IT support, tech consulting, and digital transformation services.",
+          size: "card-sm",
+        },
+        {
+          id: 7,
+          title: "Business Tools",
+          icon: "fa-tools",
+          desc: "Essential business tools, equipment, and productivity solutions.",
+          size: "card-sm",
+        },
+      ];
+
+      const EVENT_CATEGORIES = [
+        {
+          id: "corporate",
+          title: "Corporate Events",
+          description: "Professional event planning for corporate meetings, conferences, and business gatherings in Milan.",
+          features: [
+            "Venue selection and booking",
+            "Professional AV equipment setup",
+            "Catering and hospitality services",
+            "Event coordination and management",
+            "Post-event follow-up and reporting"
+          ],
+          price: "Starting from €2,500",
+          priceDetails: "Custom packages available based on event size and requirements"
+        },
+        {
+          id: "networking",
+          title: "Networking Events",
+          description: "Professional business networking events designed to connect Milan's business community.",
+          features: [
+            "Guest list management",
+            "Professional venue setup",
+            "Networking facilitation",
+            "Refreshments and catering",
+            "Follow-up contact exchange"
+          ],
+          price: "Starting from €1,200",
+          priceDetails: "Includes up to 50 attendees with premium networking tools"
+        },
+        {
+          id: "training",
+          title: "Training & Workshops",
+          description: "Professional development sessions and skill-building workshops for business teams.",
+          features: [
+            "Training venue setup",
+            "Professional equipment",
+            "Materials and resources",
+            "Expert facilitation",
+            "Post-training assessments"
+          ],
+          price: "Starting from €1,800",
+          priceDetails: "Customizable based on duration and participant count"
+        },
+        {
+          id: "product",
+          title: "Product Launches",
+          description: "Strategic launch events with comprehensive planning and execution.",
+          features: [
+            "Launch strategy development",
+            "Media and PR management",
+            "Venue branding and setup",
+            "Guest experience management",
+            "Post-launch analysis"
+          ],
+          price: "Starting from €3,500",
+          priceDetails: "Includes basic media package and venue branding"
+        }
+      ];
+
+      /* Draggable Infinite Hero Slider */
+      let currentSlide = 0;
+      const totalSlides = 4;
+      const heroSlider = document.getElementById('heroSlider');
+      const heroContainer = document.querySelector('.hero-container');
+      const indicators = document.querySelectorAll('.hero-indicator');
+      let slideInterval;
+      let isTransitioning = false;
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+
+      function goToSlide(slideIndex, animate = true) {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        currentSlide = slideIndex;
+        
+        if (animate) {
+          heroSlider.style.transition = 'transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1)';
+        } else {
+          heroSlider.style.transition = 'none';
+        }
+        
+        heroSlider.style.transform = `translateX(-${currentSlide * 25}%)`;
+        
+        // Update indicators
+        const displayIndex = currentSlide % totalSlides;
+        indicators.forEach((indicator, index) => {
+          if (index === displayIndex) {
+            indicator.classList.add('active');
+          } else {
+            indicator.classList.remove('active');
+          }
+        });
+        
+        if (animate) {
+          setTimeout(() => {
+            isTransitioning = false;
+          }, 800);
+        } else {
+          isTransitioning = false;
+        }
+        
+        resetSlideInterval();
+      }
+
+      function nextSlide() {
+        const nextSlideIndex = currentSlide + 1;
+        goToSlide(nextSlideIndex);
+        
+        // If at the end, seamlessly jump to start without animation
+        if (nextSlideIndex >= totalSlides) {
+          setTimeout(() => {
+            goToSlide(0, false);
+          }, 800);
+        }
+      }
+
+      function prevSlide() {
+        if (currentSlide === 0) {
+          // If at the beginning, jump to end without animation first
+          goToSlide(totalSlides, false);
+          setTimeout(() => {
+            goToSlide(totalSlides - 1);
+          }, 50);
+        } else {
+          goToSlide(currentSlide - 1);
+        }
+      }
+
+      function startSlideInterval() {
+        slideInterval = setInterval(nextSlide, 6000);
+      }
+
+      function resetSlideInterval() {
+        clearInterval(slideInterval);
+        startSlideInterval();
+      }
+
+      /* Drag Functionality */
+      function handleDragStart(e) {
+        isDragging = true;
+        heroContainer.classList.add('dragging');
+        startX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        currentX = startX;
+        heroSlider.style.transition = 'none';
+        clearInterval(slideInterval);
+      }
+
+      function handleDragMove(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        currentX = e.type.includes('mouse') ? e.pageX : e.touches[0].pageX;
+        const diff = startX - currentX;
+        const slideWidth = heroContainer.clientWidth;
+        const offset = (diff / slideWidth) * 100;
+        
+        heroSlider.style.transform = `translateX(calc(-${currentSlide * 25}% - ${offset}%))`;
+      }
+
+      function handleDragEnd(e) {
+        if (!isDragging) return;
+        
+        isDragging = false;
+        heroContainer.classList.remove('dragging');
+        
+        const diff = startX - currentX;
+        const slideWidth = heroContainer.clientWidth;
+        const slidePercentage = (diff / slideWidth) * 100;
+        
+        // Determine if swipe was significant enough to change slide
+        if (Math.abs(slidePercentage) > 20) {
+          if (slidePercentage > 0) {
+            // Swiped left
+            nextSlide();
+          } else {
+            // Swiped right
+            prevSlide();
+          }
+        } else {
+          // Return to current slide
+          heroSlider.style.transition = 'transform 0.3s ease';
+          heroSlider.style.transform = `translateX(-${currentSlide * 25}%)`;
+        }
+        
+        startSlideInterval();
+      }
+
+      /* Event Categories Functionality */
+      function setupEventCategories() {
+        const categoryCards = document.querySelectorAll('.event-category-card');
+        const detailPanel = document.getElementById('eventDetailPanel');
+        
+        function updateEventDetails(categoryId) {
+          const category = EVENT_CATEGORIES.find(cat => cat.id === categoryId);
+          if (!category) return;
+          
+          detailPanel.innerHTML = `
+            <h3>${category.title}</h3>
+            <p>${category.description}</p>
+            
+            <ul class="event-feature-list">
+              ${category.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('')}
+            </ul>
+
+            <div class="event-pricing">
+              <h4>${category.price}</h4>
+              <p>${category.priceDetails}</p>
+            </div>
+
+            <button class="btn-glow" style="margin-top: 20px; width: 100%;">
+              <i class="fas fa-calendar-alt" style="margin-right: 10px;"></i>
+              Schedule Consultation
+            </button>
+          `;
+        }
+        
+        categoryCards.forEach(card => {
+          card.addEventListener('click', function() {
+            // Update active state
+            categoryCards.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Update details
+            const categoryId = this.dataset.category;
+            updateEventDetails(categoryId);
+          });
+        });
+        
+        // Initialize with first category
+        updateEventDetails('corporate');
+      }
+
+      /* App Initialization */
+      function initApp() {
+        renderHub();
+        setupEventCategories();
+        setupScrollEffects();
+        setupHeroSlider();
+        setupDrag();
+      }
+
+      function renderHub() {
+        const root = document.getElementById("service-root");
+        root.innerHTML = '';
+        HUB_SERVICES.forEach((s) => {
+          const el = document.createElement("div");
+          el.className = `service-card ${s.size}`;
+          el.innerHTML = `
+                    <i class="fas ${s.icon}"></i>
+                    <h3>${s.title}</h3>
+                    <p>${s.desc}</p>
+                `;
+          root.appendChild(el);
+        });
+      }
+
+      function setupHeroSlider() {
+        // Add event listeners to navigation buttons
+        document.getElementById('prevHero').addEventListener('click', prevSlide);
+        document.getElementById('nextHero').addEventListener('click', nextSlide);
+        
+        // Add event listeners to indicators
+        indicators.forEach((indicator, index) => {
+          indicator.addEventListener('click', () => {
+            goToSlide(index);
+          });
+        });
+        
+        // Start automatic sliding
+        startSlideInterval();
+        
+        // Pause on hover
+        heroContainer.addEventListener('mouseenter', () => {
+          clearInterval(slideInterval);
+        });
+        
+        heroContainer.addEventListener('mouseleave', () => {
+          startSlideInterval();
+        });
+      }
+
+      function setupDrag() {
+        // Mouse events
+        heroContainer.addEventListener('mousedown', handleDragStart);
+        document.addEventListener('mousemove', handleDragMove);
+        document.addEventListener('mouseup', handleDragEnd);
+        
+        // Touch events
+        heroContainer.addEventListener('touchstart', handleDragStart);
+        document.addEventListener('touchmove', handleDragMove);
+        document.addEventListener('touchend', handleDragEnd);
+      }
+
+      function toggleAssist() {
+        const ui = document.getElementById("assist-ui");
+        ui.style.display = ui.style.display === "flex" ? "none" : "flex";
+      }
+
+      function handleChat() {
+        const input = document.getElementById("user-msg");
+        const flow = document.getElementById("assist-flow");
+        if (!input.value.trim()) return;
+        
+        const uEl = document.createElement("div");
+        uEl.className = "msg user";
+        uEl.innerText = input.value;
+        flow.appendChild(uEl);
+        
+        const text = input.value.toLowerCase();
+        input.value = "";
+        
+        setTimeout(() => {
+          const bEl = document.createElement("div");
+          bEl.className = "msg bot";
+          
+          if (text.includes("workspace") || text.includes("office"))
+            bEl.innerText = "We offer private office pods (€25/hour), meeting rooms (€40/hour), and virtual offices (€79/month). Which are you interested in?";
+          else if (text.includes("event") || text.includes("planning"))
+            bEl.innerText = "Our event planning services start at €1,200. We handle corporate events, networking mixers, training sessions, and product launches.";
+          else if (text.includes("tech") || text.includes("it"))
+            bEl.innerText = "Our tech hub offers cloud solutions, cybersecurity, IT infrastructure, and AI integration services. Would you like a consultation?";
+          else if (text.includes("network") || text.includes("community"))
+            bEl.innerText = "We host monthly networking events with 500+ active members. Premium members get free access to all networking events.";
+          else if (text.includes("support") || text.includes("help"))
+            bEl.innerText = "We provide 24/7 business support, document processing, and administrative services. How can we assist you today?";
+          else if (text.includes("hour") || text.includes("open"))
+            bEl.innerText = "We're open Mon-Fri 8AM-8PM and Sat-Sun 9AM-6PM. Located at Via della Moscova, 12, Milan.";
+          else if (text.includes("price") || text.includes("cost"))
+            bEl.innerText = "Our services start at: Office pods €25/hour, Meeting rooms €40/hour, Virtual offices €79/month, Event planning from €1,200.";
+          else
+            bEl.innerText = "I can help with workspace solutions, event planning, tech services, networking, or business support. What do you need assistance with?";
+          
+          flow.appendChild(bEl);
+          flow.scrollTop = flow.scrollHeight;
+        }, 700);
+      }
+
+      function setupScrollEffects() {
+        window.addEventListener("scroll", () => {
+          const nav = document.getElementById("navbar");
+          if (window.scrollY > 100) nav.classList.add("scrolled");
+          else nav.classList.remove("scrolled");
+        });
+      }
+
+      // Initialize the app when DOM is loaded
+      document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+  </body>
+</html>
