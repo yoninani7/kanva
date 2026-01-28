@@ -47,8 +47,8 @@
     --nav-height: 80px;
     --transition-premium: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
     
-    --nav-bg: rgba(255, 252, 248, 0.85); /* Warm Cream/Ivory */
- --nav-text:rgb(0, 0, 0);
+    --nav-bg: #fffffffa;
+   --nav-text:rgb(0, 0, 0);
     --nav-accent: #04be04; /* Warm Bronze/Gold */
     --nav-border: rgba(11, 243, 3, 0.15);
     --transition-soft: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -102,12 +102,7 @@
         border-radius: 4px;
       }
 
-      /* 
-           ================================================================
-           3. ENHANCED NAVIGATION WITH IMPROVED DROPDOWN
-           ================================================================
-        */
-   
+  
   
 
   /* --- FLOATING BOUTIQUE NAV --- */
@@ -178,26 +173,31 @@
     color: var(--nav-accent);
   }
 
-  /* --- REFINED MINI DROPDOWN --- */
+ /* --- REFINED MEGA DROPDOWN (3x3 Grid) --- */
   .services-dropdown {
     position: relative;
   }
 
   .dropdown-menu {
     position: absolute;
-    top: calc(100% + 15px);
+    top: calc(100% + 20px);
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    width: 280px;
+    transform: translateX(-50%) translateY(15px);
+    width: 900px; /* Wide mega-menu style */
     background: #fff;
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.12);
     border: 1px solid var(--nav-border);
     opacity: 0;
     visibility: hidden;
     transition: var(--transition-soft);
-    display: block; /* Vertical list instead of grid */
+    
+    /* 3 Column x 3 Row Grid */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    z-index: 6000;
   }
 
   .services-dropdown:hover .dropdown-menu {
@@ -206,33 +206,90 @@
     transform: translateX(-50%) translateY(0);
   }
 
+  /* Triangle Pointer */
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 5px solid #41c902;
+  }
+
   .dropdown-service {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
-    padding: 12px 15px;
+    padding: 20px;
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 15px;
     transition: var(--transition-soft);
+    border: 1px solid transparent;
   }
 
   .dropdown-service:hover {
-    background: #fdfaf5;
+    background: #f8fcf7;
+    border-color: rgba(4, 190, 4, 0.562);
+    transform: translateY(-3px);
   }
 
   .dropdown-service i {
-    font-size: 1rem;
+    font-size: 1.4rem;
     color: var(--nav-accent);
-    width: 20px;
+    background: rgba(4, 190, 4, 0.1);
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
   }
 
-  .dropdown-service h4 {
-    font-size: 0.8rem;
-    color: var(--nav-text);
+  .dropdown-service-info h4 {
+    font-size: 0.9rem;
+    color: var(--text-obsidian);
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    text-transform: none; /* Keeps it readable */
+    letter-spacing: 0;
+  }
+
+  .dropdown-service-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
     margin: 0;
-    font-weight: 500;
+    line-height: 1.4;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "Lexend Deca", sans-serif;
   }
 
+  /* Mobile Adjustments */
+  @media (max-width: 1024px) {
+    .dropdown-menu {
+      width: 95vw;
+      grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dropdown-menu {
+      position: static;
+      transform: none;
+      width: 100%;
+      grid-template-columns: 1fr; /* 1 column on mobile */
+      display: none; 
+      box-shadow: none;
+      border: none;
+      padding: 10px;
+    }
+    .services-dropdown.active .dropdown-menu {
+      display: grid;
+    }
+  }
   /* Soft Contact Button */
   .whatsapp-nav {
     background: var(--nav-accent);
@@ -1279,29 +1336,95 @@
   </head>
   <body>
     <!-- Navigation with Improved Dropdown -->
-   <nav id="navbar">
+ <nav id="navbar">
   <a href="#" class="logo">Marula <span>Store</span></a>
   
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
-    <li class="services-dropdown">
-      <a href="#services">Services <i class="fas fa-chevron-down" style="font-size: 0.6rem; opacity: 0.5; margin-left: 4px;"></i></a>
+    <li><a href="#about">About us</a></li>
+    <li class="services-dropdown" id="servicesDropdown">
+      <a href="#services" class="dropdown-toggle">Services <i class="fas fa-chevron-down" style="font-size: 0.6rem; opacity: 0.5; margin-left: 4px;"></i></a>
+      
       <div class="dropdown-menu">
+        <!-- 1. Event Organizing -->
+        <a href="#events" class="dropdown-service">
+          <i class="fas fa-holly-berry"></i>
+          <div class="dropdown-service-info">
+            <h4>Event Organizing</h4>
+            <p>Weddings, Birthdays & Restaurant Decor.</p>
+          </div>
+        </a>
+
+        <!-- 2. Mobile & SIM -->
+        <a href="#connectivity" class="dropdown-service">
+          <i class="fas fa-mobile-alt"></i>
+          <div class="dropdown-service-info">
+            <h4>Mobile & SIM</h4>
+            <p>SIM Provision & Premium Accessories.</p>
+          </div>
+        </a>
+
+        <!-- 3. Financial Hub -->
         <a href="#services" class="dropdown-service">
-          <i class="fas fa-calendar-alt"></i>
-          <h4>Event Planning</h4>
+          <i class="fas fa-university"></i>
+          <div class="dropdown-service-info">
+            <h4>Financial Hub</h4>
+            <p>PagoPA, Western Union & Wise Transfers.</p>
+          </div>
         </a>
+
+        <!-- 4. Business Center -->
+        <a href="#connectivity" class="dropdown-service">
+          <i class="fas fa-print"></i>
+          <div class="dropdown-service-info">
+            <h4>Business Center</h4>
+            <p>Print, Scan & Professional ID Photos.</p>
+          </div>
+        </a>
+
+        <!-- 5. Logistics & Parcel -->
         <a href="#logistics" class="dropdown-service">
-          <i class="fas fa-box"></i>
-          <h4>Shipping Hub</h4>
+          <i class="fas fa-box-open"></i>
+          <div class="dropdown-service-info">
+            <h4>Logistics & Parcel</h4>
+            <p>DHL, Amazon & FedEx Pickup Point.</p>
+          </div>
         </a>
+
+        <!-- 6. Luggage Storage -->
         <a href="#logistics" class="dropdown-service">
           <i class="fas fa-luggage-cart"></i>
-          <h4>Luggage Vault</h4>
+          <div class="dropdown-service-info">
+            <h4>Luggage Storage</h4>
+            <p>Secure & Licensed vault for travelers.</p>
+          </div>
         </a>
+
+        <!-- 7. Office Pods -->
         <a href="#pods" class="dropdown-service">
-          <i class="fas fa-laptop"></i>
-          <h4>Work Pods</h4>
+          <i class="fas fa-laptop-house"></i>
+          <div class="dropdown-service-info">
+            <h4>Office Pods</h4>
+            <p>Soundproof booths for hourly rental.</p>
+          </div>
+        </a>
+
+        <!-- 8. Smart Assistant -->
+        <a href="#smart-assist" class="dropdown-service">
+          <i class="fas fa-magic"></i>
+          <div class="dropdown-service-info">
+            <h4>Smart Assistant</h4>
+            <p>Translations, CV Writing & Formatting.</p>
+          </div>
+        </a>
+
+        <!-- 9. Ticket Office -->
+        <a href="#services" class="dropdown-service">
+          <i class="fas fa-ticket-alt"></i>
+          <div class="dropdown-service-info">
+            <h4>Ticket Office</h4>
+            <p>Plane, Bus & Ferry Bookings.</p>
+          </div>
         </a>
       </div>
     </li>
@@ -1310,8 +1433,7 @@
   </ul>
   
   <a href="https://wa.me/1234567890" class="whatsapp-nav">
-   <i class="fa-brands fa-whatsapp"> Whatsapp</i>
-
+    <i class="fa-brands fa-whatsapp"></i> WhatsApp
   </a>
 </nav>
 
@@ -1321,56 +1443,68 @@
     <button class="nav-btn prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
     <button class="nav-btn next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
 
-    <!-- Slide 1 -->
+    <!-- Slide 1: General Introduction -->
     <div class="hero-slide active">
         <img src="https://images.unsplash.com/photo-1616422285623-13ff0169293c?q=80&w=2000" class="slide-bg">
         <div class="slide-content">
             <span class="mono" style="color: var(--accent-gold)">Marula Milano</span>
-            <h1>The Hub <span>Experience.</span></h1>
-            <p>Your sanctuary in Milan for logistics, connectivity, and professional services.</p>
-            <button class="btn-premium" onclick="location.href='#services'">Explore Services</button>
+            <h1>The Ultimate <span>Urban Hub.</span></h1>
+            <p>From logistics and financial services to professional events and workspace—everything you need, all in one place.</p>
+            <button class="btn-premium" onclick="location.href='#services'">Explore All Services</button>
         </div>
     </div>
 
-    <!-- Slide 2 -->
+    <!-- Slide 2: Logistics & Travel (Services 5, 6, 9) -->
     <div class="hero-slide">
         <img src="https://images.unsplash.com/photo-1580674285054-bed31e145f59?q=80&w=2000" class="slide-bg">
         <div class="slide-content">
-            <span class="mono">Worldwide Reach</span>
-            <h1>Secure <span>Asset Flow.</span></h1>
-            <p>Official terminal for UPS, DHL, and Amazon. High-security luggage storage.</p>
-            <button class="btn-premium" onclick="location.href='#logistics'">Ship Now</button>
+            <span class="mono">Global Logistics</span>
+            <h1>Travel & <span>Parcel Point.</span></h1>
+            <p>Official pickup for DHL, Amazon, and FedEx. Secure luggage storage and worldwide booking for planes, buses, and ferries.</p>
+            <button class="btn-premium" onclick="location.href='#logistics'">Book Storage & Tickets</button>
         </div>
     </div>
 
-    <!-- Slide 3 -->
+    <!-- Slide 3: Business & Digital (Services 4, 7, 8) -->
     <div class="hero-slide">
         <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2000" class="slide-bg">
         <div class="slide-content">
-            <span class="mono">Digital Edge</span>
-            <h1>Always <span>Synchronized.</span></h1>
-            <p>5G connectivity and private soundproof pods for the modern professional.</p>
-            <button class="btn-premium" onclick="location.href='#pods'">Book a Pod</button>
+            <span class="mono">Professional Workspace</span>
+            <h1>Business <span>& Digital.</span></h1>
+            <p>Soundproof office pods, professional printing, and smart assistant services including CV writing and translations.</p>
+            <button class="btn-premium" onclick="location.href='#business'">Reserve a Pod</button>
         </div>
     </div>
 
-    <!-- Slide 4 -->
+    <!-- Slide 4: Financial & Tech (Services 2, 3) -->
+    <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2000" class="slide-bg">
+        <div class="slide-content">
+            <span class="mono">Connectivity & Finance</span>
+            <h1>Smart <span>Solutions.</span></h1>
+            <p>Money transfers via Western Union/Wise, PagoPA bill payments, and premium mobile accessories with instant SIM card provision.</p>
+            <button class="btn-premium" onclick="location.href='#finance'">Transfer Money</button>
+        </div>
+    </div>
+
+    <!-- Slide 5: Events (Service 1) -->
     <div class="hero-slide">
         <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2000" class="slide-bg">
         <div class="slide-content">
-            <span class="mono">Curated Events</span>
-            <h1>Signature <span>Occasions.</span></h1>
-            <p>From corporate summits to private celebrations in the heart of Milan.</p>
-            <button class="btn-premium" onclick="location.href='#events'">Start Planning</button>
+            <span class="mono">Event Organizing</span>
+            <h1>Signature <span>Celebrations.</span></h1>
+            <p>Expert decoration and planning for weddings, birthdays, concerts, and restaurant events in Milan.</p>
+            <button class="btn-premium" onclick="location.href='#events'">Plan Your Event</button>
         </div>
     </div>
 
-    <!-- Bottom Indicator Dots -->
+    <!-- Bottom Indicator Dots (Updated to 5 dots) -->
     <div class="hero-nav-labels" style="bottom: 30px; right: 50%; transform: translateX(50%); color: white;">
         <div class="nav-label active" data-index="0">01</div>
         <div class="nav-label" data-index="1">02</div>
         <div class="nav-label" data-index="2">03</div>
         <div class="nav-label" data-index="3">04</div>
+        <div class="nav-label" data-index="4">05</div>
     </div>
 </section>
     
