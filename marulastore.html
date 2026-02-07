@@ -65,7 +65,7 @@
             mix-blend-mode: difference;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- FIXED NAVIGATION SYSTEM --- */
         header {
             position: fixed; 
             top: 0; 
@@ -95,8 +95,6 @@
             transition: var(--transition-fast);
             z-index: 10002;
         }
-        
-        .logo:hover { opacity: 0.7; }
 
         .nav-links { 
             display: flex; 
@@ -124,116 +122,104 @@
             padding: 0.5rem 0;
         }
 
-        .nav-item > a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--gold);
-            transition: width 0.3s ease;
+        /* Desktop Mega Menu Dropdown */
+        @media (min-width: 1201px) {
+            .nav-item.has-dropdown:hover .dropdown {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            .dropdown {
+                position: absolute;
+                top: 90px;
+                left: 50%;
+                transform: translateX(-50%) translateY(20px);
+                width: 900px;
+                background: var(--white);
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                padding: 30px;
+                box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+                border: 1px solid var(--clay);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+                z-index: 1000;
+            }
+
+            .drop-link {
+                padding: 20px;
+                text-decoration: none;
+                transition: var(--transition-fast);
+                border-radius: 4px;
+                border: 1px solid transparent;
+            }
+
+            .drop-link:hover {
+                background: var(--linen);
+                border-color: var(--clay);
+                transform: translateY(-3px);
+            }
+
+            .drop-link h4 {
+                font-family: 'Syne';
+                font-size: 0.9rem;
+                color: var(--marula-green);
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+
+            .drop-link p {
+                font-family: 'Inter';
+                font-size: 0.75rem;
+                color: var(--black);
+                opacity: 0.6;
+                line-height: 1.4;
+            }
         }
 
-        .nav-item > a:hover::after {
-            width: 100%;
+        /* Mobile Dropdown Logic */
+        @media (max-width: 1200px) {
+            .menu-toggle { display: flex !important; }
+            .nav-links {
+                position: fixed; top: 0; right: 0; width: 100%; height: 100vh;
+                background: var(--marula-green); padding: 120px 8% 40px;
+                flex-direction: column; transform: translateX(100%);
+                transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+                z-index: 10001; overflow-y: auto; gap: 0;
+            }
+            .nav-links.active { transform: translateX(0); }
+            .nav-item { width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; height: auto; }
+            .nav-item > a { font-size: 1rem; color: var(--linen); padding: 20px 0; display: flex; justify-content: space-between; }
+            
+            .dropdown {
+                display: none;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.03);
+                padding: 0;
+                border-left: 2px solid var(--gold);
+                margin-bottom: 20px;
+            }
+            .dropdown.show { display: block; }
+            
+            .drop-link { display: block; padding: 15px 20px; text-decoration: none; }
+            .drop-link h4 { color: var(--gold); font-size: 1rem; margin-bottom: 5px; }
+            .drop-link p { color: var(--linen); opacity: 0.6; font-size: 0.8rem; }
         }
 
-        .nav-item > a:hover { 
-            color: var(--gold); 
-        }
-
-       /* ========== MOBILE DROPDOWN - USING YOUR EXAMPLE STRUCTURE ========== */
-.dropdown {
-    display: none; /* Hidden by default like your example */
-    position: static; /* Let it flow with the menu */
-    width: 100%;
-    background: transparent;
-    padding: 0;
-    margin: 0;
-    grid-template-columns: 1fr !important;
-    transform: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    box-shadow: none !important;
-    border: none !important;
-    transition: none;
-}
-
-.dropdown.show {
-    display: grid; /* Show when toggled */
-}
-
-/* Dropdown Links - Mobile Style */
-.drop-link {
-    display: block;
-    padding: 1rem 0 1rem 1.5rem !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-left: 2px solid rgba(193, 154, 107, 0.3);
-    margin-bottom: 0;
-    background: transparent !important;
-    text-decoration: none;
-    color: var(--linen);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    transform: none !important;
-}
-
-.drop-link:last-child {
-    border-bottom: none !important;
-}
-
-.drop-link:hover {
-    opacity: 1;
-    border-left-color: var(--gold);
-    background: rgba(255, 255, 255, 0.03) !important;
-    padding-left: 2rem !important;
-}
-
-.drop-link h4 {
-    font-family: 'Syne';
-    font-size: 1rem !important;
-    color: var(--linen);
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.drop-link p {
-    font-family: 'Inter';
-    font-size: 0.75rem !important;
-    color: rgba(253, 251, 247, 0.6);
-    line-height: 1.5;
-}
-        /* Menu Toggle Button */
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            cursor: pointer;
             color: var(--marula-green);
             z-index: 10002;
             padding: 10px;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-fast);
         }
 
-        .menu-toggle:hover {
-            background: rgba(193, 154, 107, 0.1);
-        }
-
-        .menu-toggle .menu-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .menu-toggle.active .menu-icon {
-            transform: rotate(90deg);
-        }
-
-        /* --- HERO --- */
+        /* --- RESTORED ORIGINAL STYLES --- */
         .hero { height: 100vh; position: relative; overflow: hidden; background: var(--black); }
         .slide { position: absolute; inset: 0; opacity: 0; transition: 1.5s ease-in-out; display: flex; align-items: center; padding: 0 10%; visibility: hidden; }
         .slide.active { opacity: 1; visibility: visible; }
@@ -243,35 +229,17 @@
         .hero-tag { font-family: 'Space Mono'; color: var(--gold); font-size: 0.7rem; letter-spacing: 5px; margin-bottom: 1.5rem; display: block; }
         .hero-title { font-family: 'Syne'; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; font-weight: 800; margin-bottom: 2.5rem; text-transform: uppercase; letter-spacing: -1px; }
         
-        .hero-btn { 
-            display: inline-block; 
-            padding: 1.2rem 3rem; 
-            border: 1px solid white; 
-            color: white; 
-            text-decoration: none; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            font-size: 0.7rem; 
-            transition: var(--transition-mid); 
-        }
-
-        .hero-btn:hover { 
-            background: white; 
-            color: var(--black); 
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
+        .hero-btn { display: inline-block; padding: 1.2rem 3rem; border: 1px solid white; color: white; text-decoration: none; text-transform: uppercase; letter-spacing: 3px; font-size: 0.7rem; transition: var(--transition-mid); }
+        .hero-btn:hover { background: white; color: var(--black); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
 
         .slider-nav { position: absolute; bottom: 50px; right: 5%; z-index: 100; display: flex; gap: 20px; }
         .nav-arrow { width: 60px; height: 60px; border: 1px solid rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; transition: var(--transition-mid); background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
         .nav-arrow:hover { background: var(--white); color: var(--black); transform: scale(1.1); }
 
-        /* --- TICKER --- */
         .ticker { background: var(--marula-green); color: white; padding: 1.2rem 0; overflow: hidden; display: flex; border-bottom: 1px solid var(--gold); }
         .ticker-inner { display: flex; white-space: nowrap; animation: ticker 40s linear infinite; font-family: 'Space Mono'; font-size: 0.7rem; }
         @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- SECTIONS --- */
         section { padding: 8rem 10%; position: relative; }
         .reveal { opacity: 0; transform: translateY(60px); transition: var(--transition-long); }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -279,379 +247,36 @@
         .mono-label { font-family: 'Space Mono'; color: var(--gold); text-transform: uppercase; letter-spacing: 3px; font-size: 0.8rem; display: block; margin-bottom: 2rem; }
         .title-large { font-family: 'Syne'; font-size: clamp(2.5rem, 5vw, 5.5rem); line-height: 0.9; margin-bottom: 3rem; }
 
-        /* --- EDITORIAL & HERITAGE ANIMATION --- */
         .editorial-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
-        
-        .editorial-img { 
-            width: 100%; 
-            height: 600px; 
-            object-fit: cover; 
-            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); 
-            transition: clip-path 0.8s cubic-bezier(0.19, 1, 0.22, 1), transform 0.8s ease; 
-        }
+        .editorial-img { width: 100%; height: 600px; object-fit: cover; clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%); transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
+        .editorial-img:hover { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); transform: scale(1.02); }
 
-        .editorial-img:hover { 
-            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); 
-            transform: scale(1.02);
-        }
-
-        /* --- BLUEPRINT PILLARS --- */
         .blueprint-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--clay); border: 1px solid var(--clay); }
-        
-        .blueprint-item { 
-            background: var(--linen); 
-            padding: 4rem 2rem; 
-            transition: var(--transition-mid); 
-            position: relative;
-            overflow: hidden;
-        }
+        .blueprint-item { background: var(--linen); padding: 4rem 2rem; transition: var(--transition-mid); position: relative; overflow: hidden; }
+        .blueprint-item:hover { background: var(--white); transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); z-index: 5; }
 
-        .blueprint-item:hover {
-            background: var(--white);
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            z-index: 5;
-        }
-
-        .blueprint-item i {
-            transition: var(--transition-mid);
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .blueprint-item:hover i {
-            transform: scale(1.2) rotate(5deg);
-            color: var(--gold);
-        }
-
-        /* --- SPEC CARDS & PANELS --- */
         .spec-card { background: white; border: 1px solid var(--clay); padding: 4rem; position: relative; transition: var(--transition-mid); }
-        .spec-card:hover { border-color: var(--gold); }
-        
         .tech-panel { background: var(--marula-green); color: white; padding: 4rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; border-radius: 4px; }
-        
         .spec-list { list-style: none; margin-top: 2rem; }
-        .spec-list li { 
-            display: flex; 
-            justify-content: space-between; 
-            padding: 1.2rem 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-            font-family: 'Space Mono'; 
-            font-size: 0.75rem; 
-            transition: var(--transition-fast);
-        }
-        .spec-list li:hover {
-            color: var(--gold);
-            padding-left: 10px;
-        }
+        .spec-list li { display: flex; justify-content: space-between; padding: 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-family: 'Space Mono'; font-size: 0.75rem; }
 
-        /* --- PRICING --- */
         .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 4rem; }
-        
-        .price-card { 
-            background: var(--white); 
-            border: 1px solid var(--clay); 
-            padding: 3rem 1.5rem; 
-            text-align: center; 
-            transition: var(--transition-mid); 
-        }
-
-        .price-card:hover {
-            transform: translateY(-15px);
-            border-color: var(--gold);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        }
-
+        .price-card { background: var(--white); border: 1px solid var(--clay); padding: 3rem 1.5rem; text-align: center; transition: var(--transition-mid); }
         .price-val { font-family: 'Syne'; font-size: 3rem; color: var(--gold); display: block; margin: 1rem 0; font-weight: 800; }
 
-        /* --- FOOTER --- */
         footer { background: var(--black); color: var(--white); padding: 8rem 10% 4rem; }
         .f-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
-        .f-logo { font-family: 'Syne'; font-size: 3rem; font-weight: 800; color: var(--gold); letter-spacing: -3px; margin-bottom: 2.5rem; display: block; text-decoration: none; transition: 0.3s; }
-        .f-logo:hover { opacity: 0.8; transform: scale(0.98); }
-        
+        .f-logo { font-family: 'Syne'; font-size: 3rem; font-weight: 800; color: var(--gold); letter-spacing: -3px; margin-bottom: 2.5rem; display: block; text-decoration: none; }
         .f-col h5 { margin-bottom: 1.5rem; font-family: 'Space Mono'; color: var(--gold); font-size: 0.8rem; }
         .f-col ul { list-style: none; }
         .f-col ul li { margin-bottom: 0.8rem; font-size: 0.8rem; opacity: 0.6; transition: 0.3s; }
         .f-col ul li:hover { opacity: 1; color: var(--gold); transform: translateX(5px); }
-
         .f-bottom { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 6rem; padding-top: 2rem; display: flex; justify-content: space-between; font-size: 0.7rem; font-family: 'Space Mono'; opacity: 0.4; }
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 1200px) {
-            /* Hide cursor on mobile */
-            #cursor { display: none; }
-            * { cursor: auto !important; }
-            
-            /* Menu Toggle Button - Visible on Mobile */
-            .menu-toggle {
-                display: flex;
-            }
-            
-            /* Navigation Overlay - Professional Dark Blur */
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: 0;
-                width: 100%;
-                height: 100vh;
-                background: rgba(21, 50, 46, 0.98);
-                backdrop-filter: blur(20px);
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding: 120px 8% 40px;
-                gap: 0;
-                transform: translateX(100%);
-                transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-                z-index: 10001;
-                overflow-y: auto;
-            }
-            
-            .nav-links.active {
-                transform: translateX(0);
-            }
-            
-            /* Navigation Items - Elegant Spacing */
-            .nav-item {
-                width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-                position: relative;
-            }
-            
-            .nav-item:last-child {
-                border-bottom: none;
-            }
-            
-            .nav-item > a {
-                font-family: 'Inter', sans-serif;
-                font-size: 0.9rem;
-                font-weight: 500;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                color: var(--linen);
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.8rem 0;
-                text-decoration: none;
-                width: 100%;
-                transition: all 0.3s ease;
-            }
-            
-            .nav-item > a::after {
-                display: none;
-            }
-            
-            .nav-item > a:hover {
-                color: var(--gold);
-                padding-left: 10px;
-            }
-            
-            /* Dropdown Indicator */
-            .nav-item.has-dropdown > a::after {
-                content: '+';
-                font-size: 1.2rem;
-                font-weight: 300;
-                transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            }
-            
-            .nav-item.has-dropdown.mobile-open > a::after {
-                content: '−';
-                transform: rotate(0deg);
-            }
-            
-            /* MOBILE DROPDOWN - PROFESSIONAL DESIGN */
-            .dropdown {
-                display: none;
-                width: 100%;
-                background: transparent;
-                padding: 0;
-                margin: 0;
-                grid-template-columns: 1fr !important;
-                position: static !important;
-                transform: none !important;
-                opacity: 1 !important;
-                visibility: visible !important;
-                box-shadow: none !important;
-                border: none !important;
-                height: 0;
-                overflow: hidden;
-                transition: height 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-            }
-            
-            .nav-item.mobile-open .dropdown {
-                display: block;
-                height: auto;
-                padding: 1rem 0 2rem 0;
-            }
-            
-            /* Dropdown Links - Sleek Design */
-            .drop-link {
-                display: block;
-                padding: 1.5rem 0 1.5rem 1.5rem !important;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-                border-left: 2px solid rgba(193, 154, 107, 0.3);
-                margin-bottom: 0.5rem;
-                background: transparent !important;
-                text-decoration: none;
-                color: var(--linen);
-                opacity: 0.8;
-                transition: all 0.3s ease;
-                transform: none !important;
-            }
-            
-            .drop-link:last-child {
-                border-bottom: none !important;
-            }
-            
-            .drop-link:hover {
-                opacity: 1;
-                border-left-color: var(--gold);
-                background: rgba(255, 255, 255, 0.03) !important;
-                padding-left: 2rem !important;
-            }
-            
-            .drop-link h4 {
-                font-family: 'Syne';
-                font-size: 1.1rem !important;
-                color: var(--linen);
-                margin-bottom: 8px;
-                font-weight: 600;
-                letter-spacing: -0.5px;
-            }
-            
-            .drop-link p {
-                font-family: 'Inter';
-                font-size: 0.8rem !important;
-                color: rgba(253, 251, 247, 0.6);
-                line-height: 1.5;
-                font-weight: 300;
-            }
-            
-            /* Adjust other sections for mobile */
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .title-large {
-                font-size: 2.2rem;
-            }
-            
-            .editorial-grid,
-            .blueprint-grid {
-                grid-template-columns: 1fr !important;
-                gap: 2rem;
-            }
-            
-            .tech-panel,
-            .spec-card,
-            .price-grid {
-                grid-template-columns: 1fr !important;
-            }
-            
-            section {
-                padding: 4rem 5%;
-            }
-            
-            .f-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-btn {
-                padding: 1rem 2rem;
-                font-size: 0.65rem;
-            }
-            
-            .slider-nav {
-                bottom: 30px;
-                right: 5%;
-            }
-            
-            .nav-arrow {
-                width: 50px;
-                height: 50px;
-            }
-            
-            /* Better mobile dropdown padding */
-            .dropdown {
-                padding: 0.5rem 0 1.5rem 0;
-            }
-            
-            .drop-link {
-                padding: 1.2rem 0 1.2rem 1rem !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links {
-                padding: 100px 5% 30px;
-            }
-            
-            .nav-item > a {
-                font-size: 0.85rem;
-                padding: 1.5rem 0;
-            }
-        }
-
         .whatsapp-nav {
-            position: relative;
-            background: linear-gradient(135deg, #059669, #007a4d);
-            color: #fff !important;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 15px rgba(5, 150, 105, 0.2);
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            position: relative; background: linear-gradient(135deg, #059669, #007a4d); color: #fff !important; padding: 10px 25px; border-radius: 50px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: flex; align-items: center; gap: 8px;
         }
-
-        .whatsapp-nav::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: 50px;
-            background: #059669;
-            z-index: -1;
-            animation: ripple-animation 2s infinite;
-            opacity: 0;
-        }
-
-        @keyframes ripple-animation {
-            0% {
-                transform: scale(1);
-                opacity: 0.6;
-            } 
-            100% {
-                transform: scale(1.2, 1.5); 
-                opacity: 0;
-            }
-        }
-
-        .whatsapp-nav:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px rgba(5, 150, 105, 0.3);
-        }
-        
-        @media (max-width: 1200px) {
-            .whatsapp-nav {
-                display: none;
-            }
-        }
+        @media (max-width: 1200px) { .whatsapp-nav { display: none; } }
     </style>
 </head>
 <body>
@@ -663,7 +288,6 @@
         <nav>
             <a href="#home" class="logo">MARULA</a>
             
-            <!-- Mobile Menu Toggle -->
             <button class="menu-toggle" id="menuToggle">
                 <i data-lucide="menu" class="menu-icon"></i>
             </button>
@@ -672,7 +296,7 @@
                 <li class="nav-item"><a href="#home">Home</a></li>
                 <li class="nav-item"><a href="#about">Heritage</a></li>
                 <li class="nav-item has-dropdown">
-                    <a href="#services" class="nav-link-trigger">Services ↓</a>
+                    <a href="javascript:void(0)" class="nav-link-trigger">Services ↓</a>
                     <div class="dropdown">
                         <a href="#events" class="drop-link">
                             <h4>Event Organizing</h4>
@@ -722,7 +346,7 @@
         </nav>
     </header>
 
-    <!-- 01-05 HERO SLIDER -->
+    <!-- HERO SLIDER -->
     <section class="hero" id="home">
         <div class="slide active">
             <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1920" class="slide-img">
@@ -770,14 +394,14 @@
         </div>
     </section>
 
-    <!-- 06. LIVE DATA TICKER -->
+    <!-- LIVE DATA TICKER -->
     <div class="ticker">
         <div class="ticker-inner">
-            • SECURITY PROTOCOL: VALID GOVERNMENT ID MANDATORY FOR PARCEL & FINANCE • TERMINAL STATUS: ACTIVE • 1GBPS FIBER READY • DHL PARTNER HUB • SECURE VAULT ONLINE • 5G CONNECTIVITY ENABLED • WESTERN UNION AUTHORIZED • SECURITY PROTOCOL: VALID GOVERNMENT ID MANDATORY FOR PARCEL & FINANCE •
+            • SECURITY PROTOCOL: VALID GOVERNMENT ID MANDATORY FOR PARCEL & FINANCE • TERMINAL STATUS: ACTIVE • 1GBPS FIBER READY • DHL PARTNER HUB • SECURE VAULT ONLINE • 5G CONNECTIVITY ENABLED • WESTERN UNION AUTHORIZED •
         </div>
     </div>
 
-    <!-- 07. BRAND MANIFESTO -->
+    <!-- BRAND MANIFESTO -->
     <section class="reveal">
         <div style="text-align: center; max-width: 1100px; margin: 0 auto;">
             <span class="mono-label">Section 01 // Manifesto</span>
@@ -786,13 +410,13 @@
         </div>
     </section>
 
-    <!-- 08. HERITAGE (ABOUT) - WITH ANIMATION -->
+    <!-- HERITAGE (ABOUT) -->
     <section class="reveal editorial-grid" id="about">
         <img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=1260" class="editorial-img">
         <div>
             <span class="mono-label">Section 02 // Heritage</span>
             <h2 class="title-large">Curating <br>Simplicity.</h2>
-            <p style="font-size: 1.1rem; opacity: 0.7; margin-bottom: 2.5rem;">By merging high-end logistics with professional workspace solutions, we act as the silent architecture behind your success in Milan. An integrated sanctuary for the modern global citizen navigating the Lombardy region.</p>
+            <p style="font-size: 1.1rem; opacity: 0.7; margin-bottom: 2.5rem;">By merging high-end logistics with professional workspace solutions, we act as the silent architecture behind your success in Milan.</p>
             <div style="border-left: 2px solid var(--gold); padding-left: 2rem;">
                 <p class="mono-label" style="color: var(--black); margin-bottom: 0.5rem;">Marula Store Milano</p>
                 <p style="font-size: 0.8rem; opacity: 0.5;">Established 2020 — Via della Moscova, 12</p>
@@ -800,44 +424,42 @@
         </div>
     </section>
 
-    <!-- 09. SERVICE BLUEPRINT (THE BIG 9) -->
+    <!-- SERVICE BLUEPRINT -->
     <section class="reveal" id="services">
         <span class="mono-label" style="text-align: center;">Section 03 // Blueprint</span>
         <h2 class="title-large" style="text-align: center; margin-bottom: 6rem;">The 9 Pillars Hub.</h2>
         <div class="blueprint-grid">
             <div class="blueprint-item"><i data-lucide="party-popper" size="40"></i><h3 class="serif">Event Organizing</h3><p>Corporate galas, weddings, and high-end restaurant decor.</p></div>
             <div class="blueprint-item"><i data-lucide="smartphone" size="40"></i><h3 class="serif">Mobile & SIM</h3><p>Instant 5G activations and premium international accessories.</p></div>
-            <div class="blueprint-item"><i data-lucide="banknote" size="40"></i><h3 class="serif">Financial Hub</h3><p>PagoPA, Western Union, RIA & Wise encrypted transfers.</p></div>
-            <div class="blueprint-item"><i data-lucide="printer" size="40"></i><h3 class="serif">Business Center</h3><p>Professional document reproduction and visa-grade ID photos.</p></div>
+            <div class="blueprint-item"><i data-lucide="banknote" size="40"></i><h3 class="serif">Financial Hub</h3><p>PagoPA, Western Union, RIA & Wise transfers.</p></div>
+            <div class="blueprint-item"><i data-lucide="printer" size="40"></i><h3 class="serif">Business Center</h3><p>Document reproduction and visa-grade ID photos.</p></div>
             <div class="blueprint-item"><i data-lucide="package" size="40"></i><h3 class="serif">Logistics Hub</h3><p>Authorized global terminal for DHL, FedEx, and Amazon Hub.</p></div>
             <div class="blueprint-item"><i data-lucide="briefcase" size="40"></i><h3 class="serif">Luggage Vault</h3><p>Secure, climate-controlled vaulting for high-value items.</p></div>
-            <div class="blueprint-item"><i data-lucide="mic" size="40"></i><h3 class="serif">Office Pods</h3><p>Soundproof booths with 1Gbps fiber and power integration.</p></div>
+            <div class="blueprint-item"><i data-lucide="mic" size="40"></i><h3 class="serif">Office Pods</h3><p>Soundproof booths with 1Gbps fiber integration.</p></div>
             <div class="blueprint-item"><i data-lucide="languages" size="40"></i><h3 class="serif">Smart Assistant</h3><p>Translations, CV architecture, and digital bureaucracy support.</p></div>
             <div class="blueprint-item"><i data-lucide="plane" size="40"></i><h3 class="serif">Ticket Office</h3><p>Global Rail, Air, and Sea bookings via professional GDS.</p></div>
         </div>
     </section>
 
-    <!-- 10. SECURITY PROTOCOL -->
+    <!-- SECURITY PROTOCOL -->
     <section class="reveal" style="background: #540D0D; color: white;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 4rem;">
             <div>
                 <span class="mono-label" style="color: white; opacity: 0.5;">Security Clearance Required</span>
                 <h2 class="title-large" style="margin: 0; font-size: 3.5rem;">Valid ID <br>Mandatory.</h2>
             </div>
-            <p style="max-width: 450px; font-family: 'Space Mono'; opacity: 0.8; font-size: 0.85rem; line-height: 1.8;">MANDATORY PROTOCOL: Valid Government-issued Photo ID is strictly required for all Parcel Logistics & Finance Hub services. No exceptions are permitted under Lombardy compliance laws.</p>
+            <p style="max-width: 450px; font-family: 'Space Mono'; opacity: 0.8; font-size: 0.85rem;">MANDATORY PROTOCOL: Valid Government-issued Photo ID is strictly required for all Parcel Logistics & Finance Hub services.</p>
         </div>
     </section>
 
-    <!-- 11. LOGISTICS TERMINAL -->
+    <!-- LOGISTICS TERMINAL -->
     <section class="reveal editorial-grid" id="logistics">
         <div class="spec-card">
             <span class="mono-label">Section 04 // Terminal</span>
             <h2 class="title-large" style="font-size: 3.5rem;">Authorised <br>Collection Hub.</h2>
-            <p>We serve as the official Milanese terminal for the world's leading couriers. Our facility handles high-value shipments with prioritized secure storage.</p>
             <div style="display: flex; gap: 3rem; margin-top: 3rem; opacity: 0.3;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/DHL_Logo.svg" width="90">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" width="90">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/United_Parcel_Service_logo_2014.svg" width="45">
             </div>
         </div>
         <div class="tech-panel">
@@ -845,38 +467,34 @@
             <ul class="spec-list">
                 <li><span>Verification</span><span>ID Multi-Check</span></li>
                 <li><span>Carrier API</span><span>Live Tracking Hub</span></li>
-                <li><span>Storage Temp</span><span>21°C Regulated</span></li>
                 <li><span>Security</span><span>24/7 CCTV / ID Log</span></li>
             </ul>
         </div>
     </section>
 
-    <!-- 12. THE VAULT -->
+    <!-- THE VAULT -->
     <section class="reveal" id="vault" style="background: var(--clay);">
         <div class="editorial-grid">
             <div style="background: var(--white); padding: 6rem; text-align: center;" class="spec-card">
                 <span class="mono-label">Vaulting Pricing</span>
                 <h2 class="title-large" style="font-size: 4rem;">The Vault.</h2>
                 <div class="price-val">€5.00 <small style="font-size: 1rem; color: var(--black);">/ DAY</small></div>
-                <p style="opacity: 0.6; margin-bottom: 3rem;">Secure climate-controlled storage vault. Explore Milan hands-free with 100% item insurance.</p>
                 <a href="#" class="hero-btn" style="border-color: var(--black); color: var(--black);">Reserve My Vault</a>
             </div>
             <img src="https://images.unsplash.com/photo-1586769852044-692d6e3703f0?auto=format&fit=crop&q=80" class="editorial-img" style="clip-path: none; height: 100%;">
         </div>
     </section>
 
-    <!-- 13. OFFICE POD ANATOMY -->
+    <!-- OFFICE PODS -->
     <section class="reveal" id="pods">
         <span class="mono-label">Section 05 // Workspace</span>
         <h2 class="title-large">Engineered Focus.</h2>
         <div class="tech-panel">
             <div>
-                <p style="font-size: 1.4rem; font-weight: 300; opacity: 0.8; margin-bottom: 3rem;">Professional soundproof deep-work environments equipped with high-speed fiber and ergonomic hubs.</p>
+                <p style="font-size: 1.4rem; opacity: 0.8; margin-bottom: 3rem;">Professional soundproof deep-work environments equipped with high-speed fiber.</p>
                 <ul class="spec-list">
                     <li><span>Acoustics</span><span>-38dB STC Isolation</span></li>
                     <li><span>Fiber Optic</span><span>1.2Gbps Synchronous</span></li>
-                    <li><span>Air Quality</span><span>HEPA Purified Flow</span></li>
-                    <li><span>Charging</span><span>USB-C / Universal AC</span></li>
                 </ul>
             </div>
             <div class="price-grid" style="margin-top: 0; grid-template-columns: 1fr 1fr;">
@@ -886,177 +504,52 @@
         </div>
     </section>
 
-    <!-- 14. POD PRICING TIERS -->
-    <section class="reveal" style="padding-top: 0;">
-        <div class="price-grid">
-            <div class="price-card"><h4>Morning (9-1)</h4><p class="price-val">€40</p><p class="mono-label" style="font-size: 0.6rem;">4 Hour Access</p></div>
-            <div class="price-card"><h4>Afternoon (2-6)</h4><p class="price-val">€40</p><p class="mono-label" style="font-size: 0.6rem;">4 Hour Access</p></div>
-            <div class="price-card"><h4>Package 5 Days</h4><p class="price-val">€280</p><p class="mono-label" style="font-size: 0.6rem;">Corporate Rate</p></div>
-            <div class="price-card" style="background: var(--marula-green); border: none; color: white;"><h4>Team Session</h4><p class="price-val" style="color: white;">€120</p><p class="mono-label" style="color: white; font-size: 0.6rem;">Up to 4 Persons</p></div>
-        </div>
-    </section>
-
-    <!-- 15. CONNECTIVITY SUITE -->
+    <!-- CONNECTIVITY NODE -->
     <section class="reveal" id="connectivity">
         <div class="editorial-grid">
             <div class="spec-card">
                 <span class="mono-label">Section 06 // Node</span>
                 <h2 class="title-large" style="font-size: 3.5rem;">Connectivity Node.</h2>
-                <p>Instant 5G activations for TIM, Vodafone, WindTre. International roaming solutions and technical device support for the global community.</p>
+                <p>Instant 5G activations for TIM, Vodafone, WindTre.</p>
             </div>
             <div style="background: var(--marula-green); padding: 6rem; color: white;">
                 <h4 class="mono-label" style="color: white;">Tech Inventory</h4>
                 <ul class="spec-list">
                     <li><span>SIM Types</span><span>Physical / eSIM</span></li>
                     <li><span>Networks</span><span>5G / 4G+ / Roaming</span></li>
-                    <li><span>Support</span><span>Multi-Device Sync</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- 16. FINANCIAL HUB -->
+    <!-- FINANCIAL HUB -->
     <section class="reveal" id="finance" style="background: var(--linen);">
         <div style="border-left: 10px solid var(--marula-green); padding: 6rem; background: white;" class="spec-card">
             <span class="mono-label">Section 07 // Financial Hub</span>
             <h2 class="title-large">Global Remittance.</h2>
-            <p style="font-size: 1.5rem; font-weight: 200; opacity: 0.8;">Authorized Western Union & RIA partner for global money transfers, bill payments, utility payments, and financial document processing.</p>
-            <div class="price-grid" style="grid-template-columns: repeat(3, 1fr); margin-top: 4rem;">
-                <div style="text-align: center;"><h4 class="serif">PagoPA</h4><p style="font-size: 0.7rem; opacity: 0.5;">Government Bills</p></div>
-                <div style="text-align: center;"><h4 class="serif">Western Union</h4><p style="font-size: 0.7rem; opacity: 0.5;">Global Cash</p></div>
-                <div style="text-align: center;"><h4 class="serif">Wise / RIA</h4><p style="font-size: 0.7rem; opacity: 0.5;">Digital Remittance</p></div>
-            </div>
+            <p style="font-size: 1.5rem; font-weight: 200; opacity: 0.8;">Authorized Western Union & RIA partner for global money transfers.</p>
         </div>
     </section>
 
-    <!-- 17. EVENT ATELIER -->
+    <!-- EVENT ATELIER -->
     <section class="reveal" id="events">
         <span class="mono-label">Section 08 // The Atelier</span>
         <h2 class="title-large">Signature Celebrations.</h2>
         <div class="editorial-grid">
             <img src="https://images.pexels.com/photos/50675/banner-ads-advertising-column-display-50675.jpeg?auto=compress&cs=tinysrgb&w=1260" class="editorial-img">
             <div>
-                <p style="font-size: 1.2rem; opacity: 0.7; margin-bottom: 3rem;">Expert coordination for corporate galas, private celebrations, and conferences. From venue selection to high-end restaurant decor in Milan's most exclusive locations.</p>
-                <ul class="spec-list" style="border-top: 1px solid var(--clay);">
-                    <li><span>Corporate Events</span><span>Full Planning</span></li>
-                    <li><span>Wedding Galas</span><span>Design & Decor</span></li>
-                    <li><span>Conferences</span><span>AV & Logistics</span></li>
-                    <li><span>Packages</span><span>From €1,500</span></li>
-                </ul>
-                <a href="#" class="hero-btn" style="border-color: var(--black); color: var(--black); margin-top: 3rem;">Start Planning</a>
+                <p style="font-size: 1.2rem; opacity: 0.7; margin-bottom: 3rem;">Expert coordination for corporate galas and private celebrations in Milan.</p>
+                <a href="#" class="hero-btn" style="border-color: var(--black); color: var(--black);">Start Planning</a>
             </div>
         </div>
     </section>
 
-    <!-- 18. EVENT TECHNICALS -->
-    <section class="reveal" style="padding-top: 0;">
-        <div class="price-grid">
-            <div class="price-card"><h4>Corporate</h4><p style="font-size: 0.8rem; opacity: 0.6;">Meetings, conferences, and coordinating professional gatherings.</p></div>
-            <div class="price-card"><h4>Private</h4><p style="font-size: 0.8rem; opacity: 0.6;">Birthdays, anniversaries, and parties with complete planning.</p></div>
-            <div class="price-card"><h4>Coordination</h4><p style="font-size: 0.8rem; opacity: 0.6;">Venue booking, AV setup, and hospitality services.</p></div>
-            <div class="price-card"><h4>Custom</h4><p style="font-size: 0.8rem; opacity: 0.6;">Custom packages available based on requirements.</p></div>
-        </div>
-    </section>
-
-    <!-- 19. SMART ASSISTANT -->
-    <section class="reveal" id="concierge">
-        <div style="background: var(--marula-green); color: white; padding: 8rem; border-radius: 4px;">
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <span class="mono-label" style="color: white; opacity: 0.5;">Section 09 // Assistant</span>
-                <h2 class="title-large" style="font-size: 3rem;">Digital Concierge.</h2>
-                <p style="margin: 3rem 0; opacity: 0.7; font-size: 1.2rem;">Translations, CV architecture, professional document formatting, and multi-language support for Milanese bureaucracy.</p>
-                <div style="display: flex; gap: 2rem; justify-content: center;">
-                    <span class="mono-label" style="color: var(--gold); border: 1px solid var(--gold); padding: 10px;">Guidance</span>
-                    <span class="mono-label" style="color: var(--gold); border: 1px solid var(--gold); padding: 10px;">Portals</span>
-                    <span class="mono-label" style="color: var(--gold); border: 1px solid var(--gold); padding: 10px;">Support</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 20. DOCUMENT STUDIO -->
-    <section class="reveal" id="business">
-        <div class="editorial-grid">
-            <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&q=80" class="editorial-img" style="height: 500px;">
-            <div>
-                <span class="mono-label">Section 10 // Print Studio</span>
-                <h2 class="title-large" style="font-size: 3rem;">Document Architecture.</h2>
-                <p>1200 DPI Printing, high-res scanning, and professional ID photography compliant with international visa standards.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 21. GLOBAL TICKETING BOARD -->
-    <section class="reveal" id="travel">
-        <div style="background: var(--black); color: var(--gold); padding: 6rem; font-family: 'Space Mono'; border: 1px solid var(--gold);">
-            <p style="margin-bottom: 3rem;">TICKETING BOARD // TRANSIT AUTHORIZED</p>
-            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; border-bottom: 1px solid #333; padding: 15px 0;">
-                <span>TRANSIT</span><span>DESTINATION</span><span>STATUS</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; padding: 15px 0; border-bottom: 1px solid #111;">
-                <span>AIR</span><span>GLOBAL REACH</span><span>AVAILABLE</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; padding: 15px 0; border-bottom: 1px solid #111;">
-                <span>RAIL</span><span>EUROPEAN HUB</span><span>AVAILABLE</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; padding: 15px 0;">
-                <span>SEA</span><span>GENOVA PORT</span><span>AVAILABLE</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 22. MILANO MOSAIC -->
-    <section class="reveal" style="padding: 0;">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); height: 400px;">
-            <img src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg" style="width:100%; height:100%; object-fit:cover;">
-            <img src="https://images.pexels.com/photos/3771212/pexels-photo-3771212.jpeg" style="width:100%; height:100%; object-fit:cover;">
-            <img src="https://images.pexels.com/photos/4391470/pexels-photo-4391470.jpeg" style="width:100%; height:100%; object-fit:cover;">
-            <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg" style="width:100%; height:100%; object-fit:cover;">
-        </div>
-    </section>
-
-    <!-- 23. CLIENT PROOF -->
-    <section class="reveal">
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem;">
-            <div class="spec-card">
-                <p style="font-size: 1.5rem; font-weight: 200; font-style: italic; opacity: 0.7;">"The office pods are the perfect workspace in Milan. Fast fiber and absolute silence. My go-to spot."</p>
-                <p class="mono-label" style="margin-top: 2rem;">— Marco Conti</p>
-            </div>
-            <div class="spec-card">
-                <p style="font-size: 1.5rem; font-weight: 200; font-style: italic; opacity: 0.7;">"Handled our corporate gala flawlessly. The decor and coordination were world-class."</p>
-                <p class="mono-label" style="margin-top: 2rem;">— Alessandro Rossi</p>
-            </div>
-            <div class="spec-card">
-                <p style="font-size: 1.5rem; font-weight: 200; font-style: italic; opacity: 0.7;">"The luggage vault was a lifesaver. Secure, professional, and right in the heart of Brera."</p>
-                <p class="mono-label" style="margin-top: 2rem;">— Sarah Goldberg</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 24. HUB LOCATION -->
-    <section class="reveal" id="contact">
-        <div class="editorial-grid">
-            <div>
-                <span class="mono-label">Locate the Nexus</span>
-                <h2 class="title-large">Visit Us.</h2>
-                <div style="margin-top: 3rem; line-height: 2;">
-                    <p><strong>Address:</strong> Via della Moscova, 12, 20121 Milano MI</p>
-                    <p><strong>Phone:</strong> +39 02 1234 5678</p>
-                    <p><strong>Hours:</strong> Mon-Fri 8-8, Sat-Sun 9-6</p>
-                </div>
-            </div>
-            <div style="background: var(--clay); height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                <img src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&q=80" style="width:100%; height:100%; object-fit:cover; filter: grayscale(1);">
-            </div>
-        </div>
-    </section>
-
-    <!-- 25. GRAND FOOTER -->
+    <!-- FOOTER -->
     <footer>
         <div class="f-grid">
             <div class="f-col">
                 <a href="#home" class="f-logo">MARULA</a>
-                <p style="opacity: 0.5; max-width: 350px;">Premium Integrated Multi-Services based in Milan. Acting as the silent architecture for the global citizen.</p>
+                <p style="opacity: 0.5;">Premium Integrated Multi-Services based in Milan. Acting as the silent architecture for the global citizen.</p>
             </div>
             <div class="f-col">
                 <h5>Logistics Hub</h5>
@@ -1064,7 +557,6 @@
                     <li>Parcel Terminal</li>
                     <li>Luggage Vault</li>
                     <li>Ticket Office</li>
-                    <li>Travel Bookings</li>
                 </ul>
             </div>
             <div class="f-col">
@@ -1073,7 +565,6 @@
                     <li>Office Pods</li>
                     <li>Document Studio</li>
                     <li>Smart Assistant</li>
-                    <li>ID Photography</li>
                 </ul>
             </div>
             <div class="f-col">
@@ -1081,7 +572,6 @@
                 <ul>
                     <li>SIM Activations</li>
                     <li>Remittance Hub</li>
-                    <li>Bill Payments</li>
                     <li>Event Atelier</li>
                 </ul>
             </div>
@@ -1093,164 +583,57 @@
     </footer>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        // Cursor Logic (desktop only)
+        // Custom Cursor Logic
         const cursor = document.getElementById('cursor');
         if (window.innerWidth > 1200) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.left = e.clientX + 'px';
                 cursor.style.top = e.clientY + 'px';
             });
-
-            // Hover Effect for Cursor (desktop only)
-            const interactives = document.querySelectorAll('a, button, .blueprint-item, .price-card, .nav-arrow, .drop-link, .editorial-img');
-            interactives.forEach(el => {
+            document.querySelectorAll('a, button, .blueprint-item').forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
             });
         }
 
-        // Hero Slider
-        const slides = document.querySelectorAll('.slide');
-        const nextBtn = document.getElementById('nextSlide');
-        const prevBtn = document.getElementById('prevSlide');
-        let currentSlide = 0;
+        // Fixed Nav & Dropdown Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const serviceTrigger = document.querySelector('.nav-link-trigger');
+        const dropdown = document.querySelector('.dropdown');
 
-        function showSlide(index) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[index].classList.add('active');
-        }
-
-        if (nextBtn && prevBtn) {
-            nextBtn.addEventListener('click', () => { 
-                currentSlide = (currentSlide + 1) % slides.length; 
-                showSlide(currentSlide); 
-            });
-            
-            prevBtn.addEventListener('click', () => { 
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length; 
-                showSlide(currentSlide); 
-            });
-        }
-
-        // Auto slide every 7 seconds
-        setInterval(() => { 
-            currentSlide = (currentSlide + 1) % slides.length; 
-            showSlide(currentSlide); 
-        }, 7000);
-
-        // Scroll Reveal Logic
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-       // ========== DROPDOWN FUNCTIONALITY LIKE YOUR EXAMPLE ==========
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
-const serviceLink = document.querySelector('.nav-link-trigger');
-const dropdown = document.querySelector('.dropdown');
-
-// Mobile menu toggle
-menuToggle.addEventListener('click', () => {
-    const isOpen = navLinks.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-    
-    // Update icon
-    if (isOpen) {
-        menuToggle.innerHTML = '<i data-lucide="x" class="menu-icon"></i>';
-        document.body.style.overflow = 'hidden';
-    } else {
-        menuToggle.innerHTML = '<i data-lucide="menu" class="menu-icon"></i>';
-        document.body.style.overflow = 'auto';
-        // Close dropdown when closing menu
-        dropdown.classList.remove('show');
-    }
-    
-    lucide.createIcons();
-});
-
-// Toggle dropdown on mobile click (like your example)
-serviceLink.addEventListener('click', (e) => {
-    if (window.innerWidth <= 1200) {
-        e.preventDefault(); // Stop link from jumping
-        e.stopPropagation(); // Prevent event bubbling
-        
-        // Toggle dropdown visibility
-        dropdown.classList.toggle('show');
-    }
-});
-
-// Close menu when clicking a link (except dropdown triggers)
-navLinks.addEventListener('click', (e) => {
-    if (window.innerWidth <= 1200) {
-        const link = e.target.closest('a');
-        if (link && !link.classList.contains('nav-link-trigger')) {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-            menuToggle.innerHTML = '<i data-lucide="menu" class="menu-icon"></i>';
-            document.body.style.overflow = 'auto';
-            
-            // Close dropdown
-            dropdown.classList.remove('show');
-            
+        menuToggle.addEventListener('click', () => {
+            const active = navLinks.classList.toggle('active');
+            menuToggle.innerHTML = active ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
             lucide.createIcons();
-        }
-    }
-});
+        });
 
-// Close dropdown when clicking outside on mobile
-document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 1200) {
-        const isClickInsideDropdown = dropdown.contains(e.target);
-        const isClickOnTrigger = serviceLink.contains(e.target);
-        
-        if (!isClickInsideDropdown && !isClickOnTrigger && dropdown.classList.contains('show')) {
-            dropdown.classList.remove('show');
-        }
-    }
-});
+        serviceTrigger.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1200) {
+                e.preventDefault();
+                dropdown.classList.toggle('show');
+            }
+        });
 
-// Handle window resize
-window.addEventListener('resize', () => {
-    if (window.innerWidth > 1200) {
-        // Reset mobile menu state on desktop
-        navLinks.classList.remove('active');
-        menuToggle.classList.remove('active');
-        menuToggle.innerHTML = '<i data-lucide="menu" class="menu-icon"></i>';
-        document.body.style.overflow = 'auto';
-        
-        // Close mobile dropdown
-        dropdown.classList.remove('show');
-        
-        lucide.createIcons();
-    }
-});
-
-// Close menu on ESC key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && window.innerWidth <= 1200) {
-        if (navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            menuToggle.classList.remove('active');
-            menuToggle.innerHTML = '<i data-lucide="menu" class="menu-icon"></i>';
-            document.body.style.overflow = 'auto';
+        // Hero Slider logic
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        function showSlide(n) {
+            slides.forEach(s => s.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
         }
-        
-        // Close dropdown
-        dropdown.classList.remove('show');
-        
-        lucide.createIcons();
-    }
-});
+        document.getElementById('nextSlide')?.addEventListener('click', () => showSlide(currentSlide + 1));
+        document.getElementById('prevSlide')?.addEventListener('click', () => showSlide(currentSlide - 1));
+        setInterval(() => showSlide(currentSlide + 1), 7000);
+
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
