@@ -1023,6 +1023,28 @@
                 right: 20px;
             }
         }
+          /* 
+           ================================================================
+           7. LOGISTICS & ID PROTOCOL
+           ================================================================
+        */
+        .logistics-area {
+            background:  #0A0A0A; color: #fff; border-radius: 60px;
+            padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+            margin-top: 40px;
+        }
+        .id-protocol {
+            background: rgba(192, 57, 43, 0.1); border: 1px solid  #c0392b;
+            padding: 30px; border-radius:20px; margin-bottom: 30px;
+            display: flex; gap: 20px; align-items: center;
+        }
+        .id-protocol i { font-size: 2rem; color: var(--status-red); }
+        .id-protocol p { font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+
+        .log-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .partner-chip { background: rgba(255,255,255,0.05); padding: 20px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 15px; }
+        .partner-chip i { font-size: 1.5rem; color: var(--accent-gold); }
+ 
     </style>
 </head>
 
@@ -1337,38 +1359,41 @@
         </div>
     </section>
 
-    <!-- SECURITY PROTOCOL -->
-    <section class="reveal" style="background: #540D0D; color: white;">
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 4rem;">
-            <div>
-                <span class="mono-label" style="color: white; opacity: 0.5;">Security Clearance Required</span>
-                <h2 class="title-large" style="margin: 0; font-size: 3.5rem;">Valid ID <br>Mandatory.</h2>
+ 
+
+    <!-- Logistics Architecture -->
+    <section id="logistics" style="padding-top: 0;">
+        <div class="container">
+            <div class="logistics-area">
+                <div class="log-info">
+                    <p class="mono" style="color: var(--accent-gold);">Global Node</p>
+                    <h2 style="color: #fff; font-size: 3.5rem; margin: 20px 0;">Official Logistics <br>Terminal</h2>
+                    <p style="color: #888; margin-bottom: 40px;">Serving as the primary Milanese collection point for the world's most trusted courier networks. Security, reliability, and precision.</p>
+                    
+                    <div class="id-protocol">
+                        <i class="fas fa-id-card-shield"></i>
+                        <p>Mandatory: Valid Government-issued Photo ID required for all parcel collections. <br> No exceptions.</p>
+                    </div>
+
+                    <div class="log-partners">
+                        <div class="partner-chip"><i class="fab fa-ups"></i> UPS Access Point™</div>
+                        <div class="partner-chip"><i class="fab fa-dhl"></i> DHL Service Point</div>
+                        <div class="partner-chip"><i class="fab fa-amazon"></i> Amazon Hub Hub</div>
+                        <div class="partner-chip"><i class="fas fa-box"></i> FedEx Authorized</div>
+                    </div>
+                </div>
+
+                <div style="background: #111; padding: 60px; border-radius: var(--radius-lg); border: 1px solid #222;">
+                    <p class="mono">Security Vault</p>
+                    <h3 style="color: #fff; font-size: 2.2rem; margin: 20px 0;">Luggage Storage</h3>
+                    <p style="color: #666; margin-bottom: 30px;">Explore Milan hands-free. Our 24/7 monitored, climate-controlled vault ensures your belongings stay pristine.</p>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 40px;">€5.00 <span style="font-size: 1rem; color: #444;">/ Day</span></div>
+                    <button class="btn-nexus" style="width: 100%;" >Reserve Vault Space</button>
+                </div>
             </div>
-            <p style="max-width: 450px; font-family: 'Space Mono'; opacity: 0.8; font-size: 0.85rem;">MANDATORY
-                PROTOCOL: Valid Government-issued Photo ID is strictly required for all Parcel Logistics & Finance Hub
-                services.</p>
         </div>
     </section>
 
-    <!-- LOGISTICS TERMINAL -->
-    <section class="reveal editorial-grid" id="logistics">
-        <div class="spec-card">
-            <span class="mono-label">Section 04 // Terminal</span>
-            <h2 class="title-large" style="font-size: 3.5rem;">Authorised <br>Collection Hub.</h2>
-            <div style="display: flex; gap: 3rem; margin-top: 3rem; opacity: 0.3;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/DHL_Logo.svg" width="90">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" width="90">
-            </div>
-        </div>
-        <div class="tech-panel">
-            <h4 class="mono-label" style="color: white;">Logistics Specs</h4>
-            <ul class="spec-list">
-                <li><span>Verification</span><span>ID Multi-Check</span></li>
-                <li><span>Carrier API</span><span>Live Tracking Hub</span></li>
-                <li><span>Security</span><span>24/7 CCTV / ID Log</span></li>
-            </ul>
-        </div>
-    </section>
 
     <!-- THE VAULT -->
     <section class="reveal" id="vault" style="background: var(--clay);">
