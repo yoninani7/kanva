@@ -291,7 +291,7 @@
             position: relative;
             overflow: hidden;
             background: var(--black);
-        }
+        } 
 
         .slide {
             position: absolute;
@@ -302,7 +302,7 @@
             align-items: center;
             padding: 0 10%;
             visibility: hidden;
-        }
+        } 
 
         .slide.active {
             opacity: 1;
@@ -318,11 +318,10 @@
             filter: brightness(0.6);
             transform: scale(1.1);
             transition: 10s transform linear;
-        }
-
+        } 
         .slide.active .slide-img {
             transform: scale(1);
-        }
+        } 
 
         .hero-content {
             position: relative;
@@ -330,7 +329,6 @@
             color: white;
             max-width: 800px;
         }
-
         .hero-tag {
             font-family: 'Space Mono';
             color: var(--gold);
@@ -1042,9 +1040,16 @@
         .id-protocol p { font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
 
         .log-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .partner-chip { background: rgba(255,255,255,0.05); padding: 20px; border-radius: var(--radius-md); display: flex; align-items: center; gap: 15px; }
-        .partner-chip i { font-size: 1.5rem; color: var(--accent-gold); }
- 
+        .partner-chip { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 20px; display: flex; align-items: center; gap: 15px; }
+        .partner-chip i { font-size: 1.5rem; color: var(--gold); }
+       .btn-nexus {
+            padding: 22px 50px; background:  #1A1A1A; color: #fff;
+            border: none; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 4px; font-size: 0.75rem; cursor: pointer; transition: var(--transition-lux);
+            text-decoration: none; display: inline-block;
+        }
+        .btn-nexus:hover { background: var(--gold); transform: translateY(-5px); box-shadow: var(--shadow-heavy); }
+ .mono { font-family: 'Space Mono', monospace; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 3px; color: var(--gold); }
     </style>
 </head>
 
@@ -1366,7 +1371,7 @@
         <div class="container">
             <div class="logistics-area">
                 <div class="log-info">
-                    <p class="mono" style="color: var(--accent-gold);">Global Node</p>
+                    <p class="mono" style="color: var(--gold);">Global Node</p>
                     <h2 style="color: #fff; font-size: 3.5rem; margin: 20px 0;">Official Logistics <br>Terminal</h2>
                     <p style="color: #888; margin-bottom: 40px;">Serving as the primary Milanese collection point for the world's most trusted courier networks. Security, reliability, and precision.</p>
                     
@@ -1383,12 +1388,12 @@
                     </div>
                 </div>
 
-                <div style="background: #111; padding: 60px; border-radius: var(--radius-lg); border: 1px solid #222;">
+                <div style="background: #111; padding: 60px; border-radius:20px; border: 1px solid #222;">
                     <p class="mono">Security Vault</p>
                     <h3 style="color: #fff; font-size: 2.2rem; margin: 20px 0;">Luggage Storage</h3>
                     <p style="color: #666; margin-bottom: 30px;">Explore Milan hands-free. Our 24/7 monitored, climate-controlled vault ensures your belongings stay pristine.</p>
-                    <div style="font-size: 3rem; font-weight: 800; color: var(--accent-gold); margin-bottom: 40px;">€5.00 <span style="font-size: 1rem; color: #444;">/ Day</span></div>
-                    <button class="btn-nexus" style="width: 100%;" >Reserve Vault Space</button>
+                    <div style="font-size: 3rem; font-weight: 800; color: var(--gold); margin-bottom: 40px;">€5.00 <span style="font-size: 1rem; color: #444;">/ Day</span></div>
+                    <button class="btn-nexus" style="width: 100%;" >Reserve my vault</button>
                 </div>
             </div>
         </div>
