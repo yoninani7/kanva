@@ -146,7 +146,7 @@
             width: 100%;
             z-index: 9000;
             background: transparent;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle white border */
             transition: var(--transition-mid);
             transform: translateY(-100%);
         }
@@ -154,17 +154,21 @@
         /* After scrolled state */
         header.scrolled {
             background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* Softer shadow */
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         /* Change text to dark when header is scrolled */
-        header.scrolled .logo,
-        header.scrolled .nav-item>a {
+        header.scrolled .logo {
             color: var(--primary-dark);
         }
 
-        header.scrolled .nav-item>a:hover {
-            color: var(--marula-green);
+        header.scrolled .nav-item > a {
+            color: var(--text-muted); /* Softer corporate gray instead of harsh dark */
+        }
+
+        header.scrolled .nav-item > a:hover {
+            color: var(--primary-dark); /* Darkens professionally on hover */
         }
 
         nav {
@@ -179,12 +183,13 @@
 
         .logo {
             font-family: 'Syne', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
+            font-size: 1.5rem; /* More understated size */
+            font-weight: 700; /* Less heavy */
             color: white;
-            letter-spacing: -1.5px;
+            letter-spacing: -0.5px;
             text-decoration: none;
             z-index: 10002;
+            text-transform: uppercase;
         }
 
         .nav-links {
@@ -201,20 +206,20 @@
             height: 100%;
         }
 
-        .nav-item>a {
-            font-family: 'Syne', sans-serif;
+        .nav-item > a {
+            font-family: 'Plus Jakarta Sans', sans-serif; /* Cleaner sans-serif for professional look */
             text-decoration: none;
-            color: white;
-            font-size: 0.89rem;
-            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            font-weight: 500; /* Lighter weight for modern B2B feel */
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px; /* Reduced tracking for legibility */
             transition: var(--transition-fast);
             padding: 0.5rem 0;
         }
 
-        .nav-item>a:hover {
-            color: var(--marula-green);
+        .nav-item > a:hover {
+            color: var(--accent-gold-light);
         }
 
         /* Desktop Mega Menu */
@@ -236,7 +241,6 @@
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 grid-auto-rows: 1fr;
-                /* <-- ADDED THIS: Forces identical row heights */
                 gap: 15px;
                 padding: 40px;
                 box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
@@ -258,7 +262,6 @@
             border-radius: 8px;
             border: 1px solid transparent;
             height: 100%;
-            /* <-- ADDED THIS: Stretches the link to fill the equal box */
             box-sizing: border-box;
         }
 
@@ -274,11 +277,10 @@
 
         .dropdown h4 {
             margin: 0;
-            font-family: 'Syne', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.95rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
             color: var(--primary-dark);
             margin-bottom: 4px;
         }
@@ -330,12 +332,15 @@
             color: var(--bg-white);
         }
 
+        /* Refined, professional WhatsApp button */
         .whatsapp-nav {
-            background: linear-gradient(135deg, #059669, #007a4d);
-            color: #fff !important;
-            padding: 12px 28px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: #ffffff !important;
+            padding: 10px 24px;
             border-radius: 50px;
-            font-size: 0.75rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -343,20 +348,26 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            animation: aura-glow 2.5s infinite;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition-fast);
         }
 
-        @keyframes aura-glow {
+        .whatsapp-nav:hover {
+            background: #ffffff;
+            color: var(--primary-dark) !important;
+            border-color: #ffffff;
+        }
 
-            0%,
-            100% {
-                box-shadow: 0 0 0 0px rgba(5, 150, 105, 0.4);
-            }
+        /* Scrolled state for WhatsApp button */
+        header.scrolled .whatsapp-nav {
+            background: var(--marula-green);
+            color: #ffffff !important;
+            border: 1px solid var(--marula-green);
+        }
 
-            50% {
-                box-shadow: 0 0 20px 10px rgba(5, 150, 105, 0);
-            }
+        header.scrolled .whatsapp-nav:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
         }
 
         .menu-toggle {
@@ -802,8 +813,7 @@
         .ed-image-container {
             position: relative;
             border-radius: 24px;
-            overflow: hidden;
-            aspect-ratio: 4/5;
+            overflow: hidden; 
             will-change: transform;
         }
 
@@ -856,8 +866,8 @@
             letter-spacing: 2px;
         }
 
-        /* --- ENTERPRISE & B2B --- */
-        .enterprise-section {
+        /* --- store & B2B --- */
+        .store-section {
             background: var(--marula-green);
             padding: var(--space-lg) 5%;
             margin: 0 5%;
@@ -866,7 +876,7 @@
             overflow: hidden;
         }
 
-        .enterprise-bg {
+        .store-bg {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -876,7 +886,7 @@
             mix-blend-mode: luminosity;
         }
 
-        .enterprise-grid {
+        .store-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5rem;
@@ -1178,7 +1188,6 @@
                 transition: var(--transition-mid);
                 z-index: 10001;
                 gap: 0;
-                /* ADD THESE TWO LINES to allow scrolling inside the mobile menu */
                 overflow-y: auto;
                 overflow-x: hidden;
             }
@@ -1196,12 +1205,17 @@
                 align-items: flex-start;
             }
 
-            .nav-item>a {
-                font-size: 1.2rem;
+            .nav-item > a {
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--primary-dark); /* Ensure it contrasts with the white mobile menu */
                 padding: 25px 0;
                 display: block;
                 width: 100%;
                 text-align: left;
+            }
+            .nav-item > a:hover {
+                color: var(--accent-gold);
             }
 
             /* NEW MOBILE DROPDOWN STYLES - Hidden by default */
@@ -1272,7 +1286,7 @@
             .editorial-wrap.reverse,
             .contact-grid,
             .footer-grid,
-            .enterprise-grid,
+            .store-grid,
             .test-grid {
                 grid-template-columns: 1fr;
                 gap: 4rem;
@@ -1292,7 +1306,7 @@
                 display: none;
             }
 
-            .enterprise-section {
+            .store-section {
                 padding: 5rem 2.5rem;
                 margin: 0;
                 border-radius: 0;
@@ -1329,6 +1343,36 @@
                 text-align: center;
             }
         }
+
+         /* 
+           ================================================================
+           7. LOGISTICS & ID PROTOCOL
+           ================================================================
+        */
+        .logistics-area {
+            background: #0A0A0A; color: #fff; border-radius: 60px;
+            padding: 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+            margin-top: 40px;
+        }
+        .id-protocol {
+            background: rgba(192, 57, 43, 0.1); border: 1px solid  #c0392b;
+            padding: 30px; border-radius:16px; margin-bottom: 30px;
+            display: flex; gap: 20px; align-items: center;
+        }
+        .id-protocol i { font-size: 2rem; color:#c0392b; }
+        .id-protocol p { font-size: 0.8rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; }
+
+        .log-partners { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .partner-chip { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 16px; display: flex; align-items: center; gap: 15px; }
+        .partner-chip i { font-size: 1.5rem; color: #B49258; }
+        .btn-logistics {
+            padding: 22px 50px; background:#1A1A1A; color: #fff;
+            border: none; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 4px; font-size: 0.75rem; cursor: pointer; transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            text-decoration: none; display: inline-block;
+        }
+        .btn-logistics:hover { background:  #B49258; transform: translateY(-5px); box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
+ 
     </style>
 </head>
 
@@ -1406,13 +1450,13 @@
                         </a>
                     </div>
                 </li>
-                <li class="nav-item"><a href="#enterprise">Enterprise</a></li>
+                <li class="nav-item"><a href="#store">Store</a></li>
                 <li class="nav-item"><a href="#faq">FAQ</a></li>
-                <li class="nav-item"><a href="#contact">Location</a></li>
+                <li class="nav-item"><a href="#contact">Contact</a></li>
             </ul>
 
-            <button class="btn-magnetic whatsapp-nav" onclick="window.open('https://wa.me/251911234567','_blank')">
-                <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i> Whatsapp
+            <button class="whatsapp-nav" onclick="window.open('https://wa.me/251911234567','_blank')">
+                <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Whatsapp
             </button>
 
             <button class="menu-toggle" id="menuToggle">
@@ -1485,48 +1529,12 @@
         </div>
     </section>
 
-    <!-- HOW IT WORKS (PROTOCOL) -->
-    <section class="process-section" id="protocol">
-        <div class="section-header gsap-fade-up">
-            <span class="tagline">Seamless Integration</span>
-            <h2 class="section-title font-syne">The Marula Protocol.</h2>
-            <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 1.5rem;">Experience a frictionless
-                approach to essential services. Centralized, secure, and impeccably managed.</p>
-        </div>
-
-        <div class="process-grid">
-            <div class="process-line">
-                <div class="process-line-fill"></div>
-            </div>
-
-            <div class="process-card gsap-stagger-up">
-                <div class="step-number">01</div>
-                <i data-lucide="compass" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
-                <h4>Consult & Walk-in</h4>
-                <p>Arrive at our Addis Ababa flagship hub or connect via our dedicated WhatsApp concierge to state your
-                    operational requirements.</p>
-            </div>
-            <div class="process-card gsap-stagger-up">
-                <div class="step-number">02</div>
-                <i data-lucide="fingerprint" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
-                <h4>Process & Verify</h4>
-                <p>From secure ID verification for global logistics to instantaneous financial routing, our desk
-                    handlers ensure compliant, rapid processing.</p>
-            </div>
-            <div class="process-card gsap-stagger-up">
-                <div class="step-number">03</div>
-                <i data-lucide="check-circle-2" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
-                <h4>Execution</h4>
-                <p>Your parcel is dispatched, your meeting pod is unlocked, or your event blueprint is finalized. Leave
-                    with absolute peace of mind.</p>
-            </div>
-        </div>
-    </section>
-
+ 
     <!-- PERFECTED BENTO GRID -->
     <section id="services">
         <div class="section-header gsap-fade-up">
-            <span class="tagline" style="color: var(--text-muted);">// Services</span>
+
+            <span class="tagline" >|| Services ||</span>
             <h2 class="section-title font-syne">What we offer.</h2><br>
             <span class="tagline" style="color: var(--text-muted);">Choose your service below <span
                     style="font-size: larger;font-weight: 900;"> ↓ </span></span>
@@ -1644,6 +1652,44 @@
         </div>
     </section>
 
+       <!-- HOW IT WORKS (PROTOCOL) -->
+    <section class="process-section" id="protocol">
+        <div class="section-header gsap-fade-up">
+            <span class="tagline">Seamless Integration</span>
+            <h2 class="section-title font-syne">The Marula Protocol.</h2>
+            <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 1.5rem;">Experience a frictionless
+                approach to essential services. Centralized, secure, and impeccably managed.</p>
+        </div>
+
+        <div class="process-grid">
+            <div class="process-line">
+                <div class="process-line-fill"></div>
+            </div>
+
+            <div class="process-card gsap-stagger-up">
+                <div class="step-number">01</div>
+                <i data-lucide="compass" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Consult & Walk-in</h4>
+                <p>Arrive at our Addis Ababa flagship hub or connect via our dedicated WhatsApp concierge to state your
+                    operational requirements.</p>
+            </div>
+            <div class="process-card gsap-stagger-up">
+                <div class="step-number">02</div>
+                <i data-lucide="fingerprint" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Process & Verify</h4>
+                <p>From secure ID verification for global logistics to instantaneous financial routing, our desk
+                    handlers ensure compliant, rapid processing.</p>
+            </div>
+            <div class="process-card gsap-stagger-up">
+                <div class="step-number">03</div>
+                <i data-lucide="check-circle-2" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Execution</h4>
+                <p>Your parcel is dispatched, your meeting pod is unlocked, or your event blueprint is finalized. Leave
+                    with absolute peace of mind.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- METRICS & GLOBAL REACH -->
     <section class="metrics-section gsap-fade-up">
         <img src="https://images.unsplash.com/photo-1558227801-7b705e4682ae?auto=format&fit=crop&q=80"
@@ -1706,37 +1752,171 @@
                     <div class="price-tag">€15 <span>/ Hour</span></div>
                 </div>
             </div>
-        </div>
+        </div> 
+    </section>
 
-        <div class="editorial-wrap reverse gsap-fade-up" id="vault" style="margin-top: 8rem;">
-            <div class="ed-image-container">
-                <img src="https://images.unsplash.com/photo-1554366405-2d4e788bc1cb?auto=format&fit=crop&q=80"
-                    alt="Luxury Luggage Storage" class="gsap-parallax-img" loading="lazy">
-                <div class="glass-card" style="right: auto; width: 320px;">
-                    <div class="font-mono" style="color: var(--accent-gold-light); font-size: 0.8rem;">SECURE STORAGE
+      <section id="logistics" >
+        <div class="container">
+            <div class="logistics-area">
+                <div class="log-info">
+                    <p class="mono" style="color: #B49258;">Global Node</p>
+                    <h2 style="color: #fff; font-size: 3.5rem; margin: 20px 0;">Official Logistics <br>Terminal</h2>
+                    <p style="color: #888; margin-bottom: 40px;">Serving as the primary Milanese collection point for the world's most trusted courier networks. Security, reliability, and precision.</p>
+                    
+                    <div class="id-protocol">
+                        <i class="fas fa-id-card-shield"></i>
+                        <p>Mandatory: Valid Government-issued Photo ID required for all parcel collections. No exceptions.</p>
                     </div>
-                    <div class="price-tag">€5 <span>/ Day</span></div>
+
+                    <div class="log-partners">
+                        <div class="partner-chip"><i class="fab fa-ups"></i> UPS Access Point™</div>
+                        <div class="partner-chip"><i class="fab fa-dhl"></i> DHL Service Point</div>
+                        <div class="partner-chip"><i class="fab fa-amazon"></i> Amazon Hub Hub</div>
+                        <div class="partner-chip"><i class="fas fa-box"></i> FedEx Authorized</div>
+                    </div>
+                </div>
+
+                <div style="background: #111; padding: 60px; border-radius:  32px; border: 1px solid #222;">
+                    <p class="mono">Security Vault</p>
+                    <h3 style="color: #fff; font-size: 2.2rem; margin: 20px 0;">Luggage Storage</h3>
+                    <p style="color: #666; margin-bottom: 30px;">Explore Milan hands-free. Our 24/7 monitored, climate-controlled vault ensures your belongings stay pristine.</p>
+                    <div style="font-size: 3rem; font-weight: 800; color: #B49258; margin-bottom: 40px;">€5.00 <span style="font-size: 1rem; color: #444;">/ Day</span></div>
+                    <button class="btn-logistics" style="width: 100%;" onclick="openBookingModal()">Reserve Vault Space</button>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 1: DIGITAL CONNECTIVITY -->
+    <section id="connectivity" style="background: var(--bg-linen); padding-top: 6rem; padding-bottom: 6rem;">
+        <div class="editorial-wrap gsap-fade-up">
             <div class="ed-content">
-                <span class="tagline">Facility 02 // Asset Protection</span>
-                <h2 class="section-title font-syne" style="margin-bottom: 1.5rem;">The Security Vault.</h2>
+                <span class="tagline">Facility 03 // Digital Connectivity</span>
+                <h2 class="section-title font-syne" style="margin-bottom: 1.5rem;">Instant 5G Access.</h2>
                 <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem;">
-                    Explore Addis Ababa entirely hands-free. The Marula Vault provides climate-controlled, 24/7 actively
-                    monitored storage for your luggage, technical equipment, and high-value acquisitions. Security meets
-                    absolute convenience.
+                    Stay connected from the moment you land. We provide priority mobile SIM provisioning, high-speed 5G data packages, and premium device accessories tailored strictly for the global traveler and executive.
                 </p>
+                <ul style="list-style: none; margin-bottom: 3rem;">
+                    <li style="padding: 1.2rem 0; border-bottom: 1px solid var(--clay); display: flex; justify-content: space-between;">
+                        <span class="font-mono">Activation Time</span> <strong style="color: var(--primary-dark);">Under 3 Minutes</strong>
+                    </li>
+                    <li style="padding: 1.2rem 0; border-bottom: 1px solid var(--clay); display: flex; justify-content: space-between;">
+                        <span class="font-mono">Network</span> <strong style="color: var(--primary-dark);">Ethio Telecom & Safaricom 5G</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="ed-image-container">
+                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&q=80" alt="Connectivity" class="gsap-parallax-img" loading="lazy">
+                <div class="glass-card">
+                    <div class="font-mono" style="color: var(--accent-gold-light); font-size: 0.8rem;">SIM PROVISION</div>
+                    <div class="price-tag">€10 <span>/ Standard Package</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 2: FINANCIAL HUB -->
+    <section id="finance" style="background: var(--bg-white); padding-top: 6rem; padding-bottom: 6rem;">
+        <div class="section-header gsap-fade-up">
+            <span class="tagline">Facility 04 // Capital Flow</span>
+            <h2 class="section-title font-syne">Financial Hub.</h2>
+            <p style="color: var(--text-muted); font-size: 1.15rem; margin-top: 1.5rem;">Secure, instantaneous global money transfers and wire routing operated directly from our Addis Ababa node.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-card gsap-stagger-up">
+                <i data-lucide="globe" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Global Wire</h4>
+                <p>Send and receive capital across borders seamlessly with Western Union and international bank wire integrations.</p>
+            </div>
+            <div class="process-card gsap-stagger-up">
+                <i data-lucide="shield" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Secure Exchange</h4>
+                <p>Compliant, rapid foreign exchange facilitation ensuring you instantly have the localized currency required for your operations.</p>
+            </div>
+            <div class="process-card gsap-stagger-up">
+                <i data-lucide="zap" style="color: var(--accent-gold); width: 45px; height: 45px;"></i>
+                <h4>Instant Settlement</h4>
+                <p>Zero-friction liquidity. Our desk operators process transactions in minutes, completely bypassing traditional banking queues.</p>
+            </div>
+        </div>
+    </section>
+ 
+
+    <!-- NEW SECTION 4: THE CONCIERGE -->
+    <section id="concierge" style="background: var(--bg-linen); padding-top: 6rem; padding-bottom: 6rem;">
+        <div class="editorial-wrap gsap-fade-up">
+            <div class="ed-content">
+                <span class="tagline">Facility 06 // Bureaucracy & Assistance</span>
+                <h2 class="section-title font-syne" style="margin-bottom: 1.5rem;">The Smart Assistant.</h2>
+                <p style="font-size: 1.15rem; color: var(--text-muted); margin-bottom: 2.5rem;">
+                    Navigate Ethiopian bureaucracy and language barriers with our dedicated smart concierge. We handle certified translations, document preparation, and local logistics, empowering you to focus entirely on your objectives.
+                </p>
+                <ul style="list-style: none; margin-bottom: 3rem;">
+                    <li style="padding: 1.2rem 0; border-bottom: 1px solid var(--clay); display: flex; justify-content: space-between;">
+                        <span class="font-mono">Languages</span> <strong style="color: var(--primary-dark);">Amharic, English, French, Mandarin</strong>
+                    </li>
+                    <li style="padding: 1.2rem 0; border-bottom: 1px solid var(--clay); display: flex; justify-content: space-between;">
+                        <span class="font-mono">Services</span> <strong style="color: var(--primary-dark);">Visas, Permits & Legal Transcripts</strong>
+                    </li>
+                </ul>
+            </div>
+            <div class="ed-image-container">
+                <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&q=80" alt="Concierge Desk" class="gsap-parallax-img" loading="lazy">
+                <div class="glass-card">
+                    <div class="font-mono" style="color: var(--accent-gold-light); font-size: 0.8rem;">DEDICATED ASSISTANT</div>
+                    <div class="price-tag">€25 <span>/ Session</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 5: GLOBAL TRANSIT TICKETING -->
+    <section id="travel" style="background: var(--bg-white); padding-top: 4rem; padding-bottom: 4rem;">
+        <div class="store-section gsap-fade-up" style="background: var(--bg-linen); border: 1px solid var(--clay);">
+            <div class="store-grid">
+                <div>
+                    <span class="tagline" style="color: var(--marula-green);">Facility 07 // Global Transit</span>
+                    <h2 class="section-title font-syne" style="color: var(--primary-dark); margin-bottom: 1.5rem;">Seamless Ticketing.</h2>
+                    <p style="color: var(--text-muted); font-size: 1.15rem; margin-bottom: 3.5rem; line-height: 1.8;">
+                        Complex itineraries simplified. Whether you require a domestic flight across Ethiopia, an international connection, or cross-country train and bus bookings, our transit desk ensures optimized routes and priority seating.
+                    </p>
+                    <a href="#contact" class="btn-magnetic" style="background: var(--marula-green); color: var(--bg-white);">Plan Your Journey</a>
+                </div>
+
+                <div>
+                    <div class="ent-feature gsap-stagger-up">
+                        <div class="ent-icon" style="background: rgba(17, 50, 42, 0.1); color: var(--marula-green);"><i data-lucide="plane"></i></div>
+                        <div>
+                            <h4 style="color: var(--primary-dark);">Aviation Desk</h4>
+                            <p style="color: var(--text-muted);">Partnered directly with Ethiopian Airlines and major international carriers for exclusive corporate rates.</p>
+                        </div>
+                    </div>
+                    <div class="ent-feature gsap-stagger-up">
+                        <div class="ent-icon" style="background: rgba(17, 50, 42, 0.1); color: var(--marula-green);"><i data-lucide="train"></i></div>
+                        <div>
+                            <h4 style="color: var(--primary-dark);">Railways & Ground</h4>
+                            <p style="color: var(--text-muted);">Secure Ethio-Djibouti railway tickets and premium intercity bus transports with absolute ease.</p>
+                        </div>
+                    </div>
+                    <div class="ent-feature gsap-stagger-up">
+                        <div class="ent-icon" style="background: rgba(17, 50, 42, 0.1); color: var(--marula-green);"><i data-lucide="map"></i></div>
+                        <div>
+                            <h4 style="color: var(--primary-dark);">Itinerary Management</h4>
+                            <p style="color: var(--text-muted);">Full-scale journey planning including hotel transfers and localized transport upon arrival.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ENTERPRISE & B2B -->
-    <section id="enterprise" style="padding: 0 0 var(--space-xl) 0; background: var(--bg-white);">
-        <div class="enterprise-section gsap-fade-up">
+    <section id="store" style="padding: 0 0 var(--space-xl) 0; background: var(--bg-white);">
+        <div class="store-section gsap-fade-up">
             <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80"
-                class="enterprise-bg gsap-parallax-img" alt="Corporate" loading="lazy">
+                class="store-bg gsap-parallax-img" alt="Corporate" loading="lazy">
 
-            <div class="enterprise-grid">
+            <div class="store-grid">
                 <div>
                     <span class="tagline" style="color: var(--accent-gold-light);">B2B Corporate Accounts</span>
                     <h2 class="section-title font-syne" style="color: white; margin-bottom: 1.5rem;">Enterprise
@@ -1835,7 +2015,7 @@
                     <div class="faq-icon"><i data-lucide="plus"></i></div>
                 </div>
                 <div class="faq-answer">
-                    <p>For absolute security, we strictly require a valid, government-issued photo ID (Passport, Kebele
+                    <p>For absolute security, we strictly require a valid, government-issued photo ID (Passport,
                         ID, or National Driver's License) that matches the recipient name on the DHL, FedEx, or Amazon
                         package exactly. Digital copies are not accepted.</p>
                 </div>
@@ -1847,8 +2027,7 @@
                     <div class="faq-icon"><i data-lucide="plus"></i></div>
                 </div>
                 <div class="faq-answer">
-                    <p>While walk-ins are welcome, our pods are in extremely high demand by corporate clients. We
-                        strongly recommend reserving your slot via our WhatsApp concierge at least 24 hours in advance
+                    <p>While walk-ins are welcome, We strongly recommend reserving your slot via our WhatsApp concierge in advance
                         to guarantee your quiet workspace.</p>
                 </div>
             </div>
@@ -1860,8 +2039,7 @@
                 </div>
                 <div class="faq-answer">
                     <p>Yes. The Marula Vault is climate-controlled, protected by 24/7 CCTV surveillance, and features
-                        restricted physical access. Every item stored receives a digital tracking tag tied directly to
-                        your contact profile.</p>
+                        restricted physical access. </p>
                 </div>
             </div>
 
@@ -2113,7 +2291,7 @@
         });
 
         // 3. Staggered Cards (Process, Testimonials)
-        gsap.utils.toArray('.process-grid, .test-grid, .enterprise-grid').forEach(grid => {
+        gsap.utils.toArray('.process-grid, .test-grid, .store-grid').forEach(grid => {
             gsap.fromTo(grid.querySelectorAll('.gsap-stagger-up'),
                 { y: 50, opacity: 0 },
                 { scrollTrigger: { trigger: grid, start: "top 85%" }, y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: "power2.out" }
@@ -2169,5 +2347,4 @@
         });
     </script>
 </body>
-
 </html>
