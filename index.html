@@ -1763,8 +1763,8 @@
                     <h2 style="color: #fff; font-size: 3.5rem; margin: 20px 0;">Official Logistics <br>Terminal</h2>
                     <p style="color: #888; margin-bottom: 40px;">Serving as the primary Milanese collection point for the world's most trusted courier networks. Security, reliability, and precision.</p>
                     
-                    <div class="id-protocol">
-                        <i class="fas fa-id-card-shield"></i>
+                    <div class="id-protocol"> 
+                        <i class="fas fa-id-card-alt" style="font-size: 2rem;color: white;"></i>
                         <p>Mandatory: Valid Government-issued Photo ID required for all parcel collections. No exceptions.</p>
                     </div>
 
@@ -2157,10 +2157,17 @@
     </footer>
 
     <!-- SCRIPTS -->
+    <!-- SCRIPTS -->
     <script>
         // Init Icons
         lucide.createIcons();
         gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Wrap hero title words in spans for stagger effect BEFORE timeline starts
+        document.querySelectorAll('.hero-title').forEach(title => {
+            const words = title.innerHTML.split(/<br\s*\/?>/i);
+            title.innerHTML = words.map(word => `<span>${word}</span>`).join('<br>');
+        });
 
         // --- PRELOADER SEQUENCE ---
         const tlPreloader = gsap.timeline();
@@ -2168,7 +2175,7 @@
             .to('.loader-line', { width: '100%', duration: 0.8, ease: "power2.inOut" }, "-=0.5")
             .to('#preloader', { yPercent: -100, duration: 1, ease: "power4.inOut", delay: 0.2 })
             .to('#main-header', { y: 0, duration: 1, ease: "power3.out" }, "-=0.5")
-            .from('.hero-anim', { y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: "power3.out" }, "-=0.8");
+            .from('.slide.active .hero-anim, .slide.active .hero-title span', { y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out" }, "-=0.8");
 
         // --- MAGNETIC BUTTONS ---
         document.querySelectorAll('.btn-magnetic').forEach(btn => {
@@ -2195,30 +2202,27 @@
 
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
-        const dropdown = document.querySelector('.dropdown'); // Defined here for global access
+        const dropdown = document.querySelector('.dropdown'); 
 
         menuToggle.addEventListener('click', () => {
             const active = navLinks.classList.toggle('active');
             menuToggle.innerHTML = active ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
-            // Lock body scroll when mobile menu is open
             document.body.style.overflow = active ? 'hidden' : '';
             lucide.createIcons();
         });
 
-        // Close menu when clicking ANY link
         document.querySelectorAll('.nav-links a:not(.nav-link-trigger)').forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 1200) {
                     navLinks.classList.remove('active');
                     menuToggle.innerHTML = '<i data-lucide="menu"></i>';
-                    document.body.style.overflow = ''; // Release body scroll
-                    dropdown.classList.remove('mobile-active'); // Reset dropdown
+                    document.body.style.overflow = ''; 
+                    dropdown.classList.remove('mobile-active'); 
                     lucide.createIcons();
                 }
             });
         });
 
-        // Clean toggle logic for "Services ↓"
         const serviceTrigger = document.querySelector('.nav-link-trigger');
         serviceTrigger.addEventListener('click', (e) => {
             if (window.innerWidth <= 1200) {
@@ -2231,12 +2235,6 @@
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
         let slideInterval;
-
-        // Wrap hero title words in spans for stagger effect
-        document.querySelectorAll('.hero-title').forEach(title => {
-            const words = title.innerHTML.split('<br>');
-            title.innerHTML = words.map(word => `<span>${word}</span>`).join('<br>');
-        });
 
         function animateHeroText(slideElement) {
             gsap.fromTo(slideElement.querySelectorAll('.hero-anim, .hero-title span'),
@@ -2272,61 +2270,31 @@
         });
 
         // --- GSAP SCROLL ANIMATIONS ---
-
-        // 1. Fade Up General Elements
+         // 1. Fade Up General Elements
         gsap.utils.toArray('.gsap-fade-up').forEach(elem => {
             gsap.fromTo(elem,
                 { y: 60, opacity: 0 },
-                { scrollTrigger: { trigger: elem, start: "top 85%" }, y: 0, opacity: 1, duration: 1, ease: "power3.out" }
+                { scrollTrigger: { trigger: elem, start: "top 85%", once: true }, y: 0, opacity: 1, duration: 1, ease: "power3.out" }
             );
         });
 
-        // 2. Bento Grid Stagger
+        // 2. Bento Grid Stagger (FIXED: Hides instantly to prevent the scroll glitch)
+        gsap.set(".gsap-bento", { opacity: 0, y: 50, scale: 0.95 }); 
+        
         ScrollTrigger.batch(".gsap-bento", {
             start: "top 85%",
-            onEnter: batch => gsap.fromTo(batch,
-                { opacity: 0, y: 50, scale: 0.95 },
-                { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "power3.out" }
+            once: true, // Prevents layout recalculation glitches if you scroll up and down fast
+            onEnter: batch => gsap.to(batch,
+                { opacity: 1, y: 0, scale: 1, stagger: 0.1, duration: 0.8, ease: "power3.out", overwrite: true }
             )
         });
 
-        // 3. Staggered Cards (Process, Testimonials)
+        // 3. Staggered Cards (Process, Testimonials, Enterprise)
         gsap.utils.toArray('.process-grid, .test-grid, .store-grid').forEach(grid => {
             gsap.fromTo(grid.querySelectorAll('.gsap-stagger-up'),
                 { y: 50, opacity: 0 },
-                { scrollTrigger: { trigger: grid, start: "top 85%" }, y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: "power2.out" }
+                { scrollTrigger: { trigger: grid, start: "top 85%", once: true }, y: 0, opacity: 1, stagger: 0.15, duration: 0.8, ease: "power2.out" }
             );
-        });
-
-        // 4. Line Draw Animation (Protocol)
-        if (document.querySelector('.process-line-fill')) {
-            gsap.to('.process-line-fill', {
-                width: '100%', ease: "none",
-                scrollTrigger: { trigger: '.process-grid', start: "top center", end: "bottom center", scrub: true }
-            });
-        }
-
-        // 5. Image Parallax
-        gsap.utils.toArray('.gsap-parallax-img').forEach(img => {
-            gsap.to(img, {
-                yPercent: 15, ease: "none",
-                scrollTrigger: { trigger: img.parentElement, start: "top bottom", end: "bottom top", scrub: true }
-            });
-        });
-
-        // 6. Number Counters
-        document.querySelectorAll('.gsap-counter').forEach(counter => {
-            const target = +counter.getAttribute('data-target');
-            const isFloat = counter.getAttribute('data-target').includes('.');
-            ScrollTrigger.create({
-                trigger: counter, start: "top 90%", once: true,
-                onEnter: () => {
-                    gsap.to(counter, {
-                        innerHTML: target, duration: 2.5, snap: { innerHTML: isFloat ? 0.1 : 1 }, ease: "power3.out",
-                        onUpdate: function () { counter.innerHTML = isFloat ? Number(this.targets()[0].innerHTML).toFixed(1) : Math.round(this.targets()[0].innerHTML); }
-                    });
-                }
-            });
         });
 
         // --- FAQ LOGIC ---
